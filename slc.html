@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK4HRK4L4M"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -9,1887 +8,1157 @@
     gtag('js', new Date());
     gtag('config', 'G-CK4HRK4L4M');
   </script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Design for Salt Lake City Service Businesses — FlowForge</title>
   <meta name="description" content="FlowForge builds high-converting websites for Salt Lake City contractors, gyms, and Latino-owned businesses. Mobile-first, bilingual, and built to get you customers.">
-
-  <!-- Open Graph -->
   <meta property="og:title" content="Web Design for Salt Lake City Service Businesses — FlowForge">
-  <meta property="og:description" content="High-converting, mobile-first websites for SLC contractors, gyms, and Latino-owned businesses. Get more calls, bookings, and quote requests.">
+  <meta property="og:description" content="High-converting, mobile-first websites for SLC contractors, gyms, and Latino-owned businesses.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flowforge.com/slc">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <!-- FIXED: absolute path so /slc route finds the CSS correctly -->
+  <link rel="stylesheet" href="/style.css">
 
-  <style>
-    /* ─────────────────────────────────────────
-       SLC PAGE — ADDITIONAL COMPONENT STYLES
-       All base vars/reset/nav/buttons/reveal
-       come from style.css
-    ───────────────────────────────────────── */
+<style>
+/* ── THEME SYSTEM ── */
+:root {
+  --bg:#07070e;--surface:#0d0d1a;--surface-2:#111127;
+  --blue:#38bdf8;--purple:#a855f7;
+  --blue-dim:rgba(56,189,248,0.15);--purple-dim:rgba(168,85,247,0.15);
+  --gradient:linear-gradient(135deg,#38bdf8,#a855f7);
+  --text:#f1f5f9;--muted:#94a3b8;
+  --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
+  --radius:14px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4);
+}
+[data-theme="light"] {
+  --bg:#f8fafc;--surface:#ffffff;--surface-2:#f1f5f9;
+  --text:#0f172a;--muted:#64748b;
+  --border:rgba(0,0,0,0.08);--border-h:rgba(0,0,0,0.15);
+  --blue-dim:rgba(56,189,248,0.1);--purple-dim:rgba(168,85,247,0.1);
+  --shadow:0 4px 24px rgba(0,0,0,0.12);
+}
+@media (prefers-color-scheme:light) {
+  [data-theme="auto"] {
+    --bg:#f8fafc;--surface:#ffffff;--surface-2:#f1f5f9;
+    --text:#0f172a;--muted:#64748b;
+    --border:rgba(0,0,0,0.08);--border-h:rgba(0,0,0,0.15);
+    --blue-dim:rgba(56,189,248,0.1);--purple-dim:rgba(168,85,247,0.1);
+    --shadow:0 4px 24px rgba(0,0,0,0.12);
+  }
+}
 
-    /* LANGUAGE TOGGLE */
-    .lang-toggle-wrap {
-      margin-bottom: 24px;
-    }
-    .lang-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-h);
-      border-radius: 100px;
-      padding: 4px;
-    }
-    .lang-btn {
-      padding: 6px 18px;
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: background 0.25s, color 0.25s;
-      background: transparent;
-      color: var(--muted);
-      font-family: inherit;
-    }
-    .lang-btn.active {
-      background: var(--gradient);
-      color: #fff;
-    }
+/* ── THEME TOGGLE BUTTON ── */
+.theme-toggle {
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border-h);
+  border-radius:100px;padding:6px 12px;cursor:pointer;
+  font-size:0.72rem;font-weight:700;color:var(--muted);
+  font-family:inherit;transition:border-color .2s,background .2s;
+  white-space:nowrap;
+}
+.theme-toggle:hover{border-color:var(--blue);background:var(--blue-dim);color:var(--text);}
+.theme-icon{font-size:0.9rem;}
 
-    /* HERO CONTENT SWAP */
-    .hero-lang { display: none; }
-    .hero-lang.active { display: block; }
+/* ── LANG TOGGLE ── */
+.lang-toggle-wrap{margin-bottom:24px;}
+.lang-toggle{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.05);border:1px solid var(--border-h);border-radius:100px;padding:4px;}
+.lang-btn{padding:6px 18px;border-radius:100px;font-size:0.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border:none;cursor:pointer;transition:background .25s,color .25s;background:transparent;color:var(--muted);font-family:inherit;}
+.lang-btn.active{background:var(--gradient);color:#fff;}
 
-    /* HERO VISUAL — SLC LEADS CARD */
-    .slc-card {
-      background: rgba(13,13,26,0.88);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 16px;
-      backdrop-filter: blur(24px);
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(56,189,248,0.06);
-      overflow: hidden;
-    }
-    .slc-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-    }
-    .slc-card-title {
-      font-size: 0.75rem;
-      color: rgba(148,163,184,0.65);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-    .slc-live {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #22c55e;
-    }
-    .slc-live-dot {
-      width: 6px; height: 6px;
-      background: #22c55e;
-      border-radius: 50%;
-      box-shadow: 0 0 6px #22c55e;
-      animation: pulse-dot 1.5s ease infinite;
-      flex-shrink: 0;
-    }
-    .slc-card-body {
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .slc-lead-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px;
-      gap: 10px;
-    }
-    .slc-lead-icon {
-      font-size: 1rem;
-      width: 32px; height: 32px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .slc-lead-info { flex: 1; min-width: 0; }
-    .slc-lead-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .slc-lead-sub {
-      font-size: 0.68rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-    .slc-lead-pill {
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 100px;
-      letter-spacing: 0.03em;
-      flex-shrink: 0;
-    }
-    .pill-new     { background: rgba(56,189,248,0.12);  color: #38bdf8; border: 1px solid rgba(56,189,248,0.25); }
-    .pill-booked  { background: rgba(34,197,94,0.12);   color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
-    .pill-quote   { background: rgba(168,85,247,0.12);  color: #a855f7; border: 1px solid rgba(168,85,247,0.25); }
-    .pill-called  { background: rgba(251,146,60,0.12);  color: #fb923c; border: 1px solid rgba(251,146,60,0.25); }
+/* ── SLC LEADS CARD ── */
+.slc-card{background:rgba(13,13,26,0.88);border:1px solid rgba(255,255,255,0.09);border-radius:16px;backdrop-filter:blur(24px);width:100%;max-width:400px;box-shadow:0 24px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(56,189,248,0.06);overflow:hidden;}
+.slc-card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);}
+.slc-card-title{font-size:.75rem;color:rgba(148,163,184,0.65);font-weight:600;letter-spacing:.04em;}
+.slc-live{display:flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;color:#22c55e;}
+.slc-live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;box-shadow:0 0 6px #22c55e;animation:pulse-dot 1.5s ease infinite;flex-shrink:0;}
+.slc-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;}
+.slc-lead-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;gap:10px;}
+.slc-lead-icon{font-size:1rem;width:32px;height:32px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.slc-lead-info{flex:1;min-width:0;}
+.slc-lead-name{font-size:.8rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.slc-lead-sub{font-size:.68rem;color:var(--muted);margin-top:2px;}
+.slc-lead-pill{font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.03em;flex-shrink:0;}
+.pill-new{background:rgba(56,189,248,0.12);color:#38bdf8;border:1px solid rgba(56,189,248,0.25);}
+.pill-booked{background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.25);}
+.pill-quote{background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.25);}
+.slc-card-footer{display:flex;justify-content:space-around;padding:14px 20px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);}
+.slc-metric{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.slc-metric-num{font-size:1rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.slc-metric-label{font-size:.62rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.07em;}
 
-    .slc-card-footer {
-      display: flex;
-      justify-content: space-around;
-      padding: 14px 20px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-    }
-    .slc-metric { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-    .slc-metric-num {
-      font-size: 1rem;
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .slc-metric-label {
-      font-size: 0.62rem;
-      color: var(--muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
+/* ── TRUST BAR ── */
+.trust-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:26px 0;}
+.trust-inner{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:.84rem;font-weight:600;color:var(--muted);white-space:nowrap;}
+.trust-check{color:var(--blue);font-weight:800;}
+.trust-div{width:1px;height:18px;background:var(--border);flex-shrink:0;}
 
-    /* TRUST BAR */
-    .trust-bar {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      padding: 26px 0;
-    }
-    .trust-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .trust-check { color: var(--blue); font-weight: 800; }
-    .trust-div {
-      width: 1px; height: 18px;
-      background: var(--border);
-      flex-shrink: 0;
-    }
-    /* INSERT LOGO ROW */
-    .logo-row-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(148,163,184,0.4);
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .logo-placeholder-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .logo-placeholder {
-      width: 100px; height: 28px;
-      background: rgba(255,255,255,0.04);
-      border: 1px dashed rgba(255,255,255,0.1);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem;
-      color: rgba(148,163,184,0.3);
-      letter-spacing: 0.06em;
-      font-weight: 600;
-    }
+/* ── NICHE CARDS ── */
+.niche-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.niche-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.niche-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gradient);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.niche-card:hover{border-color:rgba(56,189,248,0.3);transform:translateY(-5px);box-shadow:0 16px 48px rgba(56,189,248,0.08);}
+.niche-card:hover::after{transform:scaleX(1);}
+.niche-emoji{font-size:2.2rem;line-height:1;margin-bottom:4px;}
+.niche-card h3{font-size:1.2rem;color:var(--text);margin-bottom:0;}
+.niche-sub{font-size:.75rem;font-weight:600;color:rgba(148,163,184,0.55);letter-spacing:.04em;margin-top:-8px;}
+.niche-card p{font-size:.95rem;line-height:1.72;flex:1;}
+.niche-result{font-size:.88rem;font-weight:600;color:var(--text);padding:12px 16px;background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.15);border-radius:var(--radius-sm);line-height:1.55;}
+.niche-result span{color:var(--blue);}
 
-    /* NICHE CARDS */
-    .niche-intro {
-      text-align: center;
-      max-width: 560px;
-      margin: 0 auto 52px;
-    }
-    .niche-intro p { margin-top: 12px; font-size: 1rem; }
+/* ── DELIVERABLES ── */
+.deliverables-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.del-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:36px 32px;}
+.del-block.addon{border-color:rgba(168,85,247,0.2);background:linear-gradient(145deg,rgba(168,85,247,0.04),rgba(56,189,248,0.03));}
+.del-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);padding:3px 10px;border-radius:100px;margin-bottom:16px;}
+.del-block h3{color:var(--text);font-size:1.15rem;margin-bottom:6px;}
+.del-block .del-desc{font-size:.88rem;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+.del-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.del-list li{font-size:.92rem;color:var(--muted);padding-left:24px;position:relative;line-height:1.55;}
+.del-list li::before{content:'→';position:absolute;left:0;color:var(--blue);font-weight:700;}
+.del-always{margin-top:28px;padding:16px 20px;background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.15);border-radius:var(--radius-sm);}
+.del-always-title{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
+.del-always ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.del-always ul li{font-size:.87rem;color:var(--muted);padding-left:20px;position:relative;}
+.del-always ul li::before{content:'✓';position:absolute;left:0;color:var(--blue);font-weight:700;}
+.insert-screenshot{margin-top:24px;height:100px;border:2px dashed rgba(255,255,255,0.08);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;color:rgba(148,163,184,0.3);letter-spacing:.06em;}
 
-    .niche-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .niche-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .niche-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.35s ease;
-    }
-    .niche-card:hover {
-      border-color: rgba(56,189,248,0.3);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(56,189,248,0.08);
-    }
-    .niche-card:hover::after { transform: scaleX(1); }
+/* ── CASE STUDIES ── */
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,transform .3s;display:flex;flex-direction:column;}
+.case-card:hover{border-color:rgba(56,189,248,0.3);transform:translateY(-4px);}
+.case-thumb{height:130px;background:linear-gradient(135deg,rgba(56,189,248,0.08),rgba(168,85,247,0.12));display:flex;align-items:center;justify-content:center;font-size:2.4rem;border-bottom:1px solid var(--border);position:relative;}
+.case-thumb.thumb-orange{background:linear-gradient(135deg,rgba(251,146,60,0.09),rgba(239,68,68,0.09));}
+.case-coming-tag{position:absolute;top:10px;right:10px;font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:3px 9px;border-radius:100px;}
+.case-body{padding:22px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.case-type{font-size:.7rem;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;}
+.case-body h3{font-size:1rem;color:var(--text);}
+.case-body p{font-size:.88rem;line-height:1.65;flex:1;}
+.case-result{margin-top:8px;font-size:.82rem;font-weight:700;color:#22c55e;}
+.case-insert-note{font-size:.75rem;color:rgba(148,163,184,0.3);font-style:italic;}
 
-    .niche-emoji { font-size: 2.2rem; line-height: 1; margin-bottom: 4px; }
-    .niche-card h3 { font-size: 1.2rem; color: var(--text); margin-bottom: 0; }
-    .niche-sub {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: rgba(148,163,184,0.55);
-      letter-spacing: 0.04em;
-      margin-top: -8px;
-    }
-    .niche-card p { font-size: 0.95rem; line-height: 1.72; flex: 1; }
-    .niche-result {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
-      padding: 12px 16px;
-      background: rgba(56,189,248,0.05);
-      border: 1px solid rgba(56,189,248,0.15);
-      border-radius: var(--radius-sm);
-      line-height: 1.55;
-    }
-    .niche-result span { color: var(--blue); }
+/* ── FLAGSHIP CARDS ── */
+.flagship-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;}
+.flagship-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;gap:18px;position:relative;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.flagship-card:hover{border-color:rgba(56,189,248,0.3);transform:translateY(-5px);box-shadow:0 16px 48px rgba(56,189,248,0.08);}
+.flagship-card.flagship-featured{border-color:rgba(56,189,248,0.45);background:linear-gradient(160deg,rgba(56,189,248,0.06),rgba(168,85,247,0.07));}
+.flagship-top-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gradient);color:#fff;padding:4px 16px;border-radius:100px;white-space:nowrap;}
+.flagship-niche-tag{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:5px 12px;border-radius:100px;width:fit-content;}
+.tag-contractor{background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.25);color:#fb923c;}
+.tag-fitness{background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);color:var(--blue);}
+.tag-latino{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);color:var(--purple);}
+.flagship-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.flagship-name{font-size:1.45rem;font-weight:900;color:var(--text);letter-spacing:-.02em;}
+.flagship-price{font-size:1.05rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:right;line-height:1.3;}
+.flagship-price span{font-size:.78rem;font-weight:600;display:block;opacity:.7;}
+.flagship-promise{font-size:.93rem;color:var(--text);line-height:1.65;font-style:italic;padding:14px 16px;background:rgba(255,255,255,0.03);border-left:2px solid var(--blue);border-radius:0 var(--radius-sm) var(--radius-sm) 0;}
+.flagship-for{font-size:.87rem;color:var(--muted);line-height:1.6;padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);}
+.flagship-for-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:5px;}
+.flagship-features{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;}
+.flagship-features li{font-size:.9rem;color:var(--muted);padding-left:22px;position:relative;line-height:1.5;}
+.flagship-features li::before{content:'✓';position:absolute;left:0;color:var(--blue);font-weight:800;}
+.flagship-cta-wrap{display:flex;flex-direction:column;gap:8px;padding-top:4px;border-top:1px solid var(--border);margin-top:auto;}
+.flagship-micro{font-size:.75rem;color:rgba(148,163,184,0.5);text-align:center;}
+.flagship-upsell{margin-top:40px;display:flex;align-items:center;gap:16px;padding:20px 28px;background:rgba(56,189,248,0.04);border:1px solid rgba(56,189,248,0.15);border-radius:var(--radius);flex-wrap:wrap;}
+.flagship-upsell-icon{font-size:1.4rem;color:var(--blue);flex-shrink:0;}
+.flagship-upsell p{font-size:.9rem;color:var(--muted);line-height:1.65;flex:1;min-width:200px;}
+.flagship-upsell p strong{color:var(--text);}
 
-    /* DELIVERABLES */
-    .deliverables-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .del-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 32px;
-    }
-    .del-block.addon {
-      border-color: rgba(168,85,247,0.2);
-      background: linear-gradient(145deg, rgba(168,85,247,0.04), rgba(56,189,248,0.03));
-    }
-    .del-tag {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple);
-      background: rgba(168,85,247,0.1);
-      border: 1px solid rgba(168,85,247,0.25);
-      padding: 3px 10px;
-      border-radius: 100px;
-      margin-bottom: 16px;
-    }
-    .del-block h3 {
-      color: var(--text);
-      font-size: 1.15rem;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .del-block .del-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
-    .del-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .del-list li {
-      font-size: 0.92rem;
-      color: var(--muted);
-      padding-left: 24px;
-      position: relative;
-      line-height: 1.55;
-    }
-    .del-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--blue);
-      font-weight: 700;
-    }
-    .del-always {
-      margin-top: 28px;
-      padding: 16px 20px;
-      background: rgba(56,189,248,0.05);
-      border: 1px solid rgba(56,189,248,0.15);
-      border-radius: var(--radius-sm);
-    }
-    .del-always-title {
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: var(--blue);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 10px;
-    }
-    .del-always ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .del-always ul li {
-      font-size: 0.87rem;
-      color: var(--muted);
-      padding-left: 20px;
-      position: relative;
-    }
-    .del-always ul li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--blue);
-      font-weight: 700;
-    }
-    /* INSERT screenshot marker */
-    .insert-screenshot {
-      margin-top: 24px;
-      height: 100px;
-      border: 2px dashed rgba(255,255,255,0.08);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: rgba(148,163,184,0.3);
-      letter-spacing: 0.06em;
-    }
+/* ── WHY GRID ── */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.why-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:12px;transition:border-color .3s,transform .3s;}
+.why-card:hover{border-color:rgba(56,189,248,0.25);transform:translateY(-3px);}
+.why-icon{font-size:1.8rem;}
+.why-card h3{font-size:1.1rem;color:var(--text);}
+.why-card p{font-size:.95rem;line-height:1.72;}
 
-    /* CASE STUDIES */
-    .case-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .case-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-      display: flex;
-      flex-direction: column;
-    }
-    .case-card:hover {
-      border-color: rgba(56,189,248,0.3);
-      transform: translateY(-4px);
-    }
-    .case-thumb {
-      height: 130px;
-      background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(168,85,247,0.12));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.4rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .case-thumb.thumb-orange {
-      background: linear-gradient(135deg, rgba(251,146,60,0.09), rgba(239,68,68,0.09));
-    }
-    .case-coming-tag {
-      position: absolute;
-      top: 10px; right: 10px;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      padding: 3px 9px;
-      border-radius: 100px;
-    }
-    .case-body { padding: 22px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
-    .case-type {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .case-body h3 { font-size: 1rem; color: var(--text); }
-    .case-body p { font-size: 0.88rem; line-height: 1.65; flex: 1; }
-    .case-result {
-      margin-top: 8px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #22c55e;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    /* INSERT: case study content marker */
-    .case-insert-note {
-      font-size: 0.75rem;
-      color: rgba(148,163,184,0.3);
-      font-style: italic;
-    }
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:16px;transition:border-color .3s;}
+.testi-card:hover{border-color:rgba(56,189,248,0.25);}
+.testi-card.placeholder{opacity:.45;border-style:dashed;}
+.testi-stars{display:flex;gap:3px;color:#f59e0b;font-size:.9rem;}
+.testi-quote{font-size:.95rem;color:var(--text);line-height:1.75;font-style:italic;flex:1;}
+.testi-author{display:flex;flex-direction:column;gap:2px;}
+.testi-name{font-size:.88rem;font-weight:700;color:var(--text);}
+.testi-biz{font-size:.78rem;color:var(--muted);}
 
+/* ── AUTOPILOT ── */
+.autopilot-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.autopilot-card{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:56px;background:linear-gradient(135deg,rgba(56,189,248,0.04),rgba(168,85,247,0.05));border:1px solid rgba(56,189,248,0.2);border-radius:var(--radius);position:relative;overflow:hidden;}
+.autopilot-card::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(168,85,247,0.08),transparent 70%);pointer-events:none;}
+.autopilot-badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);padding:5px 14px;border-radius:100px;margin-bottom:20px;width:fit-content;}
+.autopilot-dot{width:6px;height:6px;background:var(--purple);border-radius:50%;box-shadow:0 0 6px var(--purple);animation:pulse-dot 1.5s ease infinite;flex-shrink:0;}
+.autopilot-left h2{margin-bottom:16px;font-size:clamp(1.6rem,3vw,2.2rem);}
+.autopilot-left p{margin-bottom:24px;font-size:.97rem;line-height:1.72;}
+.autopilot-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;}
+.autopilot-list li{font-size:.9rem;color:var(--muted);padding-left:22px;position:relative;line-height:1.5;}
+.autopilot-list li::before{content:'✓';position:absolute;left:0;color:var(--purple);font-weight:800;}
+.autopilot-price-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px;padding:16px 20px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);}
+.autopilot-price{font-size:2.2rem;font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;flex-shrink:0;}
+.autopilot-price span{font-size:1rem;font-weight:600;}
+.autopilot-vs{font-size:.8rem;color:var(--muted);line-height:1.55;flex:1;}
+.autopilot-cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.autopilot-note{font-size:.75rem;color:rgba(148,163,184,0.5);}
+.autopilot-preview{background:rgba(13,13,26,0.9);border:1px solid rgba(255,255,255,0.09);border-radius:14px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);}
+.ap-preview-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);}
+.ap-preview-title{font-size:.75rem;font-weight:700;color:var(--text);letter-spacing:.03em;}
+.ap-preview-date{font-size:.68rem;color:var(--muted);}
+.ap-preview-body{padding:18px;}
+.ap-stat-row{display:flex;justify-content:space-around;padding:14px 0;margin-bottom:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;}
+.ap-stat{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ap-stat-num{font-size:1.5rem;font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ap-stat-label{font-size:.62rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.07em;}
+.ap-activity{display:flex;flex-direction:column;gap:9px;}
+.ap-activity-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(148,163,184,0.45);margin-bottom:4px;}
+.ap-activity-item{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;}
+.ap-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.ap-dot-green{background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,0.5);}
+.ap-dot-blue{background:#38bdf8;box-shadow:0 0 6px rgba(56,189,248,0.5);}
+.ap-dot-purple{background:#a855f7;box-shadow:0 0 6px rgba(168,85,247,0.5);}
+.ap-preview-footer{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);margin-top:4px;}
+.ap-footer-tag{font-size:.65rem;font-weight:700;color:rgba(168,85,247,0.6);letter-spacing:.06em;}
+.ap-footer-lang{font-size:.65rem;font-weight:700;color:rgba(56,189,248,0.6);letter-spacing:.1em;}
 
+/* ── FINAL CTA ── */
+.final-cta{text-align:center;position:relative;overflow:hidden;}
+.final-cta-glow{position:absolute;width:800px;height:500px;background:radial-gradient(ellipse,rgba(56,189,248,0.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.final-cta-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
+.final-cta h2{margin:16px 0 20px;}
+.final-cta p{font-size:1rem;margin-bottom:36px;}
+.final-cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.final-micro{margin-top:20px;font-size:.82rem;color:var(--muted);}
+.slc-cities{margin-top:32px;padding-top:32px;border-top:1px solid var(--border);font-size:.78rem;color:rgba(148,163,184,0.4);letter-spacing:.04em;line-height:1.8;}
 
-    /* WHY FLOWFORGE */
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .why-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .why-card:hover {
-      border-color: rgba(56,189,248,0.25);
-      transform: translateY(-3px);
-    }
-    .why-icon { font-size: 1.8rem; }
-    .why-card h3 { font-size: 1.1rem; color: var(--text); }
-    .why-card p { font-size: 0.95rem; line-height: 1.72; }
+/* ── LIGHT MODE OVERRIDES for dark-bg components ── */
+[data-theme="light"] .slc-card,
+[data-theme="light"] .autopilot-preview {
+  background:rgba(255,255,255,0.95);
+  border-color:rgba(0,0,0,0.1);
+}
+[data-theme="light"] .slc-lead-row,
+[data-theme="light"] .ap-activity-item,
+[data-theme="light"] .ap-stat-row {
+  background:rgba(0,0,0,0.03);
+  border-color:rgba(0,0,0,0.07);
+}
+[data-theme="light"] .slc-card-header,
+[data-theme="light"] .slc-card-footer,
+[data-theme="light"] .ap-preview-header,
+[data-theme="light"] .ap-preview-footer {
+  background:rgba(0,0,0,0.02);
+  border-color:rgba(0,0,0,0.07);
+}
+[data-theme="light"] .nav.scrolled {
+  background:rgba(248,250,252,0.92);
+}
+@media (prefers-color-scheme:light) {
+  [data-theme="auto"] .slc-card,
+  [data-theme="auto"] .autopilot-preview { background:rgba(255,255,255,0.95);border-color:rgba(0,0,0,0.1); }
+  [data-theme="auto"] .slc-lead-row,
+  [data-theme="auto"] .ap-activity-item,
+  [data-theme="auto"] .ap-stat-row { background:rgba(0,0,0,0.03);border-color:rgba(0,0,0,0.07); }
+  [data-theme="auto"] .slc-card-header,
+  [data-theme="auto"] .slc-card-footer,
+  [data-theme="auto"] .ap-preview-header,
+  [data-theme="auto"] .ap-preview-footer { background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.07); }
+  [data-theme="auto"] .nav.scrolled { background:rgba(248,250,252,0.92); }
+}
 
-    /* TESTIMONIALS */
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .testi-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: border-color 0.3s;
-    }
-    .testi-card:hover { border-color: rgba(56,189,248,0.25); }
-    .testi-card.placeholder {
-      opacity: 0.45;
-      border-style: dashed;
-    }
-    .testi-stars { display: flex; gap: 3px; color: #f59e0b; font-size: 0.9rem; }
-    .testi-quote {
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.75;
-      font-style: italic;
-      flex: 1;
-    }
-    .testi-author { display: flex; flex-direction: column; gap: 2px; }
-    .testi-name { font-size: 0.88rem; font-weight: 700; color: var(--text); }
-    .testi-biz  { font-size: 0.78rem; color: var(--muted); }
-
-    /* FINAL CTA */
-    .final-cta {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .final-cta-glow {
-      position: absolute;
-      width: 800px; height: 500px;
-      background: radial-gradient(ellipse, rgba(56,189,248,0.07) 0%, transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-    .final-cta-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 620px;
-      margin: 0 auto;
-    }
-    .final-cta h2 { margin: 16px 0 20px; }
-    .final-cta p { font-size: 1rem; margin-bottom: 36px; }
-    .final-cta-btns {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .final-micro {
-      margin-top: 20px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-    .slc-cities {
-      margin-top: 32px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      font-size: 0.78rem;
-      color: rgba(148,163,184,0.4);
-      letter-spacing: 0.04em;
-      line-height: 1.8;
-    }
-
-    /* ── FLAGSHIP OFFER CARDS ── */
-    .flagship-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: start;
-    }
-    .flagship-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: relative;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .flagship-card:hover {
-      border-color: rgba(56,189,248,0.3);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(56,189,248,0.08);
-    }
-    .flagship-card.flagship-featured {
-      border-color: rgba(56,189,248,0.45);
-      background: linear-gradient(160deg, rgba(56,189,248,0.06), rgba(168,85,247,0.07));
-    }
-    .flagship-card.flagship-featured:hover {
-      box-shadow: 0 20px 56px rgba(56,189,248,0.14);
-    }
-    .flagship-top-badge {
-      position: absolute;
-      top: -13px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: var(--gradient);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 100px;
-      white-space: nowrap;
-    }
-    .flagship-niche-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 100px;
-      width: fit-content;
-    }
-    .tag-contractor {
-      background: rgba(251,146,60,0.1);
-      border: 1px solid rgba(251,146,60,0.25);
-      color: #fb923c;
-    }
-    .tag-fitness {
-      background: rgba(56,189,248,0.1);
-      border: 1px solid rgba(56,189,248,0.25);
-      color: var(--blue);
-    }
-    .tag-latino {
-      background: rgba(168,85,247,0.1);
-      border: 1px solid rgba(168,85,247,0.25);
-      color: var(--purple);
-    }
-    .flagship-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .flagship-name {
-      font-size: 1.45rem;
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-    .flagship-price {
-      font-size: 1.05rem;
-      font-weight: 800;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: right;
-      line-height: 1.3;
-    }
-    .flagship-price span {
-      font-size: 0.78rem;
-      font-weight: 600;
-      display: block;
-      opacity: 0.7;
-    }
-    .flagship-promise {
-      font-size: 0.93rem;
-      color: var(--text);
-      line-height: 1.65;
-      font-style: italic;
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.03);
-      border-left: 2px solid var(--blue);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    }
-    .flagship-for {
-      font-size: 0.87rem;
-      color: var(--muted);
-      line-height: 1.6;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-    }
-    .flagship-for-label {
-      font-size: 0.65rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-    .flagship-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-    }
-    .flagship-features li {
-      font-size: 0.9rem;
-      color: var(--muted);
-      padding-left: 22px;
-      position: relative;
-      line-height: 1.5;
-    }
-    .flagship-features li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--blue);
-      font-weight: 800;
-    }
-    .flagship-cta-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding-top: 4px;
-      border-top: 1px solid var(--border);
-      margin-top: auto;
-    }
-    .flagship-micro {
-      font-size: 0.75rem;
-      color: rgba(148,163,184,0.5);
-      text-align: center;
-    }
-    .flagship-upsell {
-      margin-top: 40px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px 28px;
-      background: rgba(56,189,248,0.04);
-      border: 1px solid rgba(56,189,248,0.15);
-      border-radius: var(--radius);
-      flex-wrap: wrap;
-    }
-    .flagship-upsell-icon {
-      font-size: 1.4rem;
-      color: var(--blue);
-      flex-shrink: 0;
-    }
-    .flagship-upsell p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.65;
-      flex: 1;
-      min-width: 200px;
-    }
-    .flagship-upsell p strong { color: var(--text); }
-
-    /* ── AUTOPILOT TEASER ── */
-    .autopilot-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .autopilot-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      padding: 56px;
-      background: linear-gradient(135deg, rgba(56,189,248,0.04), rgba(168,85,247,0.05));
-      border: 1px solid rgba(56,189,248,0.2);
-      border-radius: var(--radius);
-      position: relative;
-      overflow: hidden;
-    }
-    .autopilot-card::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(168,85,247,0.08), transparent 70%);
-      pointer-events: none;
-    }
-    .autopilot-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple);
-      background: rgba(168,85,247,0.1);
-      border: 1px solid rgba(168,85,247,0.25);
-      padding: 5px 14px;
-      border-radius: 100px;
-      margin-bottom: 20px;
-      width: fit-content;
-    }
-    .autopilot-dot {
-      width: 6px; height: 6px;
-      background: var(--purple);
-      border-radius: 50%;
-      box-shadow: 0 0 6px var(--purple);
-      animation: pulse-dot 1.5s ease infinite;
-      flex-shrink: 0;
-    }
-    .autopilot-left h2 { margin-bottom: 16px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
-    .autopilot-left p  { margin-bottom: 24px; font-size: 0.97rem; line-height: 1.72; }
-    .autopilot-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-bottom: 28px;
-    }
-    .autopilot-list li {
-      font-size: 0.9rem;
-      color: var(--muted);
-      padding-left: 22px;
-      position: relative;
-      line-height: 1.5;
-    }
-    .autopilot-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--purple);
-      font-weight: 800;
-    }
-    .autopilot-price-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-      padding: 16px 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-    }
-    .autopilot-price {
-      font-size: 2.2rem;
-      font-weight: 900;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .autopilot-price span {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    .autopilot-vs {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.55;
-      flex: 1;
-    }
-    .autopilot-cta-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .autopilot-note {
-      font-size: 0.75rem;
-      color: rgba(148,163,184,0.5);
-    }
-
-    /* AutoPilot preview card */
-    .autopilot-preview {
-      background: rgba(13,13,26,0.9);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-    }
-    .ap-preview-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-    }
-    .ap-preview-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: 0.03em;
-    }
-    .ap-preview-date {
-      font-size: 0.68rem;
-      color: var(--muted);
-    }
-    .ap-preview-body { padding: 18px; }
-    .ap-stat-row {
-      display: flex;
-      justify-content: space-around;
-      padding: 14px 0;
-      margin-bottom: 16px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-    }
-    .ap-stat { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-    .ap-stat-num {
-      font-size: 1.5rem;
-      font-weight: 900;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .ap-stat-label {
-      font-size: 0.62rem;
-      color: var(--muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-    .ap-activity { display: flex; flex-direction: column; gap: 9px; }
-    .ap-activity-title {
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(148,163,184,0.45);
-      margin-bottom: 4px;
-    }
-    .ap-activity-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 8px;
-    }
-    .ap-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .ap-dot-green  { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5); }
-    .ap-dot-blue   { background: #38bdf8; box-shadow: 0 0 6px rgba(56,189,248,0.5); }
-    .ap-dot-purple { background: #a855f7; box-shadow: 0 0 6px rgba(168,85,247,0.5); }
-    .ap-preview-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 18px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-      margin-top: 4px;
-    }
-    .ap-footer-tag {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: rgba(168,85,247,0.6);
-      letter-spacing: 0.06em;
-    }
-    .ap-footer-lang {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: rgba(56,189,248,0.6);
-      letter-spacing: 0.1em;
-    }
-
-    /* AutoPilot responsive */
-    @media (max-width: 900px) {
-      .autopilot-card {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 36px 28px;
-      }
-    }
-    @media (max-width: 560px) {
-      .autopilot-card { padding: 24px 20px; }
-      .autopilot-price-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .autopilot-cta-row { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .niche-grid       { grid-template-columns: 1fr; }
-      .flagship-grid    { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px) {
-      .deliverables-grid { grid-template-columns: 1fr; }
-      .why-grid          { grid-template-columns: 1fr; }
-      .case-grid         { grid-template-columns: 1fr 1fr; }
-      .testi-grid        { grid-template-columns: 1fr 1fr; }
-      .flagship-grid     { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      .niche-grid        { grid-template-columns: 1fr; }
-      .case-grid         { grid-template-columns: 1fr; }
-      .testi-grid        { grid-template-columns: 1fr; }
-      .flagship-grid     { grid-template-columns: 1fr; }
-      .trust-inner       { gap: 16px; }
-      .trust-div         { display: none; }
-      .final-cta-btns    { flex-direction: column; align-items: center; }
-      .final-cta-btns .btn-primary,
-      .final-cta-btns .btn-ghost { width: 100%; justify-content: center; }
-      .logo-placeholder-row { gap: 16px; }
-      .flagship-header   { flex-direction: column; align-items: flex-start; }
-      .flagship-price    { text-align: left; }
-      .flagship-upsell   { flex-direction: column; gap: 10px; }
-    }
-  </style>
+/* ── RESPONSIVE ── */
+@media (max-width:960px){.niche-grid,.flagship-grid{grid-template-columns:1fr;}}
+@media (max-width:900px){.autopilot-card{grid-template-columns:1fr;gap:40px;padding:36px 28px;}}
+@media (max-width:768px){
+  .deliverables-grid,.why-grid{grid-template-columns:1fr;}
+  .case-grid,.testi-grid{grid-template-columns:1fr 1fr;}
+  .flagship-grid{grid-template-columns:1fr;}
+}
+@media (max-width:560px){
+  .niche-grid,.case-grid,.testi-grid,.flagship-grid{grid-template-columns:1fr;}
+  .trust-inner{gap:16px;} .trust-div{display:none;}
+  .final-cta-btns{flex-direction:column;align-items:center;}
+  .final-cta-btns .btn-primary,.final-cta-btns .btn-ghost{width:100%;justify-content:center;}
+  .flagship-header{flex-direction:column;align-items:flex-start;}
+  .flagship-price{text-align:left;}
+  .flagship-upsell{flex-direction:column;gap:10px;}
+  .autopilot-card{padding:24px 20px;}
+  .autopilot-price-row{flex-direction:column;align-items:flex-start;gap:8px;}
+  .autopilot-cta-row{flex-direction:column;align-items:flex-start;}
+}
+</style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════
-       NAV — same as main site
-  ══════════════════════════════════════ -->
-  <nav class="nav" id="nav">
-    <div class="container nav-inner">
-      <a href="/" class="logo">Flow<span>Forge</span></a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#niches">Who We Serve</a></li>
-        <li><a href="#what-we-build">What We Build</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact" class="btn-nav">Get a Free Audit</a></li>
-      </ul>
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo">Flow<span>Forge</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#niches" data-i18n="nav.who">Who We Serve</a></li>
+      <li><a href="#what-we-build" data-i18n="nav.what">What We Build</a></li>
+      <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+      <li>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon" id="theme-icon">🌙</span>
+          <span id="theme-label">Dark</span>
+        </button>
+      </li>
+      <li><a href="#contact" class="btn-nav" data-i18n="nav.cta">Get a Free Audit</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle theme" style="display:none;">
+        <span class="theme-icon" id="theme-icon-mobile">🌙</span>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
-
-  <!-- ══════════════════════════════════════
-       SECTION 1 — HERO
-  ══════════════════════════════════════ -->
-  <section class="hero">
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-grid"></div>
-
-    <div class="container hero-layout">
-
-      <!-- Left: text -->
-      <div class="hero-text">
-
-        <!-- Language toggle -->
-        <div class="lang-toggle-wrap reveal">
-          <div class="lang-toggle">
-            <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
-          </div>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-grid"></div>
+  <div class="container hero-layout">
+    <div class="hero-text">
+      <!-- Lang toggle -->
+      <div class="lang-toggle-wrap reveal">
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
         </div>
-
-        <!-- ENGLISH HERO -->
-        <div class="hero-lang active" id="hero-en">
-          <div class="badge reveal">
-            <span class="badge-dot"></span>
-            Utah-based &nbsp;·&nbsp; Salt Lake City
-          </div>
-          <div class="urgency-badge reveal">
-            <span class="urgency-dot"></span>
-            Accepting <strong>3 new SLC projects</strong> — slots filling fast
-          </div>
-          <h1 class="reveal reveal-delay-1">
-            Your website should<br>
-            be getting you <span class="gradient-text">calls.</span><br>
-            If it isn't, we'll fix that.
-          </h1>
-          <p class="hero-sub reveal reveal-delay-2">
-            We build fast, mobile-first websites for Salt Lake City service businesses — designed to turn visitors into calls, bookings, and quote requests. Based in Utah. No templates. No bloated agency fees.
-          </p>
-          <div class="hero-ctas reveal reveal-delay-3">
-            <a href="#contact" class="btn-primary">Get a Free Site Audit</a>
-            <a href="#what-we-build" class="btn-ghost">See What We Build →</a>
-          </div>
-        </div>
-
-        <!-- SPANISH HERO -->
-        <div class="hero-lang" id="hero-es">
-          <div class="badge reveal">
-            <span class="badge-dot"></span>
-            Utah-based &nbsp;·&nbsp; Salt Lake City
-          </div>
-          <div class="urgency-badge reveal">
-            <span class="urgency-dot"></span>
-            Solo <strong>3 proyectos disponibles</strong> — cupos llenándose rápido
-          </div>
-          <h1 class="reveal reveal-delay-1">
-            Tu negocio en Utah<br>
-            merece un sitio web que<br>
-            <span class="gradient-text">te traiga clientes.</span>
-          </h1>
-          <p class="hero-sub reveal reveal-delay-2">
-            Creamos sitios web rápidos, en inglés y español, para negocios de servicio en Salt Lake City — diseñados para conseguirte llamadas, reservas y solicitudes de presupuesto. Somos de Utah. Sin agencias, sin complicaciones.
-          </p>
-          <div class="hero-ctas reveal reveal-delay-3">
-            <a href="#contact" class="btn-primary">Auditoría Gratis de Tu Sitio</a>
-            <a href="#what-we-build" class="btn-ghost">Ver Nuestro Trabajo →</a>
-          </div>
-        </div>
-
-      </div><!-- /hero-text -->
-
-      <!-- Right: SLC leads card -->
-      <div class="hero-visual reveal reveal-delay-2">
-        <div class="slc-card">
-          <div class="slc-card-header">
-            <span class="slc-card-title">FlowForge · SLC Leads Today</span>
-            <span class="slc-live"><span class="slc-live-dot"></span> Live</span>
-          </div>
-          <div class="slc-card-body">
-            <div class="slc-lead-row">
-              <div class="slc-lead-icon">🔧</div>
-              <div class="slc-lead-info">
-                <div class="slc-lead-name">Mountain Peak Roofing</div>
-                <div class="slc-lead-sub">Quote request · South Salt Lake</div>
-              </div>
-              <span class="slc-lead-pill pill-new">New Lead</span>
-            </div>
-            <div class="slc-lead-row">
-              <div class="slc-lead-icon">💪</div>
-              <div class="slc-lead-info">
-                <div class="slc-lead-name">Elevate Fitness SLC</div>
-                <div class="slc-lead-sub">Trial signup · Millcreek</div>
-              </div>
-              <span class="slc-lead-pill pill-booked">Booked</span>
-            </div>
-            <div class="slc-lead-row">
-              <div class="slc-lead-icon">🌎</div>
-              <div class="slc-lead-info">
-                <div class="slc-lead-name">La Mesa Restaurant</div>
-                <div class="slc-lead-sub">Reservation · West Valley</div>
-              </div>
-              <span class="slc-lead-pill pill-booked">Booked</span>
-            </div>
-            <div class="slc-lead-row">
-              <div class="slc-lead-icon">🌿</div>
-              <div class="slc-lead-info">
-                <div class="slc-lead-name">Green Valley Landscaping</div>
-                <div class="slc-lead-sub">Quote request · Draper</div>
-              </div>
-              <span class="slc-lead-pill pill-quote">Quote Sent</span>
-            </div>
-          </div>
-          <div class="slc-card-footer">
-            <div class="slc-metric">
-              <span class="slc-metric-num">12</span>
-              <span class="slc-metric-label">Leads Today</span>
-            </div>
-            <div class="slc-metric">
-              <span class="slc-metric-num">4</span>
-              <span class="slc-metric-label">Booked</span>
-            </div>
-            <div class="slc-metric">
-              <span class="slc-metric-num">100%</span>
-              <span class="slc-metric-label">Owned by You</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hv-badge hv-badge-1">✓ &nbsp;Deployed to production</div>
-        <div class="hv-badge hv-badge-2"><span class="hv-live-dot"></span> &nbsp;SLC businesses online now</div>
-      </div><!-- /hero-visual -->
-
-    </div><!-- /hero-layout -->
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 2 — TRUST BAR
-  ══════════════════════════════════════ -->
-  <section class="trust-bar">
-    <div class="container">
-
-      <!-- INSERT: client logos here when available -->
-      <!-- <div class="logo-row-label">Trusted by Salt Lake City businesses</div>
-      <div class="logo-placeholder-row">
-        <div class="logo-placeholder">CLIENT LOGO</div>
-        <div class="logo-placeholder">CLIENT LOGO</div>
-        <div class="logo-placeholder">CLIENT LOGO</div>
-        <div class="logo-placeholder">CLIENT LOGO</div>
-      </div> -->
-
-      <div class="trust-inner">
-        <div class="trust-item"><span class="trust-check">✓</span> Utah-based team</div>
-        <div class="trust-div"></div>
-        <div class="trust-item"><span class="trust-check">✓</span> 10+ sites shipped</div>
-        <div class="trust-div"></div>
-        <div class="trust-item"><span class="trust-check">✓</span> English &amp; Spanish</div>
-        <div class="trust-div"></div>
-        <div class="trust-item"><span class="trust-check">✓</span> Reply in &lt; 24h</div>
-        <div class="trust-div"></div>
-        <div class="trust-item"><span class="trust-check">✓</span> You own everything</div>
+      </div>
+      <div class="badge reveal"><span class="badge-dot"></span><span data-i18n="hero.badge">Utah-based · Salt Lake City</span></div>
+      <div class="urgency-badge reveal"><span class="urgency-dot"></span><span data-i18n-html="hero.urgency">Accepting <strong>3 new SLC projects</strong> — slots filling fast</span></div>
+      <h1 class="reveal reveal-delay-1" data-i18n-html="hero.h1">Your website should<br>be getting you <span class="gradient-text">calls.</span><br>If it isn't, we'll fix that.</h1>
+      <p class="hero-sub reveal reveal-delay-2" data-i18n="hero.sub">We build fast, mobile-first websites for Salt Lake City service businesses — designed to turn visitors into calls, bookings, and quote requests. Based in Utah. No templates. No bloated agency fees.</p>
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#contact" class="btn-primary" data-i18n="hero.cta1">Get a Free Site Audit</a>
+        <a href="#what-we-build" class="btn-ghost" data-i18n="hero.cta2">See What We Build →</a>
       </div>
     </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 3 — BUILT FOR BUSINESSES LIKE YOURS
-  ══════════════════════════════════════ -->
-  <section id="niches" class="section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">Who we work with</span>
-        <h2>Built for the businesses<br>that keep Salt Lake City running.</h2>
-        <p>We're not for everyone. We work with service businesses that are serious about growth — and done with websites that do nothing.</p>
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="slc-card">
+        <div class="slc-card-header">
+          <span class="slc-card-title" data-i18n="card.title">FlowForge · SLC Leads Today</span>
+          <span class="slc-live"><span class="slc-live-dot"></span><span data-i18n="card.live">Live</span></span>
+        </div>
+        <div class="slc-card-body">
+          <div class="slc-lead-row">
+            <div class="slc-lead-icon">🔧</div>
+            <div class="slc-lead-info">
+              <div class="slc-lead-name">Mountain Peak Roofing</div>
+              <div class="slc-lead-sub" data-i18n="card.row1.sub">Quote request · South Salt Lake</div>
+            </div>
+            <span class="slc-lead-pill pill-new" data-i18n="card.new">New Lead</span>
+          </div>
+          <div class="slc-lead-row">
+            <div class="slc-lead-icon">💪</div>
+            <div class="slc-lead-info">
+              <div class="slc-lead-name">Elevate Fitness SLC</div>
+              <div class="slc-lead-sub" data-i18n="card.row2.sub">Trial signup · Millcreek</div>
+            </div>
+            <span class="slc-lead-pill pill-booked" data-i18n="card.booked">Booked</span>
+          </div>
+          <div class="slc-lead-row">
+            <div class="slc-lead-icon">🌎</div>
+            <div class="slc-lead-info">
+              <div class="slc-lead-name">La Mesa Restaurant</div>
+              <div class="slc-lead-sub" data-i18n="card.row3.sub">Reservation · West Valley</div>
+            </div>
+            <span class="slc-lead-pill pill-booked" data-i18n="card.booked2">Booked</span>
+          </div>
+          <div class="slc-lead-row">
+            <div class="slc-lead-icon">🌿</div>
+            <div class="slc-lead-info">
+              <div class="slc-lead-name">Green Valley Landscaping</div>
+              <div class="slc-lead-sub" data-i18n="card.row4.sub">Quote request · Draper</div>
+            </div>
+            <span class="slc-lead-pill pill-quote" data-i18n="card.quote">Quote Sent</span>
+          </div>
+        </div>
+        <div class="slc-card-footer">
+          <div class="slc-metric"><span class="slc-metric-num">12</span><span class="slc-metric-label" data-i18n="card.metric1">Leads Today</span></div>
+          <div class="slc-metric"><span class="slc-metric-num">4</span><span class="slc-metric-label" data-i18n="card.metric2">Booked</span></div>
+          <div class="slc-metric"><span class="slc-metric-num">100%</span><span class="slc-metric-label" data-i18n="card.metric3">Owned by You</span></div>
+        </div>
       </div>
-
-      <div class="niche-grid">
-
-        <!-- Contractors -->
-        <div class="niche-card reveal">
-          <div class="niche-emoji">🔧</div>
-          <div>
-            <h3>Home Service Contractors</h3>
-            <p class="niche-sub">Roofers · HVAC · Plumbers · Landscapers · Electricians</p>
-          </div>
-          <p>Your customers Google you before they call. If your website is slow, ugly, or nowhere to be found — they're calling your competitor instead.</p>
-          <p>We build contractor sites that show up on Google, load fast on any phone, and make it dead simple for someone to request a quote in under 30 seconds.</p>
-          <div class="niche-result">
-            <span>What you get:</span> More quote requests. Fewer no-shows. A site that works while you're on the job.
-          </div>
-          <a href="#contact" class="service-cta">Get a free audit →</a>
-        </div>
-
-        <!-- Fitness -->
-        <div class="niche-card reveal reveal-delay-1">
-          <div class="niche-emoji">💪</div>
-          <div>
-            <h3>Fitness &amp; Wellness Businesses</h3>
-            <p class="niche-sub">Gyms · Personal trainers · Yoga studios · Massage therapists</p>
-          </div>
-          <p>Your transformation photos are on Instagram. Your booking link is buried in a bio. Your website looks like it was built in 2014.</p>
-          <p>We fix that. We build fitness sites with clear trial offers, class schedules, and booking flows that convert first-time visitors into paying members — without spending more on ads.</p>
-          <div class="niche-result">
-            <span>What you get:</span> More trial signups. More booked sessions. A site that sells your services around the clock.
-          </div>
-          <a href="#contact" class="service-cta">Get a free audit →</a>
-        </div>
-
-        <!-- Latino -->
-        <div class="niche-card reveal reveal-delay-2">
-          <div class="niche-emoji">🌎</div>
-          <div>
-            <h3>Latino-Owned Businesses in Utah</h3>
-            <p class="niche-sub">Restaurants · Salons · Cleaning services · Retail · Any local service</p>
-          </div>
-          <p>Your community is here. Your customers speak Spanish and English. Most web agencies don't — and it shows.</p>
-          <p>We build bilingual websites (English + Spanish) that represent your business the right way, connect with your community, and bring in customers from both audiences.</p>
-          <div class="niche-result">
-            <span>What you get:</span> A site that speaks your language — literally. More customers, more trust, more calls.
-          </div>
-          <!-- INSERT: testimonial from a Latino-owned SLC business when available -->
-          <a href="#contact" class="service-cta">Hablemos / Let's talk →</a>
-        </div>
-
-      </div><!-- /niche-grid -->
+      <div class="hv-badge hv-badge-1" data-i18n="card.badge1">✓ &nbsp;Deployed to production</div>
+      <div class="hv-badge hv-badge-2"><span class="hv-live-dot"></span><span data-i18n="card.badge2">&nbsp;SLC businesses online now</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
+<!-- ═══════════ TRUST BAR ═══════════ -->
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item"><span class="trust-check">✓</span><span data-i18n="trust.1">Utah-based team</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-item"><span class="trust-check">✓</span><span data-i18n="trust.2">10+ sites shipped</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-item"><span class="trust-check">✓</span><span data-i18n="trust.3">English &amp; Spanish</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-item"><span class="trust-check">✓</span><span data-i18n="trust.4">Reply in &lt; 24h</span></div>
+      <div class="trust-div"></div>
+      <div class="trust-item"><span class="trust-check">✓</span><span data-i18n="trust.5">You own everything</span></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ══════════════════════════════════════
-       SECTION 4 — WHAT WE ACTUALLY BUILD
-  ══════════════════════════════════════ -->
-  <section id="what-we-build" class="section process-section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">Deliverables</span>
-        <h2>No mystery. Here's exactly what you get.</h2>
-        <p>Most agencies keep it vague so they can upsell you later. We don't do that.</p>
+<!-- ═══════════ NICHES ═══════════ -->
+<section id="niches" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="niches.label">Who we work with</span>
+      <h2 data-i18n-html="niches.h2">Built for the businesses<br>that keep Salt Lake City running.</h2>
+      <p data-i18n="niches.p">We're not for everyone. We work with service businesses that are serious about growth — and done with websites that do nothing.</p>
+    </div>
+    <div class="niche-grid">
+      <div class="niche-card reveal">
+        <div class="niche-emoji">🔧</div>
+        <div>
+          <h3 data-i18n="niche.c.h3">Home Service Contractors</h3>
+          <p class="niche-sub" data-i18n="niche.c.sub">Roofers · HVAC · Plumbers · Landscapers · Electricians</p>
+        </div>
+        <p data-i18n="niche.c.p1">Your customers Google you before they call. If your website is slow, ugly, or nowhere to be found — they're calling your competitor instead.</p>
+        <p data-i18n="niche.c.p2">We build contractor sites that show up on Google, load fast on any phone, and make it dead simple for someone to request a quote in under 30 seconds.</p>
+        <div class="niche-result" data-i18n-html="niche.c.result"><span>What you get:</span> More quote requests. Fewer no-shows. A site that works while you're on the job.</div>
+        <a href="#contact" class="service-cta" data-i18n="niche.c.cta">Get a free audit →</a>
       </div>
+      <div class="niche-card reveal reveal-delay-1">
+        <div class="niche-emoji">💪</div>
+        <div>
+          <h3 data-i18n="niche.f.h3">Fitness &amp; Wellness Businesses</h3>
+          <p class="niche-sub" data-i18n="niche.f.sub">Gyms · Personal trainers · Yoga studios · Massage therapists</p>
+        </div>
+        <p data-i18n="niche.f.p1">Your transformation photos are on Instagram. Your booking link is buried in a bio. Your website looks like it was built in 2014.</p>
+        <p data-i18n="niche.f.p2">We fix that. We build fitness sites with clear trial offers, class schedules, and booking flows that convert first-time visitors into paying members.</p>
+        <div class="niche-result" data-i18n-html="niche.f.result"><span>What you get:</span> More trial signups. More booked sessions. A site that sells your services around the clock.</div>
+        <a href="#contact" class="service-cta" data-i18n="niche.f.cta">Get a free audit →</a>
+      </div>
+      <div class="niche-card reveal reveal-delay-2">
+        <div class="niche-emoji">🌎</div>
+        <div>
+          <h3 data-i18n="niche.l.h3">Latino-Owned Businesses in Utah</h3>
+          <p class="niche-sub" data-i18n="niche.l.sub">Restaurants · Salons · Cleaning services · Retail · Any local service</p>
+        </div>
+        <p data-i18n="niche.l.p1">Your community is here. Your customers speak Spanish and English. Most web agencies don't — and it shows.</p>
+        <p data-i18n="niche.l.p2">We build bilingual websites (English + Spanish) that represent your business the right way and bring in customers from both audiences.</p>
+        <div class="niche-result" data-i18n-html="niche.l.result"><span>What you get:</span> A site that speaks your language — literally. More customers, more trust, more calls.</div>
+        <a href="#contact" class="service-cta" data-i18n="niche.l.cta">Hablemos / Let's talk →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="deliverables-grid">
-
-        <!-- Website block -->
-        <div class="del-block reveal">
-          <h3>🌐 Your Website</h3>
-          <p class="del-desc">A fast, mobile-first site built to convert visitors into customers — not just look pretty.</p>
-          <ul class="del-list">
-            <li>Mobile-first design — looks great on any phone</li>
-            <li>5–8 pages: Home, Services, About, Contact + niche-specific pages</li>
-            <li>Fast load times (under 3 seconds — Google cares, so we do too)</li>
-            <li>Contact forms and quote request flows built to convert</li>
-            <li>Google Maps integration + location pages for local SEO</li>
-            <li>Before/after galleries (contractors), booking flows (gyms), bilingual pages (Latino businesses)</li>
-            <li>Connected to your Google Business Profile</li>
+<!-- ═══════════ DELIVERABLES ═══════════ -->
+<section id="what-we-build" class="section process-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="del.label">Deliverables</span>
+      <h2 data-i18n="del.h2">No mystery. Here's exactly what you get.</h2>
+      <p data-i18n="del.p">Most agencies keep it vague so they can upsell you later. We don't do that.</p>
+    </div>
+    <div class="deliverables-grid">
+      <div class="del-block reveal">
+        <h3 data-i18n="del.web.h3">🌐 Your Website</h3>
+        <p class="del-desc" data-i18n="del.web.desc">A fast, mobile-first site built to convert visitors into customers — not just look pretty.</p>
+        <ul class="del-list">
+          <li data-i18n="del.web.1">Mobile-first design — looks great on any phone</li>
+          <li data-i18n="del.web.2">5–8 pages: Home, Services, About, Contact + niche-specific pages</li>
+          <li data-i18n="del.web.3">Fast load times (under 3 seconds)</li>
+          <li data-i18n="del.web.4">Contact forms and quote request flows built to convert</li>
+          <li data-i18n="del.web.5">Google Maps integration + location pages for local SEO</li>
+          <li data-i18n="del.web.6">Before/after galleries, booking flows, bilingual pages</li>
+          <li data-i18n="del.web.7">Connected to your Google Business Profile</li>
+        </ul>
+        <div class="insert-screenshot" data-i18n="del.screenshot">[ INSERT: site mockup / screenshot ]</div>
+        <div class="del-always">
+          <div class="del-always-title" data-i18n="del.always.title">Included in every project</div>
+          <ul>
+            <li data-i18n="del.always.1">Full ownership — code, domain, accounts</li>
+            <li data-i18n="del.always.2">30 days of post-launch support</li>
+            <li data-i18n="del.always.3">You can update it yourself (or we handle it)</li>
           </ul>
-          <!-- INSERT: site mockup screenshot -->
-          <div class="insert-screenshot">[ INSERT: site mockup / screenshot ]</div>
-          <div class="del-always">
-            <div class="del-always-title">Included in every project</div>
-            <ul>
-              <li>Full ownership — code, domain, accounts</li>
-              <li>30 days of post-launch support</li>
-              <li>You can update it yourself (or we handle it)</li>
-            </ul>
-          </div>
         </div>
-
-        <!-- Automations block -->
-        <div class="del-block addon reveal reveal-delay-1">
-          <div class="del-tag">Optional Add-on</div>
-          <h3>⚡ Automations</h3>
-          <p class="del-desc">Let the machines handle the follow-up so you can focus on the work. Simple, reliable, wired directly to your phone.</p>
-          <ul class="del-list">
-            <li>Lead capture → instant email or SMS to your prospect</li>
-            <li>New inquiry notifications straight to your phone</li>
-            <li>Weekly summary: how many leads came in, where they came from</li>
-            <li>WhatsApp integration (especially valuable for Latino-owned businesses)</li>
-            <li>Booking confirmation + reminder messages</li>
-            <li>Google review request sent automatically after each job</li>
+      </div>
+      <div class="del-block addon reveal reveal-delay-1">
+        <div class="del-tag" data-i18n="del.auto.tag">Optional Add-on</div>
+        <h3 data-i18n="del.auto.h3">⚡ Automations</h3>
+        <p class="del-desc" data-i18n="del.auto.desc">Let the machines handle the follow-up so you can focus on the work.</p>
+        <ul class="del-list">
+          <li data-i18n="del.auto.1">Lead capture → instant email or SMS to your prospect</li>
+          <li data-i18n="del.auto.2">New inquiry notifications straight to your phone</li>
+          <li data-i18n="del.auto.3">Weekly summary: how many leads came in, where they came from</li>
+          <li data-i18n="del.auto.4">WhatsApp integration (especially valuable for Latino-owned businesses)</li>
+          <li data-i18n="del.auto.5">Booking confirmation + reminder messages</li>
+          <li data-i18n="del.auto.6">Google review request sent automatically after each job</li>
+        </ul>
+        <div class="del-always" style="border-color:rgba(168,85,247,0.2);background:rgba(168,85,247,0.04);">
+          <div class="del-always-title" style="color:var(--purple);" data-i18n="del.works.title">Works with</div>
+          <ul>
+            <li data-i18n="del.works.1">Your existing email and phone</li>
+            <li data-i18n="del.works.2">WhatsApp, Gmail, or any inbox you use</li>
+            <li data-i18n="del.works.3">No new software to learn</li>
           </ul>
-          <div class="del-always" style="border-color: rgba(168,85,247,0.2); background: rgba(168,85,247,0.04);">
-            <div class="del-always-title" style="color: var(--purple);">Works with</div>
-            <ul>
-              <li>Your existing email and phone</li>
-              <li>WhatsApp, Gmail, or any inbox you use</li>
-              <li>No new software to learn</li>
-            </ul>
-          </div>
         </div>
-
-      </div><!-- /deliverables-grid -->
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-
-  <!-- ══════════════════════════════════════
-       SECTION 5 — HOW IT WORKS
-  ══════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">The process</span>
-        <h2>Simple process. Real results.</h2>
-      </div>
-
-      <div class="steps">
-        <div class="step reveal">
-          <div class="step-num">01</div>
-          <h3>Free Audit Call</h3>
-          <p>We look at your current site (or the absence of one), your competitors, and your goals. You get a clear picture of what's broken and what it'll cost to fix it. No commitment, no sales pressure.</p>
-        </div>
-        <div class="step-connector reveal reveal-delay-1"></div>
-        <div class="step reveal reveal-delay-1">
-          <div class="step-num">02</div>
-          <h3>We Build</h3>
-          <p>You approve the plan. We design, build, and test your site in 2–3 weeks. You get progress updates along the way and can give feedback at every step. No surprises, no scope creep.</p>
-        </div>
-        <div class="step-connector reveal reveal-delay-2"></div>
-        <div class="step reveal reveal-delay-2">
-          <div class="step-num">03</div>
-          <h3>You Get Customers</h3>
-          <p>Your site goes live. Leads start coming in. We stick around for 30 days to make sure everything is working — then hand over full ownership. The site is yours, forever.</p>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top: 48px;" class="reveal reveal-delay-3">
-        <a href="#contact" class="btn-primary">Start with a free audit →</a>
-      </div>
-
+<!-- ═══════════ PROCESS ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="process.label">The process</span>
+      <h2 data-i18n="process.h2">Simple process. Real results.</h2>
     </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 6 — CASE STUDIES
-  ══════════════════════════════════════ -->
-  <section class="section process-section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">Our work</span>
-        <h2>Real businesses. Real results.</h2>
-        <p>Products shipped and working — built right here in Utah.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3 data-i18n="process.s1.h3">Free Audit Call</h3>
+        <p data-i18n="process.s1.p">We look at your current site, your competitors, and your goals. You get a clear picture of what's broken and what it'll cost to fix it. No commitment, no sales pressure.</p>
       </div>
+      <div class="step-connector reveal reveal-delay-1"></div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3 data-i18n="process.s2.h3">We Build</h3>
+        <p data-i18n="process.s2.p">You approve the plan. We design, build, and test your site in 2–3 weeks. Progress updates every few days. No surprises, no scope creep.</p>
+      </div>
+      <div class="step-connector reveal reveal-delay-2"></div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <h3 data-i18n="process.s3.h3">You Get Customers</h3>
+        <p data-i18n="process.s3.p">Your site goes live. Leads start coming in. We stick around for 30 days then hand over full ownership. The site is yours, forever.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="reveal reveal-delay-3">
+      <a href="#contact" class="btn-primary" data-i18n="process.cta">Start with a free audit →</a>
+    </div>
+  </div>
+</section>
 
-      <!-- INSERT: Replace placeholder cards with real SLC case studies -->
-      <div class="case-grid">
+<!-- ═══════════ CASE STUDIES ═══════════ -->
+<section class="section process-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="cases.label">Our work</span>
+      <h2 data-i18n="cases.h2">Real businesses. Real results.</h2>
+      <p data-i18n="cases.p">Products shipped and working — built right here in Utah.</p>
+    </div>
+    <div class="case-grid">
+      <div class="case-card reveal">
+        <div class="case-thumb">🔧<span class="case-coming-tag" data-i18n="cases.coming">Coming soon</span></div>
+        <div class="case-body">
+          <div class="case-type" data-i18n="cases.1.type">Contractor · South Salt Lake</div>
+          <h3 data-i18n="cases.1.h3">Roofing Co. — SLC</h3>
+          <p class="case-insert-note" data-i18n="cases.1.note">[ INSERT: Client name, what we built, and 1 concrete result ]</p>
+          <div class="case-result" data-i18n="cases.1.result">📈 Results incoming</div>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1">
+        <div class="case-thumb" style="background:linear-gradient(135deg,rgba(56,189,248,0.08),rgba(34,197,94,0.1));">💪<span class="case-coming-tag" data-i18n="cases.coming">Coming soon</span></div>
+        <div class="case-body">
+          <div class="case-type" data-i18n="cases.2.type">Fitness Studio · Murray</div>
+          <h3 data-i18n="cases.2.h3">Gym / Trainer — SLC</h3>
+          <p class="case-insert-note" data-i18n="cases.2.note">[ INSERT: Client name, what we built, and 1 concrete result ]</p>
+          <div class="case-result" data-i18n="cases.2.result">📈 Results incoming</div>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2">
+        <div class="case-thumb thumb-orange">🌎<span class="case-coming-tag" data-i18n="cases.coming">Coming soon</span></div>
+        <div class="case-body">
+          <div class="case-type" data-i18n="cases.3.type">Latino-owned · West Valley City</div>
+          <h3 data-i18n="cases.3.h3">Local Business — SLC</h3>
+          <p class="case-insert-note" data-i18n="cases.3.note">[ INSERT: Client name, what we built, bilingual results ]</p>
+          <div class="case-result" data-i18n="cases.3.result">📈 Results incoming</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <p style="margin-bottom:16px;" data-i18n="cases.cta.p">Want to be our next case study?</p>
+      <a href="#contact" class="btn-ghost" data-i18n="cases.cta.btn">Let's build something together →</a>
+    </div>
+  </div>
+</section>
 
-        <!-- Placeholder 1: Contractor -->
-        <div class="case-card reveal">
-          <div class="case-thumb">
-            🔧
-            <span class="case-coming-tag">Coming soon</span>
+<!-- ═══════════ PRICING / FLAGSHIP ═══════════ -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="pricing.label">Offers built for your business</span>
+      <h2 data-i18n-html="pricing.h2">One package per niche.<br>Built around your actual problem.</h2>
+      <p data-i18n="pricing.p">We don't sell one-size-fits-all plans. Here's what we recommend for each type of business — and why.</p>
+    </div>
+    <div class="flagship-grid">
+      <!-- Contractor -->
+      <div class="flagship-card reveal">
+        <div class="flagship-niche-tag tag-contractor" data-i18n="pkg.c.tag">🔧 Contractors</div>
+        <div class="flagship-header">
+          <div class="flagship-name" data-i18n="pkg.c.name">Contractor Growth</div>
+          <div class="flagship-price"><span data-i18n="pkg.c.price">$350 – $500</span><span data-i18n="pkg.c.period">/mo</span></div>
+        </div>
+        <p class="flagship-promise" data-i18n="pkg.c.promise">"A website that gets you found on Google + automated follow-up so no lead goes cold."</p>
+        <div class="flagship-for">
+          <div class="flagship-for-label" data-i18n="pkg.c.for.label">Best for</div>
+          <span data-i18n="pkg.c.for">Contractors already getting some jobs but losing leads because nobody follows up fast enough.</span>
+        </div>
+        <ul class="flagship-features">
+          <li data-i18n="pkg.c.f1">Mobile-first site — quote request in under 60 seconds</li>
+          <li data-i18n="pkg.c.f2">New lead → SMS to you within 60 seconds</li>
+          <li data-i18n="pkg.c.f3">Auto-reply to prospect: "We'll call you within the hour"</li>
+          <li data-i18n="pkg.c.f4">3-step follow-up if no response (day 1, 3, 7)</li>
+          <li data-i18n="pkg.c.f5">Google review request after every job — automatic</li>
+          <li data-i18n="pkg.c.f6">Weekly report: leads in, sources, follow-up status</li>
+          <li data-i18n="pkg.c.f7">1 site update/month included</li>
+        </ul>
+        <div class="flagship-cta-wrap">
+          <a href="#contact" class="btn-primary" data-i18n="pkg.c.cta">Get a Contractor quote</a>
+          <span class="flagship-micro" data-i18n="pkg.c.micro">Free audit included. No commitment.</span>
+        </div>
+      </div>
+      <!-- Fitness — featured -->
+      <div class="flagship-card flagship-featured reveal reveal-delay-1">
+        <div class="flagship-top-badge" data-i18n="pkg.f.badge">⭐ Recommended first step</div>
+        <div class="flagship-niche-tag tag-fitness" data-i18n="pkg.f.tag">💪 Gyms &amp; Trainers</div>
+        <div class="flagship-header">
+          <div class="flagship-name" data-i18n="pkg.f.name">Fitness Launch</div>
+          <div class="flagship-price"><span data-i18n="pkg.f.price">$1,000 – $1,400</span><span data-i18n="pkg.f.period"> one-time</span></div>
+        </div>
+        <p class="flagship-promise" data-i18n="pkg.f.promise">"A website with a built-in booking flow that converts visitors into trial signups."</p>
+        <div class="flagship-for">
+          <div class="flagship-for-label" data-i18n="pkg.f.for.label">Best for</div>
+          <span data-i18n="pkg.f.for">Trainers and gym owners running on Instagram and word-of-mouth with no real website.</span>
+        </div>
+        <ul class="flagship-features">
+          <li data-i18n="pkg.f.f1">6-page mobile-first site</li>
+          <li data-i18n="pkg.f.f2">Trial offer / free consult CTA on every page</li>
+          <li data-i18n="pkg.f.f3">Booking form or Calendly integration</li>
+          <li data-i18n="pkg.f.f4">Class schedule section built in</li>
+          <li data-i18n="pkg.f.f5">Transformation photo gallery</li>
+          <li data-i18n="pkg.f.f6">Email capture for free offer</li>
+          <li data-i18n="pkg.f.f7">Testimonials + social proof section</li>
+          <li data-i18n="pkg.f.f8">Full ownership — yours forever</li>
+        </ul>
+        <div class="flagship-cta-wrap">
+          <a href="#contact" class="btn-primary" data-i18n="pkg.f.cta">Get a Fitness quote</a>
+          <span class="flagship-micro" data-i18n="pkg.f.micro">Free audit included. No commitment.</span>
+        </div>
+      </div>
+      <!-- Latino -->
+      <div class="flagship-card reveal reveal-delay-2">
+        <div class="flagship-niche-tag tag-latino" data-i18n="pkg.l.tag">🌎 Latino-Owned</div>
+        <div class="flagship-header">
+          <div class="flagship-name" data-i18n="pkg.l.name">Latino Launch</div>
+          <div class="flagship-price"><span data-i18n="pkg.l.price">$1,100 – $1,500</span><span data-i18n="pkg.l.period"> one-time</span></div>
+        </div>
+        <p class="flagship-promise" data-i18n="pkg.l.promise">"A bilingual website — English + Spanish — that brings in customers from both communities."</p>
+        <div class="flagship-for">
+          <div class="flagship-for-label" data-i18n="pkg.l.for.label">Best for</div>
+          <span data-i18n="pkg.l.for">Latino-owned businesses with no site, English-only, or a site that doesn't represent them to their community.</span>
+        </div>
+        <ul class="flagship-features">
+          <li data-i18n="pkg.l.f1">Full bilingual site — English + Spanish, every page</li>
+          <li data-i18n="pkg.l.f2">Language toggle built in (EN / ES)</li>
+          <li data-i18n="pkg.l.f3">5–7 pages depending on business type</li>
+          <li data-i18n="pkg.l.f4">WhatsApp contact button (floating + in footer)</li>
+          <li data-i18n="pkg.l.f5">Photo gallery: food, services, team, space</li>
+          <li data-i18n="pkg.l.f6">Google Business Profile bilingual setup</li>
+          <li data-i18n="pkg.l.f7">Basic local SEO in both languages</li>
+          <li data-i18n="pkg.l.f8">Full ownership — yours forever</li>
+        </ul>
+        <div class="flagship-cta-wrap">
+          <a href="#contact" class="btn-primary" data-i18n="pkg.l.cta">Hablemos / Get a quote</a>
+          <span class="flagship-micro" data-i18n="pkg.l.micro">Auditoría gratis · Free audit included.</span>
+        </div>
+      </div>
+    </div>
+    <div class="flagship-upsell reveal">
+      <span class="flagship-upsell-icon">↑</span>
+      <p data-i18n-html="pricing.upsell">Every Launch package can grow into a <strong>Growth</strong> or <strong>Dominate</strong> monthly plan once your site is live.</p>
+      <a href="#contact" style="color:var(--blue);font-size:.85rem;font-weight:600;text-decoration:none;" data-i18n="pricing.upsell.cta">Ask about full package options →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHY FLOWFORGE ═══════════ -->
+<section class="section process-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="why.label">Why us</span>
+      <h2 data-i18n-html="why.h2">We're not an agency.<br>We're your local builder.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon">📍</div><h3 data-i18n="why.1.h3">Utah-based, SLC-focused</h3><p data-i18n="why.1.p">We're not a remote agency farming your project overseas. We're here. We know Salt Lake City and we care about your business because we're building ours here too.</p></div>
+      <div class="why-card reveal reveal-delay-1"><div class="why-icon">🌎</div><h3 data-i18n="why.2.h3">Bilingual by default</h3><p data-i18n="why.2.p">English and Spanish — not as a gimmick, but as a real capability. If your customers speak Spanish, your website should too. We write it, design it, and make sure it ranks for both audiences.</p></div>
+      <div class="why-card reveal reveal-delay-2"><div class="why-icon">🔧</div><h3 data-i18n="why.3.h3">Anti-agency, pro-results</h3><p data-i18n="why.3.p">No account managers. No retainer fees for things you don't need. You talk directly to the person building your site. We say what we'll do and we do it — on time, every time.</p></div>
+      <div class="why-card reveal reveal-delay-3"><div class="why-icon">🔑</div><h3 data-i18n="why.4.h3">You own everything</h3><p data-i18n="why.4.p">When we hand over your site, it's yours — code, domain, accounts, all of it. No monthly lock-in, no hidden fees. You're never dependent on us to keep your site alive.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="testi.label">What clients say</span>
+      <h2 data-i18n="testi.h2">From Salt Lake City business owners.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card placeholder reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote" data-i18n="testi.1.q">"We didn't have a website. Now we get 3–5 quote requests a week just from Google. Best investment we've made."</p>
+        <div class="testi-author"><span class="testi-name" data-i18n="testi.1.name">[ Client Name ]</span><span class="testi-biz" data-i18n="testi.1.biz">Roofing Contractor · West Valley City</span></div>
+      </div>
+      <div class="testi-card placeholder reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote" data-i18n="testi.2.q">"Our trial signups doubled in the first two months. The booking flow they built is so much better than what we had before."</p>
+        <div class="testi-author"><span class="testi-name" data-i18n="testi.2.name">[ Client Name ]</span><span class="testi-biz" data-i18n="testi.2.biz">Fitness Studio · Murray, UT</span></div>
+      </div>
+      <div class="testi-card placeholder reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote" data-i18n="testi.3.q">"Por fin tenemos un sitio que habla con nuestra comunidad. Nuestros clientes pueden encontrarnos en español y en inglés."</p>
+        <div class="testi-author"><span class="testi-name" data-i18n="testi.3.name">[ Nombre del cliente ]</span><span class="testi-biz" data-i18n="testi.3.biz">Restaurante · West Valley City</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="section faq-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="faq.label">Common questions</span>
+      <h2 data-i18n="faq.h2">Before you reach out.</h2>
+      <p data-i18n="faq.p">The questions every SLC business owner asks — answered straight.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal"><div class="faq-q" data-i18n="faq.1.q">Can't I just use an AI marketing tool instead?</div><div class="faq-a" data-i18n-html="faq.1.a">You can — and some are decent at social posts. But they can't build you a website that converts, fix a broken Google Business Profile, write real Spanish, or pick up the phone when something breaks.<br><br>AI tools sit on top of whatever you already have. If it's broken, they just automate the problem. We fix the foundation first.</div></div>
+      <div class="faq-item reveal reveal-delay-1"><div class="faq-q" data-i18n="faq.2.q">How long does a project take?</div><div class="faq-a" data-i18n="faq.2.a">A Launch website is typically done in 2–3 weeks from the day you approve the plan. One point of contact, no committees, no waiting.</div></div>
+      <div class="faq-item reveal reveal-delay-2"><div class="faq-q" data-i18n="faq.3.q">Do I have to pay everything upfront?</div><div class="faq-a" data-i18n="faq.3.a">No. It's 50% to start, 50% when we deliver. We accept bank transfer, PayPal, and Stripe. Monthly plans start after the site is live.</div></div>
+      <div class="faq-item reveal reveal-delay-3"><div class="faq-q" data-i18n="faq.4.q">What if I already have a website?</div><div class="faq-a" data-i18n="faq.4.a">We'll look at it on the free audit call and tell you honestly: fix what you have, or start fresh. Sometimes a few targeted changes are enough.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" data-i18n="faq.5.q">Do you actually write in Spanish, or just translate?</div><div class="faq-a" data-i18n="faq.5.a">We write it. There's a real difference between translated corporate Spanish and copy that sounds natural to a Spanish-speaking community in Utah. We're bilingual — we know the difference.</div></div>
+      <div class="faq-item reveal reveal-delay-1"><div class="faq-q" data-i18n="faq.6.q">What do I own at the end?</div><div class="faq-a" data-i18n="faq.6.a">Everything. Code, domain, hosting account, Google Business Profile access — all handed over to you on delivery. No lock-in, ever. It's yours. Full stop.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ AUTOPILOT ═══════════ -->
+<section class="section autopilot-section">
+  <div class="container">
+    <div class="autopilot-card reveal">
+      <div class="autopilot-left">
+        <div class="autopilot-badge"><span class="autopilot-dot"></span><span data-i18n="ap.badge">New · FlowForge AutoPilot</span></div>
+        <h2 data-i18n-html="ap.h2">Your marketing on autopilot.<br>Less than $6 a day.</h2>
+        <p data-i18n="ap.p">Once your site is live, add AutoPilot and your marketing runs itself — social posts, lead follow-ups, Google updates, review requests, and a Monday morning report. All in English and Spanish.</p>
+        <ul class="autopilot-list">
+          <li data-i18n="ap.f1">5 social posts/week — Instagram + Facebook, bilingual</li>
+          <li data-i18n="ap.f2">New lead → SMS to you in 60 seconds + auto-reply to prospect</li>
+          <li data-i18n="ap.f3">Google Business Profile updated weekly</li>
+          <li data-i18n="ap.f4">Review requests sent automatically after every job</li>
+          <li data-i18n="ap.f5">Weekly report every Monday morning</li>
+          <li data-i18n="ap.f6">Website chat agent — captures leads 24/7</li>
+        </ul>
+        <div class="autopilot-price-row">
+          <div class="autopilot-price">$179<span>/mo</span></div>
+          <div class="autopilot-vs" data-i18n="ap.vs">vs $249–399/mo for generic AI tools with no Spanish and no local knowledge</div>
+        </div>
+        <div class="autopilot-cta-row">
+          <a href="#contact" class="btn-primary" data-i18n="ap.cta">Ask about AutoPilot →</a>
+          <span class="autopilot-note" data-i18n="ap.note">Add-on for FlowForge website clients only.</span>
+        </div>
+      </div>
+      <div class="autopilot-right">
+        <div class="autopilot-preview">
+          <div class="ap-preview-header">
+            <span class="ap-preview-title" data-i18n="ap.preview.title">AutoPilot · Weekly Summary</span>
+            <span class="ap-preview-date" data-i18n="ap.preview.date">Monday, 9:00 AM</span>
           </div>
-          <div class="case-body">
-            <div class="case-type">Contractor · South Salt Lake</div>
-            <h3>Roofing Co. — SLC</h3>
-            <!-- INSERT: real case study content -->
-            <p class="case-insert-note">[ INSERT: Client name, what we built, and 1 concrete result — e.g. "3x more quote requests in the first month" ]</p>
-            <div class="case-result">
-              <!-- INSERT: real result here -->
-              📈 Results incoming
+          <div class="ap-preview-body">
+            <div class="ap-stat-row">
+              <div class="ap-stat"><span class="ap-stat-num">12</span><span class="ap-stat-label" data-i18n="ap.stat1">New Leads</span></div>
+              <div class="ap-stat"><span class="ap-stat-num">5</span><span class="ap-stat-label" data-i18n="ap.stat2">Posts Published</span></div>
+              <div class="ap-stat"><span class="ap-stat-num">3</span><span class="ap-stat-label" data-i18n="ap.stat3">New Reviews</span></div>
+            </div>
+            <div class="ap-activity">
+              <div class="ap-activity-title" data-i18n="ap.week">This week</div>
+              <div class="ap-activity-item"><span class="ap-dot ap-dot-green"></span><span data-i18n="ap.act1">Lead from Google — quote request sent</span></div>
+              <div class="ap-activity-item"><span class="ap-dot ap-dot-blue"></span><span data-i18n="ap.act2">Instagram post published (EN + ES)</span></div>
+              <div class="ap-activity-item"><span class="ap-dot ap-dot-green"></span><span data-i18n="ap.act3">Google Business Profile updated</span></div>
+              <div class="ap-activity-item"><span class="ap-dot ap-dot-purple"></span><span data-i18n="ap.act4">Review request sent · 1 new ★★★★★</span></div>
+              <div class="ap-activity-item"><span class="ap-dot ap-dot-blue"></span><span data-i18n="ap.act5">Follow-up sent to 2 cold leads</span></div>
             </div>
           </div>
-        </div>
-
-        <!-- Placeholder 2: Gym/wellness -->
-        <div class="case-card reveal reveal-delay-1">
-          <div class="case-thumb" style="background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(34,197,94,0.1));">
-            💪
-            <span class="case-coming-tag">Coming soon</span>
-          </div>
-          <div class="case-body">
-            <div class="case-type">Fitness Studio · Murray</div>
-            <h3>Gym / Trainer — SLC</h3>
-            <!-- INSERT: real case study content -->
-            <p class="case-insert-note">[ INSERT: Client name, what we built, and 1 concrete result — e.g. "2x more trial signups since launch" ]</p>
-            <div class="case-result">
-              📈 Results incoming
-            </div>
+          <div class="ap-preview-footer">
+            <span class="ap-footer-tag" data-i18n="ap.footer">Powered by FlowForge AutoPilot</span>
+            <span class="ap-footer-lang">EN · ES</span>
           </div>
         </div>
-
-        <!-- Placeholder 3: Latino business -->
-        <div class="case-card reveal reveal-delay-2">
-          <div class="case-thumb thumb-orange">
-            🌎
-            <span class="case-coming-tag">Coming soon</span>
-          </div>
-          <div class="case-body">
-            <div class="case-type">Latino-owned · West Valley City</div>
-            <h3>Local Business — SLC</h3>
-            <!-- INSERT: real case study content -->
-            <p class="case-insert-note">[ INSERT: Client name, what we built, bilingual results — e.g. "First time customers are finding them in Spanish searches" ]</p>
-            <div class="case-result">
-              📈 Results incoming
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /case-grid -->
-
-      <div style="text-align:center; margin-top: 40px;" class="reveal">
-        <p style="margin-bottom:16px;">Want to be our next case study?</p>
-        <a href="#contact" class="btn-ghost">Let's build something together →</a>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 7 — FLAGSHIP OFFERS (niche-specific)
-  ══════════════════════════════════════ -->
-  <section id="pricing" class="section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">Offers built for your business</span>
-        <h2>One package per niche.<br>Built around your actual problem.</h2>
-        <p>We don't sell one-size-fits-all plans. Here's what we recommend for each type of business — and why.</p>
-      </div>
-
-      <!-- ── FLAGSHIP CARDS ── -->
-      <div class="flagship-grid">
-
-        <!-- ── CONTRACTOR ── -->
-        <div class="flagship-card reveal">
-          <div class="flagship-niche-tag tag-contractor">🔧 Contractors</div>
-          <div class="flagship-header">
-            <div class="flagship-name">Contractor Growth</div>
-            <div class="flagship-price">$350 – $500<span>/mo</span></div>
-          </div>
-          <p class="flagship-promise">"A website that gets you found on Google + automated follow-up so no lead goes cold."</p>
-          <div class="flagship-for">
-            <div class="flagship-for-label">Best for</div>
-            Contractors already getting some jobs but losing leads because nobody follows up fast enough — or they have no clue how many leads they're even getting.
-          </div>
-          <ul class="flagship-features">
-            <li>Mobile-first site — quote request in under 60 seconds</li>
-            <li>New lead → SMS to you within 60 seconds</li>
-            <li>Auto-reply to prospect: "We'll call you within the hour"</li>
-            <li>3-step follow-up if no response (day 1, 3, 7)</li>
-            <li>Google review request after every job — automatic</li>
-            <li>Weekly report: leads in, sources, follow-up status</li>
-            <li>1 site update/month included</li>
-          </ul>
-          <div class="flagship-cta-wrap">
-            <a href="#contact" class="btn-primary">Get a Contractor quote</a>
-            <span class="flagship-micro">Free audit included. No commitment.</span>
-          </div>
-        </div>
-
-        <!-- ── FITNESS — featured ── -->
-        <div class="flagship-card flagship-featured reveal reveal-delay-1">
-          <div class="flagship-top-badge">⭐ Recommended first step</div>
-          <div class="flagship-niche-tag tag-fitness">💪 Gyms &amp; Trainers</div>
-          <div class="flagship-header">
-            <div class="flagship-name">Fitness Launch</div>
-            <div class="flagship-price">$1,000 – $1,400<span> one-time</span></div>
-          </div>
-          <p class="flagship-promise">"A website with a built-in booking flow that converts visitors into trial signups."</p>
-          <div class="flagship-for">
-            <div class="flagship-for-label">Best for</div>
-            Trainers and gym owners running on Instagram and word-of-mouth with no real website — or one that has no way to actually book someone.
-          </div>
-          <ul class="flagship-features">
-            <li>6-page mobile-first site</li>
-            <li>Trial offer / free consult CTA on every page</li>
-            <li>Booking form or Calendly integration</li>
-            <li>Class schedule section built in</li>
-            <li>Transformation photo gallery</li>
-            <li>Email capture for free offer (free week, free consult)</li>
-            <li>Testimonials + social proof section</li>
-            <li>Full ownership — yours forever</li>
-          </ul>
-          <div class="flagship-cta-wrap">
-            <a href="#contact" class="btn-primary">Get a Fitness quote</a>
-            <span class="flagship-micro">Free audit included. No commitment.</span>
-          </div>
-        </div>
-
-        <!-- ── LATINO ── -->
-        <div class="flagship-card reveal reveal-delay-2">
-          <div class="flagship-niche-tag tag-latino">🌎 Latino-Owned</div>
-          <div class="flagship-header">
-            <div class="flagship-name">Latino Launch</div>
-            <div class="flagship-price">$1,100 – $1,500<span> one-time</span></div>
-          </div>
-          <p class="flagship-promise">"A bilingual website — English + Spanish — that represents your business the right way and brings in customers from both communities."</p>
-          <div class="flagship-for">
-            <div class="flagship-for-label">Best for</div>
-            Latino-owned businesses with no site, an English-only site, or a site that doesn't represent the quality of their business to their community.
-          </div>
-          <ul class="flagship-features">
-            <li>Full bilingual site — English + Spanish, every page</li>
-            <li>Language toggle built in (EN / ES)</li>
-            <li>5–7 pages depending on business type</li>
-            <li>WhatsApp contact button (floating + in footer)</li>
-            <li>Photo gallery: food, services, team, space</li>
-            <li>Google Business Profile bilingual setup</li>
-            <li>Basic local SEO in both languages</li>
-            <li>Full ownership — yours forever</li>
-          </ul>
-          <div class="flagship-cta-wrap">
-            <a href="#contact" class="btn-primary">Hablemos / Get a quote</a>
-            <span class="flagship-micro">Auditoría gratis · Free audit included.</span>
-          </div>
-        </div>
-
-      </div><!-- /flagship-grid -->
-
-      <!-- upsell note -->
-      <div class="flagship-upsell reveal">
-        <span class="flagship-upsell-icon">↑</span>
-        <p>Every Launch package can grow into a <strong>Growth</strong> or <strong>Dominate</strong> monthly plan once your site is live — when you're ready for automations, SEO, and a full lead pipeline.</p>
-        <a href="#contact" style="color:var(--blue); font-size:0.85rem; font-weight:600; text-decoration:none;">Ask about full package options →</a>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 8 — WHY FLOWFORGE
-  ══════════════════════════════════════ -->
-  <section class="section process-section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">Why us</span>
-        <h2>We're not an agency.<br>We're your local builder.</h2>
-      </div>
-
-      <div class="why-grid">
-
-        <div class="why-card reveal">
-          <div class="why-icon">📍</div>
-          <h3>Utah-based, SLC-focused</h3>
-          <p>We're not a remote agency farming your project to a contractor overseas. We're here. We know Salt Lake City, we know the market, and we care about your business because we're building ours here too.</p>
-        </div>
-
-        <div class="why-card reveal reveal-delay-1">
-          <div class="why-icon">🌎</div>
-          <h3>Bilingual by default</h3>
-          <p>English and Spanish — not as a gimmick, but as a real capability. If your customers speak Spanish, your website should too. We write it, design it, and make sure it ranks for both audiences.</p>
-        </div>
-
-        <div class="why-card reveal reveal-delay-2">
-          <div class="why-icon">🔧</div>
-          <h3>Anti-agency, pro-results</h3>
-          <p>No account managers. No retainer fees for things you don't need. No jargon. You talk directly to the person building your site. We say what we'll do and we do it — on time, every time.</p>
-        </div>
-
-        <div class="why-card reveal reveal-delay-3">
-          <div class="why-icon">🔑</div>
-          <h3>You own everything</h3>
-          <p>When we hand over your site, it's yours — code, domain, accounts, all of it. No monthly lock-in, no hidden fees unless you want ongoing support. You're never dependent on us to keep your site alive.</p>
-        </div>
-
-      </div><!-- /why-grid -->
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 9 — TESTIMONIALS
-       INSERT: Replace placeholders with real quotes
-  ══════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">What clients say</span>
-        <h2>From Salt Lake City business owners.</h2>
-      </div>
-
-      <div class="testi-grid">
-
-        <!-- INSERT: Real testimonial 1 (contractor) -->
-        <div class="testi-card placeholder reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"We didn't have a website. Now we get 3–5 quote requests a week just from Google. Best investment we've made."</p>
-          <div class="testi-author">
-            <!-- INSERT: real name + business -->
-            <span class="testi-name">[ Client Name ]</span>
-            <span class="testi-biz">Roofing Contractor · West Valley City</span>
-          </div>
-        </div>
-
-        <!-- INSERT: Real testimonial 2 (gym/wellness) -->
-        <div class="testi-card placeholder reveal reveal-delay-1">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"Our trial signups doubled in the first two months. The booking flow they built is so much better than what we had before."</p>
-          <div class="testi-author">
-            <!-- INSERT: real name + business -->
-            <span class="testi-name">[ Client Name ]</span>
-            <span class="testi-biz">Fitness Studio · Murray, UT</span>
-          </div>
-        </div>
-
-        <!-- INSERT: Real testimonial 3 (Latino-owned) -->
-        <div class="testi-card placeholder reveal reveal-delay-2">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"Por fin tenemos un sitio que habla con nuestra comunidad. Nuestros clientes pueden encontrarnos en español y en inglés."</p>
-          <div class="testi-author">
-            <!-- INSERT: real name + business -->
-            <span class="testi-name">[ Nombre del cliente ]</span>
-            <span class="testi-biz">Restaurante · West Valley City</span>
-          </div>
-        </div>
-
-      </div><!-- /testi-grid -->
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 10 — FAQ
-  ══════════════════════════════════════ -->
-  <section class="section faq-section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">Common questions</span>
-        <h2>Before you reach out.</h2>
-        <p>The questions every SLC business owner asks — answered straight.</p>
-      </div>
-
-      <div class="faq-grid">
-
-        <div class="faq-item reveal">
-          <div class="faq-q">Can't I just use an AI marketing tool instead?</div>
-          <div class="faq-a">You can — and some of them are decent at scheduling social posts and writing generic captions. But here's what they can't do: build you a website that actually converts visitors into calls. Fix a Google Business Profile sending people to the wrong address. Write content in real Spanish that sounds like a human, not a translator. Or pick up the phone when something breaks.<br><br>AI tools sit on top of whatever you already have. If what you already have is broken or missing — they just automate the problem. We fix the foundation first. Then we automate on top of something that works.</div>
-        </div>
-
-        <div class="faq-item reveal reveal-delay-1">
-          <div class="faq-q">How long does a project take?</div>
-          <div class="faq-a">A Launch website is typically done in 2–3 weeks from the day you approve the plan. We move fast because we keep the process simple — one point of contact, no committees, no waiting. You'll see progress every few days, not once a month.</div>
-        </div>
-
-        <div class="faq-item reveal reveal-delay-2">
-          <div class="faq-q">Do I have to pay everything upfront?</div>
-          <div class="faq-a">No. It's 50% to start, 50% when we deliver. That protects both sides and keeps things moving. We accept bank transfer, PayPal, and Stripe. Monthly plans start after the site is live.</div>
-        </div>
-
-        <div class="faq-item reveal reveal-delay-3">
-          <div class="faq-q">What if I already have a website?</div>
-          <div class="faq-a">We'll look at it on the free audit call and tell you honestly: fix what you have, or start fresh. Sometimes a few targeted changes are enough. If your current site is too slow, too old, or built on a platform that limits you, we'll tell you that too — and explain why.</div>
-        </div>
-
-        <div class="faq-item reveal">
-          <div class="faq-q">Do you actually write in Spanish, or just translate?</div>
-          <div class="faq-a">We write it. There's a real difference between translated corporate Spanish and copy that sounds natural to a Spanish-speaking community in Utah. We're bilingual — we know the difference, and your customers will too.</div>
-        </div>
-
-        <div class="faq-item reveal reveal-delay-1">
-          <div class="faq-q">What do I own at the end?</div>
-          <div class="faq-a">Everything. Code, domain, hosting account, Google Business Profile access — all handed over to you on delivery. No lock-in, no monthly platform fee, no "you can only edit it through us." It's yours. Full stop.</div>
-        </div>
-
-      </div><!-- /faq-grid -->
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       AUTOPILOT TEASER SECTION
-  ══════════════════════════════════════ -->
-  <section class="section autopilot-section">
-    <div class="container">
-      <div class="autopilot-card reveal">
-
-        <div class="autopilot-left">
-          <div class="autopilot-badge">
-            <span class="autopilot-dot"></span>
-            New · FlowForge AutoPilot
-          </div>
-          <h2>Your marketing on autopilot.<br>Less than $6 a day.</h2>
-          <p>Once your site is live, add AutoPilot and your marketing runs itself — social posts, lead follow-ups, Google updates, review requests, and a Monday morning report. All done for you, every week, in English and Spanish.</p>
-          <ul class="autopilot-list">
-            <li>5 social posts/week — Instagram + Facebook, bilingual</li>
-            <li>New lead → SMS to you in 60 seconds + auto-reply to prospect</li>
-            <li>Google Business Profile updated weekly</li>
-            <li>Review requests sent automatically after every job</li>
-            <li>Weekly report every Monday morning</li>
-            <li>Website chat agent — captures leads 24/7</li>
-          </ul>
-          <div class="autopilot-price-row">
-            <div class="autopilot-price">$179<span>/mo</span></div>
-            <div class="autopilot-vs">vs $249–399/mo for generic AI tools with no Spanish and no local knowledge</div>
-          </div>
-          <div class="autopilot-cta-row">
-            <a href="#contact" class="btn-primary">Ask about AutoPilot →</a>
-            <span class="autopilot-note">Add-on for FlowForge website clients only.</span>
-          </div>
-        </div>
-
-        <div class="autopilot-right">
-          <div class="autopilot-preview">
-            <div class="ap-preview-header">
-              <span class="ap-preview-title">AutoPilot · Weekly Summary</span>
-              <span class="ap-preview-date">Monday, 9:00 AM</span>
-            </div>
-            <div class="ap-preview-body">
-              <div class="ap-stat-row">
-                <div class="ap-stat">
-                  <span class="ap-stat-num">12</span>
-                  <span class="ap-stat-label">New Leads</span>
-                </div>
-                <div class="ap-stat">
-                  <span class="ap-stat-num">5</span>
-                  <span class="ap-stat-label">Posts Published</span>
-                </div>
-                <div class="ap-stat">
-                  <span class="ap-stat-num">3</span>
-                  <span class="ap-stat-label">New Reviews</span>
-                </div>
-              </div>
-              <div class="ap-activity">
-                <div class="ap-activity-title">This week</div>
-                <div class="ap-activity-item">
-                  <span class="ap-dot ap-dot-green"></span>
-                  <span>Lead from Google — quote request sent</span>
-                </div>
-                <div class="ap-activity-item">
-                  <span class="ap-dot ap-dot-blue"></span>
-                  <span>Instagram post published (EN + ES)</span>
-                </div>
-                <div class="ap-activity-item">
-                  <span class="ap-dot ap-dot-green"></span>
-                  <span>Google Business Profile updated</span>
-                </div>
-                <div class="ap-activity-item">
-                  <span class="ap-dot ap-dot-purple"></span>
-                  <span>Review request sent · 1 new ★★★★★</span>
-                </div>
-                <div class="ap-activity-item">
-                  <span class="ap-dot ap-dot-blue"></span>
-                  <span>Follow-up sent to 2 cold leads</span>
-                </div>
-              </div>
-            </div>
-            <div class="ap-preview-footer">
-              <span class="ap-footer-tag">Powered by FlowForge AutoPilot</span>
-              <span class="ap-footer-lang">EN · ES</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /autopilot-card -->
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════
-       SECTION 11 — FINAL CTA
-  ══════════════════════════════════════ -->
-  <section id="contact" class="section final-cta">
-    <div class="final-cta-glow"></div>
-    <div class="container">
-      <div class="final-cta-inner">
-
-        <span class="label reveal">Let's talk</span>
-        <h2 class="reveal reveal-delay-1">Ready to get a website<br>that actually works?</h2>
-        <p class="reveal reveal-delay-2">
-          Let's start with a free 20-minute audit. We'll look at your current site (or starting point), tell you exactly what's holding you back, and give you a clear plan — no strings attached.<br><br>
-          Most clients walk away with at least 3 things they can fix immediately, whether they work with us or not.
-        </p>
-
-        <div class="final-cta-btns reveal reveal-delay-3">
-          <a href="mailto:hello@flowforge.com?subject=Free Site Audit — SLC" class="btn-primary">Book My Free Audit</a>
-          <a href="https://wa.me/16032059425?text=Hi%20FlowForge!%20I%27d%20like%20a%20free%20site%20audit%20for%20my%20SLC%20business." target="_blank" rel="noopener" class="btn-ghost">Message on WhatsApp →</a>
-        </div>
-
-        <p class="final-micro reveal">No commitment. No sales pitch. Just a straight look at your online presence.</p>
-
-        <div class="slc-cities reveal">
-          📍 Serving Salt Lake City and surrounding areas<br>
-          West Valley City · Murray · Sandy · Draper · South Salt Lake · Millcreek · Provo · Ogden
-        </div>
-
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <a href="/" class="logo">Flow<span>Forge</span></a>
-      <p class="footer-copy">© 2025 FlowForge · Utah, USA · Globally delivered.</p>
-      <div class="footer-links">
-        <a href="/#services">Services</a>
-        <a href="/#portfolio">Work</a>
-        <a href="/#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
+<!-- ═══════════ FINAL CTA ═══════════ -->
+<section id="contact" class="section final-cta">
+  <div class="final-cta-glow"></div>
+  <div class="container">
+    <div class="final-cta-inner">
+      <span class="label reveal" data-i18n="cta.label">Let's talk</span>
+      <h2 class="reveal reveal-delay-1" data-i18n-html="cta.h2">Ready to get a website<br>that actually works?</h2>
+      <p class="reveal reveal-delay-2" data-i18n-html="cta.p">Let's start with a free 20-minute audit. We'll look at your current site, tell you exactly what's holding you back, and give you a clear plan — no strings attached.<br><br>Most clients walk away with at least 3 things they can fix immediately, whether they work with us or not.</p>
+      <div class="final-cta-btns reveal reveal-delay-3">
+        <a href="mailto:hello@flowforge.com?subject=Free Site Audit — SLC" class="btn-primary" data-i18n="cta.btn1">Book My Free Audit</a>
+        <a href="https://wa.me/16032059425?text=Hi%20FlowForge!%20I%27d%20like%20a%20free%20site%20audit." target="_blank" rel="noopener" class="btn-ghost" data-i18n="cta.btn2">Message on WhatsApp →</a>
       </div>
+      <p class="final-micro reveal" data-i18n="cta.micro">No commitment. No sales pitch. Just a straight look at your online presence.</p>
+      <div class="slc-cities reveal" data-i18n-html="cta.cities">📍 Serving Salt Lake City and surrounding areas<br>West Valley City · Murray · Sandy · Draper · South Salt Lake · Millcreek · Provo · Ogden</div>
     </div>
-  </footer>
+  </div>
+</section>
 
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="logo">Flow<span>Forge</span></a>
+    <p class="footer-copy" data-i18n="footer.copy">© 2025 FlowForge · Utah, USA · Globally delivered.</p>
+    <div class="footer-links">
+      <a href="/#services" data-i18n="footer.services">Services</a>
+      <a href="/#portfolio" data-i18n="footer.work">Work</a>
+      <a href="/#pricing" data-i18n="footer.pricing">Pricing</a>
+      <a href="#contact" data-i18n="footer.contact">Contact</a>
+    </div>
+  </div>
+</footer>
 
-  <!-- ══════════════════════════════════════
-       WHATSAPP FLOATING BUTTON
-  ══════════════════════════════════════ -->
-  <a href="https://wa.me/16032059425?text=Hi%20FlowForge!%20I%27m%20interested%20in%20a%20website%20for%20my%20SLC%20business."
-     class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-  </a>
+<!-- ═══════════ WHATSAPP ═══════════ -->
+<a href="https://wa.me/16032059425?text=Hi%20FlowForge!" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
+<!-- FIXED: absolute path -->
+<script src="/script.js"></script>
+<script>
+// ═══════════════════════════════════════════════════
+// TRANSLATIONS — full EN + ES for every visible string
+// ═══════════════════════════════════════════════════
+const T = {
+  en: {
+    'nav.who':'Who We Serve','nav.what':'What We Build','nav.pricing':'Pricing','nav.cta':'Get a Free Audit',
+    'hero.badge':'Utah-based · Salt Lake City',
+    'hero.urgency':'Accepting <strong>3 new SLC projects</strong> — slots filling fast',
+    'hero.h1':'Your website should<br>be getting you <span class="gradient-text">calls.</span><br>If it isn\'t, we\'ll fix that.',
+    'hero.sub':'We build fast, mobile-first websites for Salt Lake City service businesses — designed to turn visitors into calls, bookings, and quote requests. Based in Utah. No templates. No bloated agency fees.',
+    'hero.cta1':'Get a Free Site Audit','hero.cta2':'See What We Build →',
+    'card.title':'FlowForge · SLC Leads Today','card.live':'Live',
+    'card.row1.sub':'Quote request · South Salt Lake','card.new':'New Lead',
+    'card.row2.sub':'Trial signup · Millcreek','card.booked':'Booked',
+    'card.row3.sub':'Reservation · West Valley','card.booked2':'Booked',
+    'card.row4.sub':'Quote request · Draper','card.quote':'Quote Sent',
+    'card.metric1':'Leads Today','card.metric2':'Booked','card.metric3':'Owned by You',
+    'card.badge1':'✓  Deployed to production','card.badge2':' SLC businesses online now',
+    'trust.1':'Utah-based team','trust.2':'10+ sites shipped','trust.3':'English & Spanish','trust.4':'Reply in < 24h','trust.5':'You own everything',
+    'niches.label':'Who we work with',
+    'niches.h2':'Built for the businesses<br>that keep Salt Lake City running.',
+    'niches.p':'We\'re not for everyone. We work with service businesses that are serious about growth — and done with websites that do nothing.',
+    'niche.c.h3':'Home Service Contractors','niche.c.sub':'Roofers · HVAC · Plumbers · Landscapers · Electricians',
+    'niche.c.p1':'Your customers Google you before they call. If your website is slow, ugly, or nowhere to be found — they\'re calling your competitor instead.',
+    'niche.c.p2':'We build contractor sites that show up on Google, load fast on any phone, and make it dead simple for someone to request a quote in under 30 seconds.',
+    'niche.c.result':'<span>What you get:</span> More quote requests. Fewer no-shows. A site that works while you\'re on the job.',
+    'niche.c.cta':'Get a free audit →',
+    'niche.f.h3':'Fitness & Wellness Businesses','niche.f.sub':'Gyms · Personal trainers · Yoga studios · Massage therapists',
+    'niche.f.p1':'Your transformation photos are on Instagram. Your booking link is buried in a bio. Your website looks like it was built in 2014.',
+    'niche.f.p2':'We fix that. We build fitness sites with clear trial offers, class schedules, and booking flows that convert first-time visitors into paying members.',
+    'niche.f.result':'<span>What you get:</span> More trial signups. More booked sessions. A site that sells your services around the clock.',
+    'niche.f.cta':'Get a free audit →',
+    'niche.l.h3':'Latino-Owned Businesses in Utah','niche.l.sub':'Restaurants · Salons · Cleaning services · Retail · Any local service',
+    'niche.l.p1':'Your community is here. Your customers speak Spanish and English. Most web agencies don\'t — and it shows.',
+    'niche.l.p2':'We build bilingual websites (English + Spanish) that represent your business the right way and bring in customers from both audiences.',
+    'niche.l.result':'<span>What you get:</span> A site that speaks your language — literally. More customers, more trust, more calls.',
+    'niche.l.cta':'Hablemos / Let\'s talk →',
+    'del.label':'Deliverables','del.h2':'No mystery. Here\'s exactly what you get.','del.p':'Most agencies keep it vague so they can upsell you later. We don\'t do that.',
+    'del.web.h3':'🌐 Your Website','del.web.desc':'A fast, mobile-first site built to convert visitors into customers — not just look pretty.',
+    'del.web.1':'Mobile-first design — looks great on any phone',
+    'del.web.2':'5–8 pages: Home, Services, About, Contact + niche-specific pages',
+    'del.web.3':'Fast load times (under 3 seconds)','del.web.4':'Contact forms and quote request flows built to convert',
+    'del.web.5':'Google Maps integration + location pages for local SEO',
+    'del.web.6':'Before/after galleries, booking flows, bilingual pages',
+    'del.web.7':'Connected to your Google Business Profile',
+    'del.screenshot':'[ INSERT: site mockup / screenshot ]',
+    'del.always.title':'Included in every project',
+    'del.always.1':'Full ownership — code, domain, accounts','del.always.2':'30 days of post-launch support','del.always.3':'You can update it yourself (or we handle it)',
+    'del.auto.tag':'Optional Add-on','del.auto.h3':'⚡ Automations','del.auto.desc':'Let the machines handle the follow-up so you can focus on the work.',
+    'del.auto.1':'Lead capture → instant email or SMS to your prospect','del.auto.2':'New inquiry notifications straight to your phone',
+    'del.auto.3':'Weekly summary: how many leads came in, where they came from',
+    'del.auto.4':'WhatsApp integration (especially valuable for Latino-owned businesses)',
+    'del.auto.5':'Booking confirmation + reminder messages','del.auto.6':'Google review request sent automatically after each job',
+    'del.works.title':'Works with','del.works.1':'Your existing email and phone','del.works.2':'WhatsApp, Gmail, or any inbox you use','del.works.3':'No new software to learn',
+    'process.label':'The process','process.h2':'Simple process. Real results.',
+    'process.s1.h3':'Free Audit Call','process.s1.p':'We look at your current site, your competitors, and your goals. You get a clear picture of what\'s broken and what it\'ll cost to fix it. No commitment, no sales pressure.',
+    'process.s2.h3':'We Build','process.s2.p':'You approve the plan. We design, build, and test your site in 2–3 weeks. Progress updates every few days. No surprises, no scope creep.',
+    'process.s3.h3':'You Get Customers','process.s3.p':'Your site goes live. Leads start coming in. We stick around for 30 days then hand over full ownership. The site is yours, forever.',
+    'process.cta':'Start with a free audit →',
+    'cases.label':'Our work','cases.h2':'Real businesses. Real results.','cases.p':'Products shipped and working — built right here in Utah.',
+    'cases.coming':'Coming soon',
+    'cases.1.type':'Contractor · South Salt Lake','cases.1.h3':'Roofing Co. — SLC','cases.1.note':'[ INSERT: Client name, what we built, and 1 concrete result ]','cases.1.result':'📈 Results incoming',
+    'cases.2.type':'Fitness Studio · Murray','cases.2.h3':'Gym / Trainer — SLC','cases.2.note':'[ INSERT: Client name, what we built, and 1 concrete result ]','cases.2.result':'📈 Results incoming',
+    'cases.3.type':'Latino-owned · West Valley City','cases.3.h3':'Local Business — SLC','cases.3.note':'[ INSERT: Client name, what we built, bilingual results ]','cases.3.result':'📈 Results incoming',
+    'cases.cta.p':'Want to be our next case study?','cases.cta.btn':'Let\'s build something together →',
+    'pricing.label':'Offers built for your business',
+    'pricing.h2':'One package per niche.<br>Built around your actual problem.',
+    'pricing.p':'We don\'t sell one-size-fits-all plans. Here\'s what we recommend for each type of business — and why.',
+    'pkg.c.tag':'🔧 Contractors','pkg.c.name':'Contractor Growth','pkg.c.price':'$350 – $500','pkg.c.period':'/mo',
+    'pkg.c.promise':'"A website that gets you found on Google + automated follow-up so no lead goes cold."',
+    'pkg.c.for.label':'Best for','pkg.c.for':'Contractors already getting some jobs but losing leads because nobody follows up fast enough.',
+    'pkg.c.f1':'Mobile-first site — quote request in under 60 seconds','pkg.c.f2':'New lead → SMS to you within 60 seconds',
+    'pkg.c.f3':'Auto-reply to prospect: "We\'ll call you within the hour"','pkg.c.f4':'3-step follow-up if no response (day 1, 3, 7)',
+    'pkg.c.f5':'Google review request after every job — automatic','pkg.c.f6':'Weekly report: leads in, sources, follow-up status','pkg.c.f7':'1 site update/month included',
+    'pkg.c.cta':'Get a Contractor quote','pkg.c.micro':'Free audit included. No commitment.',
+    'pkg.f.badge':'⭐ Recommended first step','pkg.f.tag':'💪 Gyms & Trainers','pkg.f.name':'Fitness Launch','pkg.f.price':'$1,000 – $1,400','pkg.f.period':' one-time',
+    'pkg.f.promise':'"A website with a built-in booking flow that converts visitors into trial signups."',
+    'pkg.f.for.label':'Best for','pkg.f.for':'Trainers and gym owners running on Instagram and word-of-mouth with no real website.',
+    'pkg.f.f1':'6-page mobile-first site','pkg.f.f2':'Trial offer / free consult CTA on every page','pkg.f.f3':'Booking form or Calendly integration',
+    'pkg.f.f4':'Class schedule section built in','pkg.f.f5':'Transformation photo gallery','pkg.f.f6':'Email capture for free offer',
+    'pkg.f.f7':'Testimonials + social proof section','pkg.f.f8':'Full ownership — yours forever',
+    'pkg.f.cta':'Get a Fitness quote','pkg.f.micro':'Free audit included. No commitment.',
+    'pkg.l.tag':'🌎 Latino-Owned','pkg.l.name':'Latino Launch','pkg.l.price':'$1,100 – $1,500','pkg.l.period':' one-time',
+    'pkg.l.promise':'"A bilingual website — English + Spanish — that brings in customers from both communities."',
+    'pkg.l.for.label':'Best for','pkg.l.for':'Latino-owned businesses with no site, English-only, or a site that doesn\'t represent them to their community.',
+    'pkg.l.f1':'Full bilingual site — English + Spanish, every page','pkg.l.f2':'Language toggle built in (EN / ES)','pkg.l.f3':'5–7 pages depending on business type',
+    'pkg.l.f4':'WhatsApp contact button (floating + in footer)','pkg.l.f5':'Photo gallery: food, services, team, space',
+    'pkg.l.f6':'Google Business Profile bilingual setup','pkg.l.f7':'Basic local SEO in both languages','pkg.l.f8':'Full ownership — yours forever',
+    'pkg.l.cta':'Hablemos / Get a quote','pkg.l.micro':'Auditoría gratis · Free audit included.',
+    'pricing.upsell':'Every Launch package can grow into a <strong>Growth</strong> or <strong>Dominate</strong> monthly plan once your site is live.',
+    'pricing.upsell.cta':'Ask about full package options →',
+    'why.label':'Why us','why.h2':'We\'re not an agency.<br>We\'re your local builder.',
+    'why.1.h3':'Utah-based, SLC-focused','why.1.p':'We\'re not a remote agency farming your project overseas. We\'re here. We know Salt Lake City and we care about your business because we\'re building ours here too.',
+    'why.2.h3':'Bilingual by default','why.2.p':'English and Spanish — not as a gimmick, but as a real capability. If your customers speak Spanish, your website should too. We write it, design it, and make sure it ranks for both audiences.',
+    'why.3.h3':'Anti-agency, pro-results','why.3.p':'No account managers. No retainer fees for things you don\'t need. You talk directly to the person building your site. We say what we\'ll do and we do it — on time, every time.',
+    'why.4.h3':'You own everything','why.4.p':'When we hand over your site, it\'s yours — code, domain, accounts, all of it. No monthly lock-in, no hidden fees. You\'re never dependent on us to keep your site alive.',
+    'testi.label':'What clients say','testi.h2':'From Salt Lake City business owners.',
+    'testi.1.q':'"We didn\'t have a website. Now we get 3–5 quote requests a week just from Google. Best investment we\'ve made."','testi.1.name':'[ Client Name ]','testi.1.biz':'Roofing Contractor · West Valley City',
+    'testi.2.q':'"Our trial signups doubled in the first two months. The booking flow they built is so much better than what we had before."','testi.2.name':'[ Client Name ]','testi.2.biz':'Fitness Studio · Murray, UT',
+    'testi.3.q':'"Por fin tenemos un sitio que habla con nuestra comunidad. Nuestros clientes pueden encontrarnos en español y en inglés."','testi.3.name':'[ Nombre del cliente ]','testi.3.biz':'Restaurante · West Valley City',
+    'faq.label':'Common questions','faq.h2':'Before you reach out.','faq.p':'The questions every SLC business owner asks — answered straight.',
+    'faq.1.q':'Can\'t I just use an AI marketing tool instead?',
+    'faq.1.a':'You can — and some are decent at social posts. But they can\'t build you a website that converts, fix a broken Google Business Profile, write real Spanish, or pick up the phone when something breaks.<br><br>AI tools sit on top of whatever you already have. If it\'s broken, they just automate the problem. We fix the foundation first.',
+    'faq.2.q':'How long does a project take?','faq.2.a':'A Launch website is typically done in 2–3 weeks from the day you approve the plan. One point of contact, no committees, no waiting.',
+    'faq.3.q':'Do I have to pay everything upfront?','faq.3.a':'No. It\'s 50% to start, 50% when we deliver. We accept bank transfer, PayPal, and Stripe. Monthly plans start after the site is live.',
+    'faq.4.q':'What if I already have a website?','faq.4.a':'We\'ll look at it on the free audit call and tell you honestly: fix what you have, or start fresh. Sometimes a few targeted changes are enough.',
+    'faq.5.q':'Do you actually write in Spanish, or just translate?','faq.5.a':'We write it. There\'s a real difference between translated corporate Spanish and copy that sounds natural to a Spanish-speaking community in Utah. We\'re bilingual — we know the difference.',
+    'faq.6.q':'What do I own at the end?','faq.6.a':'Everything. Code, domain, hosting account, Google Business Profile access — all handed over to you on delivery. No lock-in, ever. It\'s yours. Full stop.',
+    'ap.badge':'New · FlowForge AutoPilot','ap.h2':'Your marketing on autopilot.<br>Less than $6 a day.',
+    'ap.p':'Once your site is live, add AutoPilot and your marketing runs itself — social posts, lead follow-ups, Google updates, review requests, and a Monday morning report. All in English and Spanish.',
+    'ap.f1':'5 social posts/week — Instagram + Facebook, bilingual','ap.f2':'New lead → SMS to you in 60 seconds + auto-reply to prospect',
+    'ap.f3':'Google Business Profile updated weekly','ap.f4':'Review requests sent automatically after every job',
+    'ap.f5':'Weekly report every Monday morning','ap.f6':'Website chat agent — captures leads 24/7',
+    'ap.vs':'vs $249–399/mo for generic AI tools with no Spanish and no local knowledge',
+    'ap.cta':'Ask about AutoPilot →','ap.note':'Add-on for FlowForge website clients only.',
+    'ap.preview.title':'AutoPilot · Weekly Summary','ap.preview.date':'Monday, 9:00 AM',
+    'ap.stat1':'New Leads','ap.stat2':'Posts Published','ap.stat3':'New Reviews','ap.week':'This week',
+    'ap.act1':'Lead from Google — quote request sent','ap.act2':'Instagram post published (EN + ES)',
+    'ap.act3':'Google Business Profile updated','ap.act4':'Review request sent · 1 new ★★★★★','ap.act5':'Follow-up sent to 2 cold leads',
+    'ap.footer':'Powered by FlowForge AutoPilot',
+    'cta.label':'Let\'s talk','cta.h2':'Ready to get a website<br>that actually works?',
+    'cta.p':'Let\'s start with a free 20-minute audit. We\'ll look at your current site, tell you exactly what\'s holding you back, and give you a clear plan — no strings attached.<br><br>Most clients walk away with at least 3 things they can fix immediately, whether they work with us or not.',
+    'cta.btn1':'Book My Free Audit','cta.btn2':'Message on WhatsApp →',
+    'cta.micro':'No commitment. No sales pitch. Just a straight look at your online presence.',
+    'cta.cities':'📍 Serving Salt Lake City and surrounding areas<br>West Valley City · Murray · Sandy · Draper · South Salt Lake · Millcreek · Provo · Ogden',
+    'footer.copy':'© 2025 FlowForge · Utah, USA · Globally delivered.','footer.services':'Services','footer.work':'Work','footer.pricing':'Pricing','footer.contact':'Contact',
+  },
+  es: {
+    'nav.who':'A quién servimos','nav.what':'Qué construimos','nav.pricing':'Precios','nav.cta':'Auditoría Gratis',
+    'hero.badge':'Utah · Salt Lake City',
+    'hero.urgency':'Solo <strong>3 proyectos disponibles</strong> — cupos llenándose rápido',
+    'hero.h1':'Tu negocio en Utah<br>merece un sitio web que<br><span class="gradient-text">te traiga clientes.</span>',
+    'hero.sub':'Creamos sitios web rápidos, en inglés y español, para negocios de servicio en Salt Lake City — diseñados para conseguirte llamadas, reservas y solicitudes de presupuesto. Somos de Utah. Sin agencias, sin complicaciones.',
+    'hero.cta1':'Auditoría Gratis de Tu Sitio','hero.cta2':'Ver Nuestro Trabajo →',
+    'card.title':'FlowForge · Leads SLC Hoy','card.live':'En vivo',
+    'card.row1.sub':'Solicitud de presupuesto · South Salt Lake','card.new':'Nuevo Lead',
+    'card.row2.sub':'Inscripción de prueba · Millcreek','card.booked':'Reservado',
+    'card.row3.sub':'Reservación · West Valley','card.booked2':'Reservado',
+    'card.row4.sub':'Solicitud de presupuesto · Draper','card.quote':'Cotización Enviada',
+    'card.metric1':'Leads Hoy','card.metric2':'Reservados','card.metric3':'Tuyo al 100%',
+    'card.badge1':'✓  Desplegado a producción','card.badge2':' Negocios SLC en línea ahora',
+    'trust.1':'Equipo en Utah','trust.2':'10+ sitios entregados','trust.3':'Inglés y Español','trust.4':'Respuesta en < 24h','trust.5':'Tú eres dueño de todo',
+    'niches.label':'A quién servimos',
+    'niches.h2':'Construido para los negocios<br>que mantienen Salt Lake City en marcha.',
+    'niches.p':'No somos para todos. Trabajamos con negocios de servicio serios sobre el crecimiento — y hartos de sitios web que no hacen nada.',
+    'niche.c.h3':'Contratistas de Servicios del Hogar','niche.c.sub':'Techadores · HVAC · Plomeros · Jardineros · Electricistas',
+    'niche.c.p1':'Tus clientes te buscan en Google antes de llamar. Si tu sitio web es lento, feo o no aparece — están llamando a tu competencia.',
+    'niche.c.p2':'Construimos sitios para contratistas que aparecen en Google, cargan rápido en cualquier teléfono y hacen muy fácil solicitar un presupuesto en menos de 30 segundos.',
+    'niche.c.result':'<span>Lo que obtienes:</span> Más solicitudes de presupuesto. Menos cancelaciones. Un sitio que trabaja mientras tú estás en el trabajo.',
+    'niche.c.cta':'Auditoría gratis →',
+    'niche.f.h3':'Negocios de Fitness y Bienestar','niche.f.sub':'Gimnasios · Entrenadores personales · Estudios de yoga · Masajistas',
+    'niche.f.p1':'Tus fotos de transformación están en Instagram. Tu enlace de reservas está enterrado en una biografía. Tu sitio web parece del 2014.',
+    'niche.f.p2':'Lo arreglamos. Construimos sitios de fitness con ofertas de prueba claras, horarios y flujos de reserva que convierten visitantes en miembros pagadores.',
+    'niche.f.result':'<span>Lo que obtienes:</span> Más inscripciones de prueba. Más sesiones reservadas. Un sitio que vende tus servicios las 24 horas.',
+    'niche.f.cta':'Auditoría gratis →',
+    'niche.l.h3':'Negocios Latinos en Utah','niche.l.sub':'Restaurantes · Salones · Servicios de limpieza · Comercios · Cualquier servicio local',
+    'niche.l.p1':'Tu comunidad está aquí. Tus clientes hablan español e inglés. La mayoría de las agencias no — y se nota.',
+    'niche.l.p2':'Construimos sitios web bilingües (inglés + español) que representan tu negocio de la manera correcta y atraen clientes de ambas audiencias.',
+    'niche.l.result':'<span>Lo que obtienes:</span> Un sitio que habla tu idioma — literalmente. Más clientes, más confianza, más llamadas.',
+    'niche.l.cta':'Hablemos →',
+    'del.label':'Entregables','del.h2':'Sin misterios. Esto es exactamente lo que obtienes.','del.p':'La mayoría de las agencias son vagas para poder cobrarte más después. Nosotros no hacemos eso.',
+    'del.web.h3':'🌐 Tu Sitio Web','del.web.desc':'Un sitio rápido, optimizado para móvil, construido para convertir visitantes en clientes.',
+    'del.web.1':'Diseño mobile-first — se ve bien en cualquier teléfono',
+    'del.web.2':'5–8 páginas: Inicio, Servicios, Nosotros, Contacto + páginas de nicho',
+    'del.web.3':'Tiempos de carga rápidos (menos de 3 segundos)','del.web.4':'Formularios de contacto y flujos de presupuesto optimizados para convertir',
+    'del.web.5':'Integración de Google Maps + páginas de área local para SEO',
+    'del.web.6':'Galerías antes/después, flujos de reserva, páginas bilingües',
+    'del.web.7':'Conectado a tu Perfil de Google Business',
+    'del.screenshot':'[ INSERTAR: mockup / captura de pantalla ]',
+    'del.always.title':'Incluido en cada proyecto',
+    'del.always.1':'Propiedad completa — código, dominio, cuentas','del.always.2':'30 días de soporte post-lanzamiento','del.always.3':'Puedes actualizarlo tú mismo (o nosotros lo hacemos)',
+    'del.auto.tag':'Complemento Opcional','del.auto.h3':'⚡ Automatizaciones','del.auto.desc':'Deja que las máquinas manejen el seguimiento para que puedas enfocarte en el trabajo.',
+    'del.auto.1':'Captura de leads → SMS o email instantáneo a tu prospecto','del.auto.2':'Notificaciones de nuevas consultas directo a tu teléfono',
+    'del.auto.3':'Resumen semanal: cuántos leads llegaron y de dónde',
+    'del.auto.4':'Integración de WhatsApp (especialmente útil para negocios latinos)',
+    'del.auto.5':'Confirmación de reserva + mensajes de recordatorio','del.auto.6':'Solicitud de reseña de Google enviada automáticamente después de cada trabajo',
+    'del.works.title':'Funciona con','del.works.1':'Tu email y teléfono existentes','del.works.2':'WhatsApp, Gmail o cualquier bandeja que uses','del.works.3':'No hay software nuevo que aprender',
+    'process.label':'El proceso','process.h2':'Proceso simple. Resultados reales.',
+    'process.s1.h3':'Llamada de Auditoría Gratis','process.s1.p':'Revisamos tu sitio actual, tus competidores y tus objetivos. Obtienes una imagen clara de qué está roto y cuánto costará arreglarlo. Sin compromiso, sin presión.',
+    'process.s2.h3':'Construimos','process.s2.p':'Apruebas el plan. Diseñamos, construimos y probamos tu sitio en 2–3 semanas. Actualizaciones de progreso cada pocos días. Sin sorpresas.',
+    'process.s3.h3':'Obtienes Clientes','process.s3.p':'Tu sitio se lanza. Los leads comienzan a llegar. Estamos disponibles 30 días y luego te entregamos la propiedad completa. El sitio es tuyo, para siempre.',
+    'process.cta':'Comenzar con una auditoría gratis →',
+    'cases.label':'Nuestro trabajo','cases.h2':'Negocios reales. Resultados reales.','cases.p':'Proyectos enviados y funcionando — construidos aquí en Utah.',
+    'cases.coming':'Próximamente',
+    'cases.1.type':'Contratista · South Salt Lake','cases.1.h3':'Empresa de Techado — SLC','cases.1.note':'[ INSERTAR: Nombre, qué construimos y 1 resultado concreto ]','cases.1.result':'📈 Resultados próximamente',
+    'cases.2.type':'Estudio de Fitness · Murray','cases.2.h3':'Gimnasio / Entrenador — SLC','cases.2.note':'[ INSERTAR: Nombre, qué construimos y 1 resultado concreto ]','cases.2.result':'📈 Resultados próximamente',
+    'cases.3.type':'Negocio Latino · West Valley City','cases.3.h3':'Negocio Local — SLC','cases.3.note':'[ INSERTAR: Nombre, qué construimos, resultados bilingües ]','cases.3.result':'📈 Resultados próximamente',
+    'cases.cta.p':'¿Quieres ser nuestro próximo caso de estudio?','cases.cta.btn':'Construyamos algo juntos →',
+    'pricing.label':'Ofertas para tu negocio',
+    'pricing.h2':'Un paquete por nicho.<br>Construido alrededor de tu problema real.',
+    'pricing.p':'No vendemos planes de talla única. Esto es lo que recomendamos para cada tipo de negocio — y por qué.',
+    'pkg.c.tag':'🔧 Contratistas','pkg.c.name':'Contractor Growth','pkg.c.price':'$350 – $500','pkg.c.period':'/mes',
+    'pkg.c.promise':'"Un sitio web que te hace aparecer en Google + seguimiento automatizado para que ningún lead se enfríe."',
+    'pkg.c.for.label':'Ideal para','pkg.c.for':'Contratistas que ya consiguen trabajos pero pierden leads porque nadie hace seguimiento rápido.',
+    'pkg.c.f1':'Sitio mobile-first — solicitud de presupuesto en menos de 60 segundos','pkg.c.f2':'Nuevo lead → SMS a ti en 60 segundos',
+    'pkg.c.f3':'Respuesta automática al prospecto: "Te llamamos en una hora"','pkg.c.f4':'Seguimiento de 3 pasos si no hay respuesta (día 1, 3, 7)',
+    'pkg.c.f5':'Solicitud de reseña de Google después de cada trabajo — automático','pkg.c.f6':'Reporte semanal: leads, fuentes, estado de seguimiento','pkg.c.f7':'1 actualización del sitio/mes incluida',
+    'pkg.c.cta':'Cotización para Contratistas','pkg.c.micro':'Auditoría gratis incluida. Sin compromiso.',
+    'pkg.f.badge':'⭐ Primer paso recomendado','pkg.f.tag':'💪 Gimnasios y Entrenadores','pkg.f.name':'Fitness Launch','pkg.f.price':'$1,000 – $1,400','pkg.f.period':' única vez',
+    'pkg.f.promise':'"Un sitio web con flujo de reservas que convierte visitantes en inscripciones de prueba."',
+    'pkg.f.for.label':'Ideal para','pkg.f.for':'Entrenadores y dueños de gimnasios que funcionan con Instagram y boca en boca sin un sitio web real.',
+    'pkg.f.f1':'Sitio mobile-first de 6 páginas','pkg.f.f2':'CTA de prueba gratis / consulta en cada página','pkg.f.f3':'Formulario de reserva o integración con Calendly',
+    'pkg.f.f4':'Sección de horario de clases incluida','pkg.f.f5':'Galería de fotos de transformación','pkg.f.f6':'Captura de email para oferta gratis',
+    'pkg.f.f7':'Sección de testimonios + prueba social','pkg.f.f8':'Propiedad completa — tuyo para siempre',
+    'pkg.f.cta':'Cotización para Fitness','pkg.f.micro':'Auditoría gratis incluida. Sin compromiso.',
+    'pkg.l.tag':'🌎 Negocios Latinos','pkg.l.name':'Latino Launch','pkg.l.price':'$1,100 – $1,500','pkg.l.period':' única vez',
+    'pkg.l.promise':'"Un sitio web bilingüe — inglés + español — que atrae clientes de ambas comunidades."',
+    'pkg.l.for.label':'Ideal para','pkg.l.for':'Negocios latinos sin sitio, solo en inglés, o con un sitio que no los representa ante su comunidad.',
+    'pkg.l.f1':'Sitio completamente bilingüe — inglés + español, cada página','pkg.l.f2':'Botón de cambio de idioma integrado (EN / ES)','pkg.l.f3':'5–7 páginas según el tipo de negocio',
+    'pkg.l.f4':'Botón de WhatsApp (flotante + en el pie de página)','pkg.l.f5':'Galería de fotos: comida, servicios, equipo, espacio',
+    'pkg.l.f6':'Perfil de Google Business bilingüe','pkg.l.f7':'SEO local básico en ambos idiomas','pkg.l.f8':'Propiedad completa — tuyo para siempre',
+    'pkg.l.cta':'Hablemos / Cotización','pkg.l.micro':'Auditoría gratis incluida.',
+    'pricing.upsell':'Cada paquete Launch puede crecer a un plan mensual <strong>Growth</strong> o <strong>Dominate</strong> una vez que tu sitio esté en vivo.',
+    'pricing.upsell.cta':'Preguntar sobre opciones completas →',
+    'why.label':'Por qué nosotros','why.h2':'No somos una agencia.<br>Somos tu constructor local.',
+    'why.1.h3':'Basados en Utah, enfocados en SLC','why.1.p':'No somos una agencia remota que subcontrata tu proyecto al extranjero. Estamos aquí. Conocemos Salt Lake City y nos importa tu negocio porque también estamos construyendo el nuestro aquí.',
+    'why.2.h3':'Bilingüe por defecto','why.2.p':'Inglés y español — no como truco, sino como capacidad real. Si tus clientes hablan español, tu sitio web también debería. Lo escribimos, lo diseñamos y nos aseguramos de que aparezca para ambas audiencias.',
+    'why.3.h3':'Anti-agencia, pro-resultados','why.3.p':'Sin gestores de cuenta. Sin tarifas innecesarias. Hablas directamente con la persona que construye tu sitio. Decimos lo que haremos y lo hacemos — a tiempo, siempre.',
+    'why.4.h3':'Tú eres dueño de todo','why.4.p':'Cuando te entregamos tu sitio, es tuyo — código, dominio, cuentas, todo. Sin bloqueo mensual, sin tarifas ocultas. Nunca dependerás de nosotros para mantener tu sitio activo.',
+    'testi.label':'Lo que dicen los clientes','testi.h2':'De dueños de negocios en Salt Lake City.',
+    'testi.1.q':'"No teníamos sitio web. Ahora recibimos 3–5 solicitudes de presupuesto por semana solo de Google. La mejor inversión que hemos hecho."','testi.1.name':'[ Nombre del Cliente ]','testi.1.biz':'Contratista de Techado · West Valley City',
+    'testi.2.q':'"Nuestras inscripciones de prueba se duplicaron en los primeros dos meses. El flujo de reservas que construyeron es mucho mejor que lo que teníamos."','testi.2.name':'[ Nombre del Cliente ]','testi.2.biz':'Estudio de Fitness · Murray, UT',
+    'testi.3.q':'"Por fin tenemos un sitio que habla con nuestra comunidad. Nuestros clientes pueden encontrarnos en español y en inglés."','testi.3.name':'[ Nombre del cliente ]','testi.3.biz':'Restaurante · West Valley City',
+    'faq.label':'Preguntas frecuentes','faq.h2':'Antes de contactarnos.','faq.p':'Las preguntas que todo dueño de negocio en SLC hace — respondidas directamente.',
+    'faq.1.q':'¿No puedo usar una herramienta de marketing con IA?',
+    'faq.1.a':'Puedes — y algunas son buenas para publicaciones. Pero no pueden construirte un sitio que convierta, arreglar un Perfil de Google roto, escribir español real, o contestar el teléfono cuando algo se rompe.<br><br>Las herramientas de IA se ponen encima de lo que ya tienes. Si está roto, solo automatizan el problema. Nosotros arreglamos la base primero.',
+    'faq.2.q':'¿Cuánto tiempo toma un proyecto?','faq.2.a':'Un sitio web Launch generalmente está listo en 2–3 semanas desde que apruebas el plan. Un punto de contacto, sin comités, sin esperas.',
+    'faq.3.q':'¿Tengo que pagar todo por adelantado?','faq.3.a':'No. Es 50% para comenzar, 50% al entregar. Aceptamos transferencia bancaria, PayPal y Stripe. Los planes mensuales comienzan después de que el sitio esté en vivo.',
+    'faq.4.q':'¿Qué pasa si ya tengo un sitio web?','faq.4.a':'Lo revisaremos en la llamada de auditoría y te diremos honestamente: arregla lo que tienes, o empieza de nuevo. A veces algunos cambios específicos son suficientes.',
+    'faq.5.q':'¿Realmente escriben en español o solo traducen?','faq.5.a':'Lo escribimos. Hay una diferencia real entre el español corporativo traducido y el texto que suena natural para la comunidad hispanohablante en Utah. Somos bilingües — lo sabemos.',
+    'faq.6.q':'¿Qué soy dueño al final?','faq.6.a':'Todo. Código, dominio, cuenta de hosting, acceso al Perfil de Google Business — todo te lo entregamos al finalizar. Sin bloqueo, sin tarifas. Es tuyo. Punto.',
+    'ap.badge':'Nuevo · FlowForge AutoPilot','ap.h2':'Tu marketing en piloto automático.<br>Menos de $6 al día.',
+    'ap.p':'Una vez que tu sitio esté en vivo, agrega AutoPilot y tu marketing se maneja solo — publicaciones, seguimiento de leads, actualizaciones de Google, solicitudes de reseñas y un reporte cada lunes. Todo en inglés y español.',
+    'ap.f1':'5 publicaciones/semana — Instagram + Facebook, bilingüe','ap.f2':'Nuevo lead → SMS a ti en 60 segundos + respuesta automática al prospecto',
+    'ap.f3':'Perfil de Google Business actualizado semanalmente','ap.f4':'Solicitudes de reseña enviadas automáticamente después de cada trabajo',
+    'ap.f5':'Reporte semanal cada lunes por la mañana','ap.f6':'Agente de chat en el sitio — captura leads 24/7',
+    'ap.vs':'vs $249–399/mes por herramientas genéricas de IA sin español y sin conocimiento local',
+    'ap.cta':'Preguntar sobre AutoPilot →','ap.note':'Complemento solo para clientes con sitio web de FlowForge.',
+    'ap.preview.title':'AutoPilot · Resumen Semanal','ap.preview.date':'Lunes, 9:00 AM',
+    'ap.stat1':'Nuevos Leads','ap.stat2':'Posts Publicados','ap.stat3':'Nuevas Reseñas','ap.week':'Esta semana',
+    'ap.act1':'Lead de Google — solicitud de presupuesto enviada','ap.act2':'Post de Instagram publicado (EN + ES)',
+    'ap.act3':'Perfil de Google Business actualizado','ap.act4':'Solicitud de reseña enviada · 1 nueva ★★★★★','ap.act5':'Seguimiento enviado a 2 leads fríos',
+    'ap.footer':'Impulsado por FlowForge AutoPilot',
+    'cta.label':'Hablemos','cta.h2':'¿Listo para tener un sitio web<br>que realmente funcione?',
+    'cta.p':'Comencemos con una auditoría gratuita de 20 minutos. Revisaremos tu sitio actual, te diremos exactamente qué te está frenando y te daremos un plan claro — sin compromisos.<br><br>La mayoría de los clientes se van con al menos 3 cosas que pueden arreglar de inmediato.',
+    'cta.btn1':'Reservar Mi Auditoría Gratis','cta.btn2':'Mensaje por WhatsApp →',
+    'cta.micro':'Sin compromiso. Sin presión de ventas. Solo una mirada honesta a tu presencia online.',
+    'cta.cities':'📍 Sirviendo Salt Lake City y áreas circundantes<br>West Valley City · Murray · Sandy · Draper · South Salt Lake · Millcreek · Provo · Ogden',
+    'footer.copy':'© 2025 FlowForge · Utah, USA · Entregado globalmente.','footer.services':'Servicios','footer.work':'Trabajo','footer.pricing':'Precios','footer.contact':'Contacto',
+  }
+};
 
-  <!-- ══════════════════════════════════════
-       SCRIPTS
-  ══════════════════════════════════════ -->
-  <script src="script.js"></script>
-  <script>
-    // ── LANGUAGE TOGGLE ──
-    function setLang(lang) {
-      document.getElementById('hero-en').classList.toggle('active', lang === 'en');
-      document.getElementById('hero-es').classList.toggle('active', lang === 'es');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-      document.documentElement.lang = lang === 'es' ? 'es' : 'en';
-    }
-  </script>
+// ═══ APPLY TRANSLATIONS ═══
+let currentLang = localStorage.getItem('ff_lang') || 'en';
 
+function applyLang(lang) {
+  const t = T[lang];
+  // Text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  // HTML nodes
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.documentElement.lang = lang;
+  localStorage.setItem('ff_lang', lang);
+  currentLang = lang;
+}
+
+function setLang(lang) {
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  applyLang(lang);
+}
+
+// ═══ THEME TOGGLE ═══
+const themes = [
+  { key:'dark',  icon:'🌙', label:'Dark'  },
+  { key:'light', icon:'☀️', label:'Light' },
+  { key:'auto',  icon:'💻', label:'Auto'  },
+];
+let themeIdx = 0;
+const savedTheme = localStorage.getItem('ff_theme') || 'dark';
+themeIdx = themes.findIndex(t => t.key === savedTheme);
+if (themeIdx < 0) themeIdx = 0;
+
+function applyTheme(idx) {
+  const t = themes[idx];
+  document.documentElement.setAttribute('data-theme', t.key);
+  document.getElementById('theme-icon').textContent = t.icon;
+  document.getElementById('theme-label').textContent = t.label;
+  document.getElementById('theme-icon-mobile').textContent = t.icon;
+  localStorage.setItem('ff_theme', t.key);
+}
+
+function cycleTheme() {
+  themeIdx = (themeIdx + 1) % themes.length;
+  applyTheme(themeIdx);
+}
+
+document.getElementById('theme-toggle').addEventListener('click', cycleTheme);
+document.getElementById('theme-toggle-mobile').addEventListener('click', cycleTheme);
+
+// ═══ INIT ═══
+applyTheme(themeIdx);
+applyLang(currentLang);
+if (currentLang === 'es') {
+  document.getElementById('btn-en').classList.remove('active');
+  document.getElementById('btn-es').classList.add('active');
+}
+</script>
 </body>
 </html>
