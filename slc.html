@@ -587,25 +587,45 @@
 
 /* Mobile landscape / small tablet (≤768px) */
 @media (max-width: 768px) {
-  /* Nav overlay — uses CSS vars so it respects Light/Auto/Dark */
+  /* Nav bar stays on top of everything */
+  .nav { z-index: 300 !important; }
+
+  /* Overlay: covers full screen, sits below nav bar, above all content */
   .nav-links {
-    display: none;
+    display: none !important;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 32px;
     background: var(--bg);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    z-index: 99;
+    z-index: 200;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 100px 24px 60px;
   }
-  .nav-links.open { display: flex; }
-  .nav-links a { font-size: 1.15rem; font-weight: 600; color: var(--text); }
-  .nav-links .btn-nav { font-size: 1rem; }
-  .nav-links li { width: 100%; text-align: center; display: flex; justify-content: center; }
-  .hamburger { display: flex !important; z-index: 100; }
+  .nav-links.open { display: flex !important; }
+  .nav-links a {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links .btn-nav {
+    font-size: 1rem;
+    padding: 14px 32px;
+  }
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  .hamburger { display: flex !important; z-index: 301; position: relative; }
 
   /* Sections */
   .section { padding: 56px 0; }
@@ -1719,6 +1739,34 @@ const T = {
     'cmp.footnote':'AutoPilot es un complemento para clientes con sitio web de FlowForge. Compromiso de 6 meses. Sin tarifas de configuración.',
   }
 };
+
+// ═══ HAMBURGER — override script.js with iOS-safe scroll lock ═══
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  if (!hamburger || !navLinks) return;
+
+  // Remove any listeners added by script.js by cloning
+  const newHamburger = hamburger.cloneNode(true);
+  hamburger.parentNode.replaceChild(newHamburger, hamburger);
+
+  newHamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    newHamburger.classList.toggle('open', isOpen);
+    // Lock scroll on both html + body — fixes iOS Safari scroll-through
+    document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+    document.body.style.overflow            = isOpen ? 'hidden' : '';
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      newHamburger.classList.remove('open');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow            = '';
+    });
+  });
+})();
 
 // ═══ APPLY TRANSLATIONS ═══
 let currentLang = localStorage.getItem('ff_lang') || 'en';
