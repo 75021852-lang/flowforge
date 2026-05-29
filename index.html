@@ -10,6 +10,7 @@
     gtag('config', 'G-CK4HRK4L4M');
   </script>
   <meta charset="UTF-8">
+  <script>var t=localStorage.getItem('ff-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FlowForge — AI Tools, Automations & Web Design</title>
   <meta name="description" content="FlowForge builds AI integrations, automation workflows, Chrome extensions, and web design for businesses worldwide. Utah-based, globally delivered.">
@@ -29,6 +30,13 @@
         <li><a href="#portfolio">Work</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#contact" class="btn-nav">Get a Quote</a></li>
+        <li>
+          <div class="theme-toggle" id="theme-toggle">
+            <button class="theme-btn active" data-theme-val="auto" title="Auto">Auto</button>
+            <button class="theme-btn" data-theme-val="light" title="Light">☀︎</button>
+            <button class="theme-btn" data-theme-val="dark" title="Dark">☾</button>
+          </div>
+        </li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -604,5 +612,28 @@
   </a>
 
   <script src="script.js"></script>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('ff-theme') || 'auto';
+      if (saved !== 'auto') document.documentElement.setAttribute('data-theme', saved);
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      const btns = document.querySelectorAll('.theme-btn');
+      const saved = localStorage.getItem('ff-theme') || 'auto';
+      btns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.themeVal === saved);
+        btn.addEventListener('click', function() {
+          const val = this.dataset.themeVal;
+          localStorage.setItem('ff-theme', val);
+          if (val === 'auto') {
+            document.documentElement.removeAttribute('data-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', val);
+          }
+          btns.forEach(b => b.classList.toggle('active', b.dataset.themeVal === val));
+        });
+      });
+    });
+  </script>
 </body>
 </html>

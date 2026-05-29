@@ -11,6 +11,7 @@
   </script>
 
   <meta charset="UTF-8">
+  <script>var t=localStorage.getItem('ff-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Design for Salt Lake City Service Businesses — FlowForge</title>
   <meta name="description" content="FlowForge builds high-converting websites for Salt Lake City contractors, gyms, and Latino-owned businesses. Mobile-first, bilingual, and built to get you customers.">
@@ -1049,6 +1050,13 @@
         <li><a href="#what-we-build">What We Build</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#contact" class="btn-nav">Get a Free Audit</a></li>
+        <li>
+          <div class="theme-toggle" id="theme-toggle">
+            <button class="theme-btn active" data-theme-val="auto" title="Auto">Auto</button>
+            <button class="theme-btn" data-theme-val="light" title="Light">☀︎</button>
+            <button class="theme-btn" data-theme-val="dark" title="Dark">☾</button>
+          </div>
+        </li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1626,56 +1634,6 @@
   </section>
 
 
-  <!-- ══════════════════════════════════════
-       SECTION 9 — TESTIMONIALS
-       INSERT: Replace placeholders with real quotes
-  ══════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-
-      <div class="section-header reveal">
-        <span class="label">What clients say</span>
-        <h2>From Salt Lake City business owners.</h2>
-      </div>
-
-      <div class="testi-grid">
-
-        <!-- INSERT: Real testimonial 1 (contractor) -->
-        <div class="testi-card placeholder reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"We didn't have a website. Now we get 3–5 quote requests a week just from Google. Best investment we've made."</p>
-          <div class="testi-author">
-            <!-- INSERT: real name + business -->
-            <span class="testi-name">[ Client Name ]</span>
-            <span class="testi-biz">Roofing Contractor · West Valley City</span>
-          </div>
-        </div>
-
-        <!-- INSERT: Real testimonial 2 (gym/wellness) -->
-        <div class="testi-card placeholder reveal reveal-delay-1">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"Our trial signups doubled in the first two months. The booking flow they built is so much better than what we had before."</p>
-          <div class="testi-author">
-            <!-- INSERT: real name + business -->
-            <span class="testi-name">[ Client Name ]</span>
-            <span class="testi-biz">Fitness Studio · Murray, UT</span>
-          </div>
-        </div>
-
-        <!-- INSERT: Real testimonial 3 (Latino-owned) -->
-        <div class="testi-card placeholder reveal reveal-delay-2">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"Por fin tenemos un sitio que habla con nuestra comunidad. Nuestros clientes pueden encontrarnos en español y en inglés."</p>
-          <div class="testi-author">
-            <!-- INSERT: real name + business -->
-            <span class="testi-name">[ Nombre del cliente ]</span>
-            <span class="testi-biz">Restaurante · West Valley City</span>
-          </div>
-        </div>
-
-      </div><!-- /testi-grid -->
-    </div>
-  </section>
 
 
   <!-- ══════════════════════════════════════
@@ -1880,6 +1838,30 @@
        SCRIPTS
   ══════════════════════════════════════ -->
   <script src="script.js"></script>
+  <script>
+    // ── THEME TOGGLE ──
+    (function() {
+      const saved = localStorage.getItem('ff-theme') || 'auto';
+      if (saved !== 'auto') document.documentElement.setAttribute('data-theme', saved);
+    })();
+    document.addEventListener('DOMContentLoaded', function() {
+      const btns = document.querySelectorAll('.theme-btn');
+      const saved = localStorage.getItem('ff-theme') || 'auto';
+      btns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.themeVal === saved);
+        btn.addEventListener('click', function() {
+          const val = this.dataset.themeVal;
+          localStorage.setItem('ff-theme', val);
+          if (val === 'auto') {
+            document.documentElement.removeAttribute('data-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', val);
+          }
+          btns.forEach(b => b.classList.toggle('active', b.dataset.themeVal === val));
+        });
+      });
+    });
+  </script>
   <script>
     // ── LANGUAGE TOGGLE ──
     function setLang(lang) {
