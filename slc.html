@@ -800,7 +800,7 @@
         <button class="theme-seg-btn active" data-theme-key="auto" onclick="setTheme('auto')">💻</button>
         <button class="theme-seg-btn" data-theme-key="dark" onclick="setTheme('dark')">🌙</button>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Menu" style="display:none;">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -1749,39 +1749,19 @@ const T = {
   }
 };
 
-// ═══ HAMBURGER — iOS/Android safe scroll lock ═══
+// ═══ HAMBURGER — scroll lock only, no duplicate listener ═══
+// script.js already handles the hamburger click + open class toggle.
+// We just watch for that class change and add the scroll lock on top.
 (function() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('nav-links');
-  if (!hamburger || !navLinks) return;
+  const navLinks = document.getElementById('nav-links');
+  if (!navLinks) return;
 
-  function openMenu() {
-    navLinks.classList.add('open');
-    hamburger.classList.add('open');
-    // Lock scroll — both html + body needed for iOS Safari
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    // Android: lock position so page doesn't jump
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-  }
-
-  function closeMenu() {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
-  }
-
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.contains('open') ? closeMenu() : openMenu();
-  });
-
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
+  new MutationObserver(function() {
+    const isOpen = navLinks.classList.contains('open');
+    // Lock both html + body — required for iOS Safari AND Android Chrome
+    document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+    document.body.style.overflow            = isOpen ? 'hidden' : '';
+  }).observe(navLinks, { attributes: true, attributeFilter: ['class'] });
 })();
 
 // ═══ APPLY TRANSLATIONS ═══
