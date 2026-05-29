@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="auto">
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK4HRK4L4M"></script>
   <script>
@@ -50,7 +50,108 @@
   }
 }
 
-/* ── THEME TOGGLE BUTTON ── */
+/* ── NAV LANG TOGGLE (sticky) ── */
+.nav-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-h);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 2px;
+}
+.nav-lang-btn {
+  padding: 4px 13px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1;
+}
+.nav-lang-btn.active {
+  background: var(--gradient);
+  color: #fff;
+}
+/* Hide mobile lang by default, show on mobile */
+.nav-lang-mobile { display: none; }
+@media (max-width: 768px) {
+  .nav-lang-mobile { display: inline-flex; }
+}
+
+/* ── FIX: hv-badge in light/auto mode ── */
+.hv-badge {
+  background: var(--surface) !important;
+  border-color: var(--border-h) !important;
+  color: var(--text);
+  border-radius: 100px !important;
+  overflow: visible !important;
+}
+/* Keep the live dot badge green text */
+.hv-badge-1 { color: #22c55e !important; border-color: rgba(34,197,94,0.35) !important; }
+/* Force radius to clip properly */
+[data-theme="light"] .hv-badge,
+[data-theme="auto"] .hv-badge {
+  background: rgba(255,255,255,0.97) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+@media (prefers-color-scheme:light) {
+  [data-theme="auto"] .hv-badge {
+    background: rgba(255,255,255,0.97) !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
+    border-color: rgba(0,0,0,0.1) !important;
+  }
+}
+
+/* ── THEME SEGMENTED CONTROL ── */
+.theme-seg {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-h);
+  border-radius: 100px;
+  padding: 3px;
+  gap: 2px;
+}
+.theme-seg-btn {
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+  line-height: 1;
+}
+.theme-seg-btn.active {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border-h);
+}
+[data-theme="light"] .theme-seg-btn.active,
+[data-theme="auto"] .theme-seg-btn.active {
+  background: rgba(0,0,0,0.07);
+}
+/* Mobile: icon-only, smaller */
+.theme-seg-mobile { display: none; }
+.theme-seg-mobile .theme-seg-btn { padding: 4px 8px; font-size: 0.8rem; }
+@media (max-width: 768px) {
+  .theme-seg-mobile { display: inline-flex; }
+  .theme-seg:not(.theme-seg-mobile) { display: none; }
+}
+
+/* ── THEME TOGGLE BUTTON (legacy, keep for fallback) ── */
 .theme-toggle {
   display:flex;align-items:center;gap:6px;
   background:rgba(255,255,255,0.05);border:1px solid var(--border-h);
@@ -268,6 +369,174 @@
   [data-theme="auto"] .nav.scrolled { background:rgba(248,250,252,0.92); }
 }
 
+/* ── COMPARISON TABLE ── */
+.cmp-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.cmp-cost-strip {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  gap: 0;
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cmp-cost-block {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cmp-cost-block.cmp-them { background: rgba(255,255,255,0.02); }
+.cmp-cost-block.cmp-us   { background: linear-gradient(135deg, rgba(56,189,248,0.06), rgba(168,85,247,0.07)); }
+.cmp-cost-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.cmp-cost-price {
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text);
+}
+.cmp-us .cmp-cost-price {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cmp-cost-price span { font-size: 1rem; font-weight: 600; }
+.cmp-cost-note { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+.cmp-cost-vs {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 800; color: var(--muted);
+  background: var(--bg); border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+  letter-spacing: 0.06em;
+}
+
+.cmp-table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cmp-row {
+  display: grid;
+  grid-template-columns: 1fr 180px 200px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.cmp-row:last-child { border-bottom: none; }
+
+.cmp-header {
+  background: rgba(255,255,255,0.03);
+  border-bottom: 2px solid var(--border) !important;
+}
+.cmp-col-feature,
+.cmp-col-them,
+.cmp-col-us { padding: 14px 20px; }
+
+.cmp-col-feature {
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.cmp-col-them {
+  font-size: 0.82rem;
+  color: var(--muted);
+  border-left: 1px solid var(--border);
+  text-align: center;
+}
+.cmp-col-us {
+  font-size: 0.82rem;
+  border-left: 1px solid rgba(56,189,248,0.2);
+  background: rgba(56,189,248,0.03);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Header cols */
+.cmp-col-them.cmp-header-col {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--muted); text-align: center;
+}
+.cmp-us-logo {
+  font-size: 0.88rem; font-weight: 900; color: var(--text);
+}
+.cmp-us-logo span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cmp-ap-tag {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--purple);
+  background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.25);
+  padding: 2px 8px; border-radius: 100px;
+}
+
+/* Value badges */
+.cmp-check { color: #22c55e; font-size: 1.1rem; font-weight: 800; }
+.cmp-x     { color: rgba(148,163,184,0.4); font-size: 1.1rem; font-weight: 800; }
+.cmp-us-note {
+  font-size: 0.72rem; color: var(--blue); font-weight: 600;
+}
+.cmp-them-val { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+.cmp-us-val {
+  font-size: 0.9rem; font-weight: 900;
+  background: var(--gradient); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.cmp-badge-bad {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  color: #fb923c; background: rgba(251,146,60,0.1);
+  border: 1px solid rgba(251,146,60,0.25); padding: 3px 10px; border-radius: 100px;
+}
+.cmp-badge-good {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  color: #22c55e; background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.25); padding: 3px 10px; border-radius: 100px;
+}
+.cmp-badge-meh {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  color: var(--muted); background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); padding: 3px 10px; border-radius: 100px;
+}
+.cmp-total-label {
+  font-size: 0.78rem; font-weight: 700; color: rgba(251,146,60,0.8);
+}
+.cmp-cta-row {
+  background: rgba(56,189,248,0.03);
+  border-top: 2px solid var(--border) !important;
+}
+.cmp-footnote {
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(148,163,184,0.4);
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cmp-row { grid-template-columns: 1fr 140px 160px; }
+  .cmp-col-feature, .cmp-col-them, .cmp-col-us { padding: 12px 14px; }
+  .cmp-col-feature { font-size: 0.82rem; }
+  .cmp-cost-strip { grid-template-columns: 1fr 36px 1fr; }
+  .cmp-cost-block { padding: 20px 18px; }
+  .cmp-cost-price { font-size: 1.8rem; }
+}
+@media (max-width: 560px) {
+  .cmp-cost-strip { grid-template-columns: 1fr; }
+  .cmp-cost-vs { padding: 10px; border: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .cmp-row { grid-template-columns: 1fr 100px 120px; }
+  .cmp-col-feature, .cmp-col-them, .cmp-col-us { padding: 10px 10px; font-size: 0.75rem; }
+  .cmp-col-feature { font-size: 0.75rem; }
+  .cmp-badge-bad, .cmp-badge-good, .cmp-badge-meh { font-size: 0.62rem; padding: 2px 7px; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width:960px){.niche-grid,.flagship-grid{grid-template-columns:1fr;}}
 @media (max-width:900px){.autopilot-card{grid-template-columns:1fr;gap:40px;padding:36px 28px;}}
@@ -301,17 +570,34 @@
       <li><a href="#what-we-build" data-i18n="nav.what">What We Build</a></li>
       <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
       <li>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-          <span class="theme-icon" id="theme-icon">🌙</span>
-          <span id="theme-label">Dark</span>
-        </button>
+        <!-- EN/ES sticky toggle in nav -->
+        <div class="nav-lang-toggle">
+          <button class="nav-lang-btn active" id="nav-btn-en" onclick="setLang('en')">EN</button>
+          <button class="nav-lang-btn" id="nav-btn-es" onclick="setLang('es')">ES</button>
+        </div>
+      </li>
+      <li>
+        <!-- 3-option theme control: Light | Auto | Dark -->
+        <div class="theme-seg" id="theme-seg">
+          <button class="theme-seg-btn" data-theme-key="light" onclick="setTheme('light')" aria-label="Light mode">☀️ Light</button>
+          <button class="theme-seg-btn active" data-theme-key="auto"  onclick="setTheme('auto')"  aria-label="Auto mode">💻 Auto</button>
+          <button class="theme-seg-btn" data-theme-key="dark"  onclick="setTheme('dark')"  aria-label="Dark mode">🌙 Dark</button>
+        </div>
       </li>
       <li><a href="#contact" class="btn-nav" data-i18n="nav.cta">Get a Free Audit</a></li>
     </ul>
-    <div style="display:flex;align-items:center;gap:10px;">
-      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle theme" style="display:none;">
-        <span class="theme-icon" id="theme-icon-mobile">🌙</span>
-      </button>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <!-- EN/ES on mobile nav bar -->
+      <div class="nav-lang-toggle nav-lang-mobile">
+        <button class="nav-lang-btn active" id="nav-btn-en-m" onclick="setLang('en')">EN</button>
+        <button class="nav-lang-btn" id="nav-btn-es-m" onclick="setLang('es')">ES</button>
+      </div>
+      <!-- compact theme seg for mobile -->
+      <div class="theme-seg theme-seg-mobile" id="theme-seg-mobile">
+        <button class="theme-seg-btn" data-theme-key="light" onclick="setTheme('light')">☀️</button>
+        <button class="theme-seg-btn active" data-theme-key="auto"  onclick="setTheme('auto')">💻</button>
+        <button class="theme-seg-btn" data-theme-key="dark"  onclick="setTheme('dark')">🌙</button>
+      </div>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -756,7 +1042,7 @@
     <div class="autopilot-card reveal">
       <div class="autopilot-left">
         <div class="autopilot-badge"><span class="autopilot-dot"></span><span data-i18n="ap.badge">New · FlowForge AutoPilot</span></div>
-        <h2 data-i18n-html="ap.h2">Your marketing on autopilot.<br>Less than $6 a day.</h2>
+        <h2 data-i18n-html="ap.h2">Your marketing on autopilot.<br>$259/mo. 6-month commitment.</h2>
         <p data-i18n="ap.p">Once your site is live, add AutoPilot and your marketing runs itself — social posts, lead follow-ups, Google updates, review requests, and a Monday morning report. All in English and Spanish.</p>
         <ul class="autopilot-list">
           <li data-i18n="ap.f1">5 social posts/week — Instagram + Facebook, bilingual</li>
@@ -767,8 +1053,8 @@
           <li data-i18n="ap.f6">Website chat agent — captures leads 24/7</li>
         </ul>
         <div class="autopilot-price-row">
-          <div class="autopilot-price">$179<span>/mo</span></div>
-          <div class="autopilot-vs" data-i18n="ap.vs">vs $249–399/mo for generic AI tools with no Spanish and no local knowledge</div>
+          <div class="autopilot-price">$259<span>/mo</span></div>
+          <div class="autopilot-vs" data-i18n="ap.vs">vs $299/mo locked into a 12-month contract — English only, no real automations, no WhatsApp</div>
         </div>
         <div class="autopilot-cta-row">
           <a href="#contact" class="btn-primary" data-i18n="ap.cta">Ask about AutoPilot →</a>
@@ -803,6 +1089,130 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ COMPARISON TABLE ═══════════ -->
+<section class="section cmp-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label" data-i18n="cmp.label">Why FlowForge AutoPilot</span>
+      <h2 data-i18n-html="cmp.h2">$179/mo vs. the typical<br>Utah web agency.</h2>
+      <p data-i18n="cmp.p">Most agencies lock you into 12-month contracts and charge $299–$400/mo for a package that doesn't speak Spanish and doesn't do real automations. Here's the difference.</p>
+    </div>
+
+    <!-- TOP STRIP: cost comparison -->
+    <div class="cmp-cost-strip reveal">
+      <div class="cmp-cost-block cmp-them">
+        <div class="cmp-cost-label" data-i18n="cmp.them.label">Typical Utah Agency</div>
+        <div class="cmp-cost-price">$299<span data-i18n="cmp.mo">/mo</span></div>
+        <div class="cmp-cost-note" data-i18n="cmp.them.note">12-month contract · English only · No real automations</div>
+      </div>
+      <div class="cmp-cost-vs">VS</div>
+      <div class="cmp-cost-block cmp-us">
+        <div class="cmp-cost-label" data-i18n="cmp.us.label">FlowForge AutoPilot</div>
+        <div class="cmp-cost-price">$259<span data-i18n="cmp.mo2">/mo</span></div>
+        <div class="cmp-cost-note" data-i18n="cmp.us.note">6-month commitment · English + Spanish · Real lead automations</div>
+      </div>
+    </div>
+
+    <!-- MAIN COMPARISON TABLE -->
+    <div class="cmp-table reveal">
+
+      <!-- Header row -->
+      <div class="cmp-row cmp-header">
+        <div class="cmp-col-feature"></div>
+        <div class="cmp-col-them" data-i18n="cmp.col.them">Typical Agency</div>
+        <div class="cmp-col-us">
+          <span class="cmp-us-logo">Flow<span>Forge</span></span>
+          <span class="cmp-ap-tag" data-i18n="cmp.col.ap">AutoPilot</span>
+        </div>
+      </div>
+
+      <!-- Rows -->
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r1.feat">Monthly price</div>
+        <div class="cmp-col-them"><span class="cmp-them-val" data-i18n="cmp.r1.them">$299/mo</span></div>
+        <div class="cmp-col-us"><span class="cmp-us-val" data-i18n="cmp.r1.us">$259/mo</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r2.feat">Contract required</div>
+        <div class="cmp-col-them"><span class="cmp-badge-bad" data-i18n="cmp.r2.them">12 months minimum</span></div>
+        <div class="cmp-col-us"><span class="cmp-badge-good" data-i18n="cmp.r2.us">6 months only</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r3.feat">Bilingual (EN + ES)</div>
+        <div class="cmp-col-them"><span class="cmp-x">✕</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r4.feat">New lead SMS in 60 seconds</div>
+        <div class="cmp-col-them"><span class="cmp-x">✕</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r5.feat">Auto follow-up sequence</div>
+        <div class="cmp-col-them"><span class="cmp-x">✕</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r6.feat">WhatsApp integration</div>
+        <div class="cmp-col-them"><span class="cmp-x">✕</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r7.feat">Social posts (EN + ES)</div>
+        <div class="cmp-col-them"><span class="cmp-badge-meh" data-i18n="cmp.r7.them">Blog posts only</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span><span class="cmp-us-note" data-i18n="cmp.r7.us">5 posts/week</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r8.feat">Google review requests</div>
+        <div class="cmp-col-them"><span class="cmp-x">✕</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span><span class="cmp-us-note" data-i18n="cmp.r8.us">Automatic after every job</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r9.feat">Weekly lead report</div>
+        <div class="cmp-col-them"><span class="cmp-badge-meh" data-i18n="cmp.r9.them">Monthly only</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span><span class="cmp-us-note" data-i18n="cmp.r9.us">Every Monday morning</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r10.feat">You own the website</div>
+        <div class="cmp-col-them"><span class="cmp-badge-meh" data-i18n="cmp.r10.them">After 12 months</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span><span class="cmp-us-note" data-i18n="cmp.r10.us">From day one</span></div>
+      </div>
+
+      <div class="cmp-row reveal">
+        <div class="cmp-col-feature" data-i18n="cmp.r11.feat">Talk directly to the builder</div>
+        <div class="cmp-col-them"><span class="cmp-badge-meh" data-i18n="cmp.r11.them">Account manager</span></div>
+        <div class="cmp-col-us"><span class="cmp-check">✓</span><span class="cmp-us-note" data-i18n="cmp.r11.us">Always</span></div>
+      </div>
+
+      <!-- CTA row -->
+      <div class="cmp-row cmp-cta-row">
+        <div class="cmp-col-feature"></div>
+        <div class="cmp-col-them">
+          <span class="cmp-total-label" data-i18n="cmp.total.them">$3,588 minimum · 12 months</span>
+        </div>
+        <div class="cmp-col-us">
+          <span class="cmp-total-label" style="color:var(--blue);font-size:.72rem;" data-i18n="cmp.total.us">$1,554 · 6 months</span><br>
+          <a href="#contact" class="btn-primary" style="font-size:.85rem;padding:12px 20px;margin-top:8px;" data-i18n="cmp.cta">Get started →</a>
+        </div>
+      </div>
+
+    </div><!-- /cmp-table -->
+
+    <!-- Bottom note -->
+    <p class="cmp-footnote reveal" data-i18n="cmp.footnote">AutoPilot is an add-on for FlowForge website clients. Pricing starts after your site is live. No setup fees, no long-term contracts.</p>
+
   </div>
 </section>
 
@@ -954,13 +1364,13 @@ const T = {
     'faq.4.q':'What if I already have a website?','faq.4.a':'We\'ll look at it on the free audit call and tell you honestly: fix what you have, or start fresh. Sometimes a few targeted changes are enough.',
     'faq.5.q':'Do you actually write in Spanish, or just translate?','faq.5.a':'We write it. There\'s a real difference between translated corporate Spanish and copy that sounds natural to a Spanish-speaking community in Utah. We\'re bilingual — we know the difference.',
     'faq.6.q':'What do I own at the end?','faq.6.a':'Everything. Code, domain, hosting account, Google Business Profile access — all handed over to you on delivery. No lock-in, ever. It\'s yours. Full stop.',
-    'ap.badge':'New · FlowForge AutoPilot','ap.h2':'Your marketing on autopilot.<br>Less than $6 a day.',
+    'ap.badge':'New · FlowForge AutoPilot','ap.h2':'Your marketing on autopilot.<br>$259/mo. 6-month commitment.',
     'ap.p':'Once your site is live, add AutoPilot and your marketing runs itself — social posts, lead follow-ups, Google updates, review requests, and a Monday morning report. All in English and Spanish.',
     'ap.f1':'5 social posts/week — Instagram + Facebook, bilingual','ap.f2':'New lead → SMS to you in 60 seconds + auto-reply to prospect',
     'ap.f3':'Google Business Profile updated weekly','ap.f4':'Review requests sent automatically after every job',
     'ap.f5':'Weekly report every Monday morning','ap.f6':'Website chat agent — captures leads 24/7',
-    'ap.vs':'vs $249–399/mo for generic AI tools with no Spanish and no local knowledge',
-    'ap.cta':'Ask about AutoPilot →','ap.note':'Add-on for FlowForge website clients only.',
+    'ap.vs':'vs $299/mo locked into a 12-month contract — English only, no real automations, no WhatsApp',
+    'ap.cta':'Ask about AutoPilot →','ap.note':'6-month commitment. Add-on for FlowForge website clients only.',
     'ap.preview.title':'AutoPilot · Weekly Summary','ap.preview.date':'Monday, 9:00 AM',
     'ap.stat1':'New Leads','ap.stat2':'Posts Published','ap.stat3':'New Reviews','ap.week':'This week',
     'ap.act1':'Lead from Google — quote request sent','ap.act2':'Instagram post published (EN + ES)',
@@ -972,6 +1382,29 @@ const T = {
     'cta.micro':'No commitment. No sales pitch. Just a straight look at your online presence.',
     'cta.cities':'📍 Serving Salt Lake City and surrounding areas<br>West Valley City · Murray · Sandy · Draper · South Salt Lake · Millcreek · Provo · Ogden',
     'footer.copy':'© 2025 FlowForge · Utah, USA · Globally delivered.','footer.services':'Services','footer.work':'Work','footer.pricing':'Pricing','footer.contact':'Contact',
+    'cmp.label':'Why FlowForge AutoPilot',
+    'cmp.h2':'$259/mo vs. the typical<br>Utah web agency.',
+    'cmp.p':'Most agencies lock you into 12-month contracts and charge $299/mo for a package that doesn\'t speak Spanish and doesn\'t do real automations. Here\'s the difference.',
+    'cmp.them.label':'Typical Utah Agency','cmp.cost.them':'$299','cmp.mo':'/mo',
+    'cmp.them.note':'12-month contract · English only · No real automations',
+    'cmp.us.label':'FlowForge AutoPilot','cmp.cost.us':'$259','cmp.mo2':'/mo',
+    'cmp.us.note':'6-month commitment · English + Spanish · Real lead automations',
+    'cmp.col.them':'Typical Agency','cmp.col.ap':'AutoPilot',
+    'cmp.r1.feat':'Monthly price','cmp.r1.them':'$299/mo','cmp.r1.us':'$259/mo',
+    'cmp.r2.feat':'Contract length','cmp.r2.them':'12 months minimum','cmp.r2.us':'6 months only',
+    'cmp.r3.feat':'Bilingual (EN + ES)',
+    'cmp.r4.feat':'New lead SMS in 60 seconds',
+    'cmp.r5.feat':'Auto follow-up sequence',
+    'cmp.r6.feat':'WhatsApp integration',
+    'cmp.r7.feat':'Social posts (EN + ES)','cmp.r7.them':'Blog posts only','cmp.r7.us':'5 posts/week',
+    'cmp.r8.feat':'Google review requests','cmp.r8.us':'Automatic after every job',
+    'cmp.r9.feat':'Weekly lead report','cmp.r9.them':'Monthly only','cmp.r9.us':'Every Monday morning',
+    'cmp.r10.feat':'You own the website','cmp.r10.them':'After 12 months','cmp.r10.us':'From day one',
+    'cmp.r11.feat':'Talk directly to the builder','cmp.r11.them':'Account manager','cmp.r11.us':'Always',
+    'cmp.total.them':'$3,588 minimum · 12 months',
+    'cmp.total.us':'$1,554 · 6 months',
+    'cmp.cta':'Get started →',
+    'cmp.footnote':'AutoPilot is an add-on for FlowForge website clients. 6-month commitment. No setup fees.',
   },
   es: {
     'nav.who':'A quién servimos','nav.what':'Qué construimos','nav.pricing':'Precios','nav.cta':'Auditoría Gratis',
@@ -1077,13 +1510,13 @@ const T = {
     'faq.4.q':'¿Qué pasa si ya tengo un sitio web?','faq.4.a':'Lo revisaremos en la llamada de auditoría y te diremos honestamente: arregla lo que tienes, o empieza de nuevo. A veces algunos cambios específicos son suficientes.',
     'faq.5.q':'¿Realmente escriben en español o solo traducen?','faq.5.a':'Lo escribimos. Hay una diferencia real entre el español corporativo traducido y el texto que suena natural para la comunidad hispanohablante en Utah. Somos bilingües — lo sabemos.',
     'faq.6.q':'¿Qué soy dueño al final?','faq.6.a':'Todo. Código, dominio, cuenta de hosting, acceso al Perfil de Google Business — todo te lo entregamos al finalizar. Sin bloqueo, sin tarifas. Es tuyo. Punto.',
-    'ap.badge':'Nuevo · FlowForge AutoPilot','ap.h2':'Tu marketing en piloto automático.<br>Menos de $6 al día.',
+    'ap.badge':'Nuevo · FlowForge AutoPilot','ap.h2':'Tu marketing en piloto automático.<br>$259/mes. Compromiso de 6 meses.',
     'ap.p':'Una vez que tu sitio esté en vivo, agrega AutoPilot y tu marketing se maneja solo — publicaciones, seguimiento de leads, actualizaciones de Google, solicitudes de reseñas y un reporte cada lunes. Todo en inglés y español.',
     'ap.f1':'5 publicaciones/semana — Instagram + Facebook, bilingüe','ap.f2':'Nuevo lead → SMS a ti en 60 segundos + respuesta automática al prospecto',
     'ap.f3':'Perfil de Google Business actualizado semanalmente','ap.f4':'Solicitudes de reseña enviadas automáticamente después de cada trabajo',
     'ap.f5':'Reporte semanal cada lunes por la mañana','ap.f6':'Agente de chat en el sitio — captura leads 24/7',
-    'ap.vs':'vs $249–399/mes por herramientas genéricas de IA sin español y sin conocimiento local',
-    'ap.cta':'Preguntar sobre AutoPilot →','ap.note':'Complemento solo para clientes con sitio web de FlowForge.',
+    'ap.vs':'vs $299/mes en un contrato de 12 meses — solo inglés, sin automatizaciones reales, sin WhatsApp',
+    'ap.cta':'Preguntar sobre AutoPilot →','ap.note':'Compromiso de 6 meses. Solo para clientes con sitio web de FlowForge.',
     'ap.preview.title':'AutoPilot · Resumen Semanal','ap.preview.date':'Lunes, 9:00 AM',
     'ap.stat1':'Nuevos Leads','ap.stat2':'Posts Publicados','ap.stat3':'Nuevas Reseñas','ap.week':'Esta semana',
     'ap.act1':'Lead de Google — solicitud de presupuesto enviada','ap.act2':'Post de Instagram publicado (EN + ES)',
@@ -1095,6 +1528,29 @@ const T = {
     'cta.micro':'Sin compromiso. Sin presión de ventas. Solo una mirada honesta a tu presencia online.',
     'cta.cities':'📍 Sirviendo Salt Lake City y áreas circundantes<br>West Valley City · Murray · Sandy · Draper · South Salt Lake · Millcreek · Provo · Ogden',
     'footer.copy':'© 2025 FlowForge · Utah, USA · Entregado globalmente.','footer.services':'Servicios','footer.work':'Trabajo','footer.pricing':'Precios','footer.contact':'Contacto',
+    'cmp.label':'Por qué FlowForge AutoPilot',
+    'cmp.h2':'$259/mes vs. la agencia web<br>típica de Utah.',
+    'cmp.p':'La mayoría de las agencias te encierran en contratos de 12 meses y cobran $299/mes por un paquete que no habla español y no hace automatizaciones reales. Aquí está la diferencia.',
+    'cmp.them.label':'Agencia Típica de Utah','cmp.cost.them':'$299','cmp.mo':'/mes',
+    'cmp.them.note':'Contrato de 12 meses · Solo inglés · Sin automatizaciones reales',
+    'cmp.us.label':'FlowForge AutoPilot','cmp.cost.us':'$259','cmp.mo2':'/mes',
+    'cmp.us.note':'Compromiso de 6 meses · Inglés + Español · Automatizaciones reales',
+    'cmp.col.them':'Agencia Típica','cmp.col.ap':'AutoPilot',
+    'cmp.r1.feat':'Precio mensual','cmp.r1.them':'$299/mes','cmp.r1.us':'$259/mes',
+    'cmp.r2.feat':'Duración del contrato','cmp.r2.them':'12 meses mínimo','cmp.r2.us':'Solo 6 meses',
+    'cmp.r3.feat':'Bilingüe (EN + ES)',
+    'cmp.r4.feat':'SMS de nuevo lead en 60 segundos',
+    'cmp.r5.feat':'Secuencia de seguimiento automático',
+    'cmp.r6.feat':'Integración de WhatsApp',
+    'cmp.r7.feat':'Publicaciones sociales (EN + ES)','cmp.r7.them':'Solo blogs','cmp.r7.us':'5 posts/semana',
+    'cmp.r8.feat':'Solicitudes de reseña de Google','cmp.r8.us':'Automático después de cada trabajo',
+    'cmp.r9.feat':'Reporte semanal de leads','cmp.r9.them':'Solo mensual','cmp.r9.us':'Cada lunes por la mañana',
+    'cmp.r10.feat':'Tú eres dueño del sitio','cmp.r10.them':'Después de 12 meses','cmp.r10.us':'Desde el primer día',
+    'cmp.r11.feat':'Hablas directamente con el constructor','cmp.r11.them':'Gestor de cuenta','cmp.r11.us':'Siempre',
+    'cmp.total.them':'$3,588 mínimo · 12 meses',
+    'cmp.total.us':'$1,554 · 6 meses',
+    'cmp.cta':'Comenzar →',
+    'cmp.footnote':'AutoPilot es un complemento para clientes con sitio web de FlowForge. Compromiso de 6 meses. Sin tarifas de configuración.',
   }
 };
 
@@ -1119,46 +1575,38 @@ function applyLang(lang) {
 }
 
 function setLang(lang) {
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  // Sync all EN/ES buttons (hero + nav desktop + nav mobile)
+  ['btn-en','btn-es','nav-btn-en','nav-btn-es','nav-btn-en-m','nav-btn-es-m'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('active', id.includes('-en') ? lang === 'en' : lang === 'es');
+  });
   applyLang(lang);
 }
 
-// ═══ THEME TOGGLE ═══
-const themes = [
-  { key:'dark',  icon:'🌙', label:'Dark'  },
-  { key:'light', icon:'☀️', label:'Light' },
-  { key:'auto',  icon:'💻', label:'Auto'  },
-];
-let themeIdx = 0;
-const savedTheme = localStorage.getItem('ff_theme') || 'dark';
-themeIdx = themes.findIndex(t => t.key === savedTheme);
-if (themeIdx < 0) themeIdx = 0;
+// ═══ THEME ═══
+const savedTheme = localStorage.getItem('ff_theme') || 'auto';
 
-function applyTheme(idx) {
-  const t = themes[idx];
-  document.documentElement.setAttribute('data-theme', t.key);
-  document.getElementById('theme-icon').textContent = t.icon;
-  document.getElementById('theme-label').textContent = t.label;
-  document.getElementById('theme-icon-mobile').textContent = t.icon;
-  localStorage.setItem('ff_theme', t.key);
+function setTheme(key) {
+  document.documentElement.setAttribute('data-theme', key);
+  localStorage.setItem('ff_theme', key);
+  // Sync all theme-seg buttons (desktop + mobile)
+  document.querySelectorAll('.theme-seg-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeKey === key);
+  });
 }
 
-function cycleTheme() {
-  themeIdx = (themeIdx + 1) % themes.length;
-  applyTheme(themeIdx);
-}
-
-document.getElementById('theme-toggle').addEventListener('click', cycleTheme);
-document.getElementById('theme-toggle-mobile').addEventListener('click', cycleTheme);
+// Init theme
+setTheme(savedTheme);
 
 // ═══ INIT ═══
-applyTheme(themeIdx);
 applyLang(currentLang);
-if (currentLang === 'es') {
-  document.getElementById('btn-en').classList.remove('active');
-  document.getElementById('btn-es').classList.add('active');
-}
+// Sync all lang buttons to saved preference
+['btn-en','btn-es','nav-btn-en','nav-btn-es','nav-btn-en-m','nav-btn-es-m'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('active', id.includes('-en') ? currentLang === 'en' : currentLang === 'es');
+});
 </script>
 </body>
 </html>
