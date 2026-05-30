@@ -1995,26 +1995,41 @@ if(firstMetric) counterObserver.observe(firstMetric.closest('.slc-card') || firs
 (function(){
   var h1 = document.querySelector('.hero-text h1');
   if(!h1) return;
-  // wrap each word in a span with overflow hidden parent
-  var html = h1.innerHTML;
-  // split text nodes only, preserve spans like gradient-text
-  h1.innerHTML = html.replace(/(\b\S+\b)(?=[^<]*(?:<(?!\/?(span|br|strong))[^>]*>|$))/g, function(w){
-    return '<span class="word-wrap"><span class="word-inner">'+w+'</span></span>';
+  // walk text nodes only — never touch element nodes
+  var walker = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT, null, false);
+  var textNodes = [];
+  var node;
+  while((node = walker.nextNode())) textNodes.push(node);
+  var allWords = [];
+  textNodes.forEach(function(tn){
+    var words = tn.textContent.split(/(\s+)/);
+    var frag = document.createDocumentFragment();
+    words.forEach(function(part){
+      if(/^\s+$/.test(part) || part === ''){
+        frag.appendChild(document.createTextNode(part));
+      } else {
+        var outer = document.createElement('span');
+        outer.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;';
+        var inner = document.createElement('span');
+        inner.className = 'word-inner';
+        inner.textContent = part;
+        outer.appendChild(inner);
+        frag.appendChild(outer);
+        allWords.push(inner);
+      }
+    });
+    tn.parentNode.replaceChild(frag, tn);
   });
-  h1.style.overflow = 'visible';
-  var words = h1.querySelectorAll('.word-inner');
-  words.forEach(function(w, i){
-    w.style.cssText = 'display:inline-block;transform:translateY(110%);opacity:0;transition:transform 0.7s cubic-bezier(0.16,1,0.3,1) '+(i*0.07)+'s, opacity 0.5s ease '+(i*0.07)+'s;';
-    w.parentElement.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;';
+  allWords.forEach(function(w, i){
+    w.style.cssText = 'display:inline-block;transform:translateY(110%);opacity:0;transition:transform 0.7s cubic-bezier(0.16,1,0.3,1) '+(i*0.06)+'s,opacity 0.5s ease '+(i*0.06)+'s;';
   });
   var revealed = false;
-  var wordObserver = new IntersectionObserver(function(entries){
+  new IntersectionObserver(function(entries){
     if(entries[0].isIntersecting && !revealed){
       revealed = true;
-      words.forEach(function(w){ w.style.transform='translateY(0)'; w.style.opacity='1'; });
+      allWords.forEach(function(w){ w.style.transform='translateY(0)'; w.style.opacity='1'; });
     }
-  }, { threshold: 0.2 });
-  wordObserver.observe(h1);
+  }, { threshold: 0.2 }).observe(h1);
 })();
 
 // ─── MAGNETIC BUTTON ───
