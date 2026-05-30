@@ -1937,6 +1937,104 @@ setTheme(savedTheme);
 
 // ═══ INIT ═══
 applyLang(currentLang);
+
+// ─── NOISE TEXTURE OVERLAY ───
+(function(){
+  var canvas = document.createElement('canvas');
+  canvas.width = 200; canvas.height = 200;
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.032;mix-blend-mode:overlay;';
+  var ctx = canvas.getContext('2d');
+  var img = ctx.createImageData(200,200);
+  for(var i=0;i<img.data.length;i+=4){
+    var v=Math.random()*255|0;
+    img.data[i]=img.data[i+1]=img.data[i+2]=v;
+    img.data[i+3]=255;
+  }
+  ctx.putImageData(img,0,0);
+  document.body.appendChild(canvas);
+  // animate grain
+  function shift(){
+    canvas.style.transform='translate('+(Math.random()*4-2)+'px,'+(Math.random()*4-2)+'px)';
+    requestAnimationFrame(shift);
+  }
+  shift();
+})();
+
+// ─── COUNTER ANIMATIONS ───
+function animateCounter(el, target, suffix, duration){
+  var start = 0, step = target / (duration / 16);
+  var timer = setInterval(function(){
+    start = Math.min(start + step, target);
+    el.textContent = Math.round(start) + suffix;
+    if(start >= target){ el.textContent = target + suffix; clearInterval(timer); }
+  }, 16);
+}
+var countersDone = false;
+var counterObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting && !countersDone){
+      countersDone = true;
+      // slc card metrics
+      var m1 = document.querySelector('.slc-metric-num:nth-child(1)');
+      var metrics = document.querySelectorAll('.slc-metric-num');
+      if(metrics[0]) animateCounter(metrics[0], 12, '', 800);
+      if(metrics[1]) animateCounter(metrics[1], 4, '', 600);
+      if(metrics[2]) animateCounter(metrics[2], 100, '%', 1000);
+      // autopilot stats
+      var apStats = document.querySelectorAll('.ap-stat-num');
+      if(apStats[0]) animateCounter(apStats[0], 12, '', 800);
+      if(apStats[1]) animateCounter(apStats[1], 5, '', 600);
+      if(apStats[2]) animateCounter(apStats[2], 3, '', 500);
+    }
+  });
+}, { threshold: 0.5 });
+var firstMetric = document.querySelector('.slc-metric-num');
+if(firstMetric) counterObserver.observe(firstMetric.closest('.slc-card') || firstMetric);
+
+// ─── WORD REVEAL ON SCROLL ───
+(function(){
+  var h1 = document.querySelector('.hero-text h1');
+  if(!h1) return;
+  // wrap each word in a span with overflow hidden parent
+  var html = h1.innerHTML;
+  // split text nodes only, preserve spans like gradient-text
+  h1.innerHTML = html.replace(/(\b\S+\b)(?=[^<]*(?:<(?!\/?(span|br|strong))[^>]*>|$))/g, function(w){
+    return '<span class="word-wrap"><span class="word-inner">'+w+'</span></span>';
+  });
+  h1.style.overflow = 'visible';
+  var words = h1.querySelectorAll('.word-inner');
+  words.forEach(function(w, i){
+    w.style.cssText = 'display:inline-block;transform:translateY(110%);opacity:0;transition:transform 0.7s cubic-bezier(0.16,1,0.3,1) '+(i*0.07)+'s, opacity 0.5s ease '+(i*0.07)+'s;';
+    w.parentElement.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;';
+  });
+  var revealed = false;
+  var wordObserver = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting && !revealed){
+      revealed = true;
+      words.forEach(function(w){ w.style.transform='translateY(0)'; w.style.opacity='1'; });
+    }
+  }, { threshold: 0.2 });
+  wordObserver.observe(h1);
+})();
+
+// ─── MAGNETIC BUTTON ───
+(function(){
+  var btn = document.querySelector('.hero-ctas .btn-primary');
+  if(!btn) return;
+  btn.addEventListener('mousemove', function(e){
+    var r = btn.getBoundingClientRect();
+    var x = e.clientX - r.left - r.width/2;
+    var y = e.clientY - r.top - r.height/2;
+    btn.style.transform = 'translate('+x*0.25+'px,'+y*0.35+'px) scale(1.04)';
+  });
+  btn.addEventListener('mouseleave', function(){
+    btn.style.transform = 'translate(0,0) scale(1)';
+    btn.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+  });
+  btn.addEventListener('mouseenter', function(){
+    btn.style.transition = 'transform 0.15s ease';
+  });
+})();
 ['nav-btn-en','nav-btn-es','nav-btn-en-m','nav-btn-es-m'].forEach(id => {
   const el = document.getElementById(id);
   if (!el) return;
