@@ -28,23 +28,23 @@
   --bg:#07070e;--surface:#0d0d1a;--surface-2:#111127;
   --blue:#38bdf8;--purple:#a855f7;
   --blue-dim:rgba(56,189,248,0.15);--purple-dim:rgba(168,85,247,0.15);
-  /* SLC accent: warm blue → orange instead of blue → purple */
-  --gradient:linear-gradient(135deg,#38bdf8,#dc2626);
-  --accent:   #dc2626;
-  --accent-dim:rgba(220,38,38,0.15);
+  /* SLC accent: emerald → gold */
+  --gradient:linear-gradient(135deg,#059669,#eab308);
+  --accent:   #059669;
+  --accent-dim:rgba(5,150,105,0.15);
   --text:#f1f5f9;--muted:#94a3b8;
   --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
   --radius:14px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4);
 }
-/* Keep orange gradient in light mode (style.css would revert to blue/purple) */
+/* Keep emerald→gold gradient in light/auto mode (style.css would revert to blue/purple) */
 [data-theme="light"] {
   --bg:#f8fafc;--surface:#ffffff;--surface-2:#f1f5f9;
   --text:#0f172a;--muted:#64748b;
   --border:rgba(0,0,0,0.08);--border-h:rgba(0,0,0,0.15);
   --blue-dim:rgba(56,189,248,0.1);--purple-dim:rgba(168,85,247,0.1);
-  --accent-dim:rgba(220,38,38,0.1);
+  --accent-dim:rgba(5,150,105,0.1);
   --shadow:0 4px 24px rgba(0,0,0,0.12);
-  --gradient:linear-gradient(135deg,#38bdf8,#dc2626) !important;
+  --gradient:linear-gradient(135deg,#059669,#eab308) !important;
 }
 @media (prefers-color-scheme:light) {
   [data-theme="auto"] {
@@ -52,37 +52,33 @@
     --text:#0f172a;--muted:#64748b;
     --border:rgba(0,0,0,0.08);--border-h:rgba(0,0,0,0.15);
     --blue-dim:rgba(56,189,248,0.1);--purple-dim:rgba(168,85,247,0.1);
-    --accent-dim:rgba(220,38,38,0.1);
+    --accent-dim:rgba(5,150,105,0.1);
     --shadow:0 4px 24px rgba(0,0,0,0.12);
-    --gradient:linear-gradient(135deg,#38bdf8,#dc2626) !important;
+    --gradient:linear-gradient(135deg,#059669,#eab308) !important;
   }
 }
 
-/* ── SLC ACCENT OVERRIDES: orange instead of purple ── */
-/* urgency badge */
+/* ── SLC ACCENT OVERRIDES: emerald + gold ── */
 .urgency-badge {
-  background: rgba(220,38,38,0.08);
-  border-color: rgba(220,38,38,0.25);
+  background: rgba(5,150,105,0.08);
+  border-color: rgba(5,150,105,0.25);
 }
 .urgency-badge strong { color: var(--accent); }
 .urgency-dot {
   background: var(--accent);
   box-shadow: 0 0 8px var(--accent);
 }
-/* btn-nav stays gradient (now blue→crimson) */
-/* niche card hover glow — crimson */
 .niche-card:hover {
-  box-shadow: 0 16px 48px rgba(220,38,38,0.07);
+  box-shadow: 0 16px 48px rgba(5,150,105,0.10);
 }
-/* process step numbers */
 .step-num { color: var(--accent); }
 
-/* ── SLC HERO ORBS: warm Utah palette ── */
+/* ── SLC HERO ORBS: emerald + gold ── */
 .hero-orb-1 {
-  background: rgba(56,189,248,0.10) !important;   /* blue — left top */
+  background: rgba(5,150,105,0.10) !important;
 }
 .hero-orb-2 {
-  background: rgba(220,38,38,0.05) !important;   /* crimson — right bottom, very faint */
+  background: rgba(234,179,8,0.06) !important;
 }
 
 /* ── NAV UTILS (right corner group) ── */
