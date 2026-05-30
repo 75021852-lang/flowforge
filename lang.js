@@ -50,6 +50,10 @@ const FF_LANG = {
     'svc.chatbot.price': 'From $600',
     'svc.chatbot.cta': 'Get started →',
 
+    /* BADGES */
+    'badge.mostRequested': 'Most Requested',
+    'badge.mostPopular': 'Most Popular',
+
     /* PROCESS */
     'process.label': 'How we work',
     'process.h2': 'Simple process, real results',
@@ -385,6 +389,10 @@ const FF_LANG = {
     'svc.chatbot.desc': 'Asistentes de IA personalizados para WhatsApp, Instagram, sitios web y herramientas internas. Responde, califica leads y atiende clientes 24/7 automáticamente.',
     'svc.chatbot.price': 'Desde $600',
     'svc.chatbot.cta': 'Empezar →',
+
+    /* BADGES */
+    'badge.mostRequested': 'Más Solicitado',
+    'badge.mostPopular': 'Más Popular',
 
     /* PROCESS */
     'process.label': 'Cómo trabajamos',
