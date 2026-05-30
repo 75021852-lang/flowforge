@@ -1996,7 +1996,17 @@ if(firstMetric) counterObserver.observe(firstMetric.closest('.slc-card') || firs
   var h1 = document.querySelector('.hero-text h1');
   if(!h1) return;
   // walk text nodes only — never touch element nodes
-  var walker = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT, null, false);
+  var walker = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(n){
+      // skip text inside gradient-text spans — background-clip breaks on nested elements
+      var p = n.parentNode;
+      while(p && p !== h1){
+        if(p.classList && p.classList.contains('gradient-text')) return NodeFilter.FILTER_REJECT;
+        p = p.parentNode;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  }, false);
   var textNodes = [];
   var node;
   while((node = walker.nextNode())) textNodes.push(node);
