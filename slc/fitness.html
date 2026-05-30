@@ -144,6 +144,7 @@
   .proof-card{flex-direction:column;gap:16px;}
   .price-single{padding:28px 20px;}
   .hero-ctas .btn-primary,.hero-ctas .btn-ghost{width:100%;justify-content:center;}
+  .pricing-grid{grid-template-columns:1fr !important;}
 }
 [data-theme="light"] .booking-preview{background:rgba(255,255,255,0.95);border-color:rgba(0,0,0,0.08);box-shadow:0 8px 40px rgba(0,0,0,0.08);}
 [data-theme="light"] .booking-slot{background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.06);}
@@ -337,29 +338,75 @@
   <div class="container">
     <div class="section-header reveal">
       <span class="label">Pricing</span>
-      <h2>One flat price.<br>No recurring fees.</h2>
-      <p>A website that pays for itself the first month it brings in 2 new members.</p>
+      <h2>Pick your plan.<br>Grow at your pace.</h2>
+      <p>Start with a site, add automation when you're ready, or go full autopilot from day one.</p>
     </div>
-    <div class="price-single reveal">
-      <div class="price-tag">💪 Fitness Package</div>
-      <div class="price-name">Fitness Launch</div>
-      <div style="margin:16px 0;">
-        <span class="price-amount">$1,500</span><span class="price-period"> one-time</span>
+    <!-- Any-site note -->
+    <div style="max-width:960px;margin:0 auto 32px;padding:16px 20px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:12px;font-size:.9rem;color:var(--text);text-align:center;" class="reveal">
+      💡 <strong>Already have a website?</strong> FlowFrame Automation and AutoPilot work on any existing site — Wix, Squarespace, WordPress, anything. Same price.
+    </div>
+    <!-- Pricing grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto;" class="pricing-grid">
+      <!-- FlowFrame Launch -->
+      <div class="price-single reveal" style="margin:0;max-width:none;">
+        <div class="price-tag">🔧 One-Time</div>
+        <div class="price-name">FlowFrame Launch</div>
+        <div style="margin:16px 0;"><span class="price-amount">$1,800</span><span class="price-period"> one-time</span></div>
+        <div class="price-desc">"A fitness site with a built-in booking flow that converts visitors into trial signups — and trial signups into paying members."</div>
+        <ul class="del-list-simple">
+          <li>6-page mobile-first fitness site</li>
+          <li>Trial offer + booking flow built in</li>
+          <li>Class schedule section</li>
+          <li>Transformation photo gallery</li>
+          <li>Email capture for free offer</li>
+          <li>Testimonials + social proof</li>
+          <li>Done in 2–3 weeks · 30 days of support</li>
+          <li>Full ownership from day one</li>
+        </ul>
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border);">
+          <a href="#contact" class="btn-primary" style="text-align:center;display:block;">Get a Free Audit</a>
+        </div>
       </div>
-      <div class="price-desc">"A website with a built-in booking flow that converts visitors into trial signups — and trial signups into paying members."</div>
-      <ul class="del-list-simple">
-        <li>6-page mobile-first fitness site</li>
-        <li>Trial offer + booking flow built in</li>
-        <li>Class schedule section</li>
-        <li>Transformation photo gallery</li>
-        <li>Email capture for free offer</li>
-        <li>Testimonials + social proof</li>
-        <li>Done in 2–3 weeks · 30 days of support</li>
-        <li>Full ownership from day one</li>
-      </ul>
-      <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:12px;">
-        <a href="#contact" class="btn-primary" style="text-align:center;display:block;">Get a Free Fitness Audit</a>
-        <p style="font-size:.75rem;color:var(--muted);text-align:center;">No commitment. We'll look at your current online presence and tell you exactly what's missing.</p>
+      <!-- FlowFrame Automation -->
+      <div class="price-single reveal reveal-delay-1" style="margin:0;max-width:none;">
+        <div class="price-tag">⚡ Subscription</div>
+        <div class="price-name">FlowFrame Automation</div>
+        <div style="margin:16px 0;"><span class="price-amount">$199</span><span class="price-period">/mo</span></div>
+        <div class="price-desc">"Your leads never go cold. Set it once, runs forever — works on any website."</div>
+        <ul class="del-list-simple">
+          <li>Lead SMS within 2 min of form fill</li>
+          <li>3-touch follow-up sequence (SMS + email)</li>
+          <li>Automated review request after class</li>
+          <li>WhatsApp follow-up for trial no-shows</li>
+          <li>Weekly performance report</li>
+          <li>1 site update/month</li>
+          <li>Works on any existing site</li>
+        </ul>
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border);">
+          <a href="#contact" class="btn-primary" style="text-align:center;display:block;">Get Started</a>
+        </div>
+      </div>
+      <!-- FlowFrame AutoPilot -->
+      <div class="price-single reveal reveal-delay-2" style="margin:0;max-width:none;border-color:rgba(236,72,153,0.5);position:relative;">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.08em;padding:4px 14px;border-radius:100px;white-space:nowrap;">⭐ MOST POPULAR</div>
+        <div class="price-tag">🚀 Pro Subscription</div>
+        <div class="price-name">FlowFrame AutoPilot</div>
+        <div style="margin:16px 0;"><span class="price-amount">$399</span><span class="price-period">/mo</span></div>
+        <div class="price-desc">"Everything in Automation, plus your social media, SEO, and AI chat — handled. Your gym markets itself."</div>
+        <ul class="del-list-simple">
+          <li>Everything in Automation</li>
+          <li>Social posts 5×/week (Instagram + Facebook)</li>
+          <li>Google Business Profile updates</li>
+          <li>AI chat widget on your site</li>
+          <li>Missed call text-back</li>
+          <li>Unlimited site updates</li>
+          <li>Monthly strategy call</li>
+          <li>SEO progress report</li>
+          <li>Priority support</li>
+        </ul>
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border);">
+          <a href="#contact" class="btn-primary" style="text-align:center;display:block;">Get Started</a>
+        </div>
       </div>
     </div>
   </div>
