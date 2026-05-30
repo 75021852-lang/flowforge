@@ -303,7 +303,7 @@ const FF_LANG = {
     'slc.why4.desc': "When we hand over your site, it's yours — code, domain, accounts, all of it. No monthly lock-in, no hidden fees unless you want ongoing support. You're never dependent on us to keep your site alive.",
 
     'slc.ap.badge': 'New · FlowForge AutoPilot',
-    'slc.ap.h2': 'Your marketing on autopilot.<br>Less than $6 a day.',
+    'slc.ap.h2': 'Your marketing on autopilot.<br>Less than $9 a day.',
     'slc.ap.p': 'Once your site is live, add AutoPilot and your marketing runs itself — social posts, lead follow-ups, Google updates, review requests, and a Monday morning report. All done for you, every week, in English and Spanish.',
     'slc.ap.li1': '5 social posts/week — Instagram + Facebook, bilingual',
     'slc.ap.li2': 'New lead → SMS to you in 60 seconds + auto-reply to prospect',
@@ -643,7 +643,7 @@ const FF_LANG = {
     'slc.why4.desc': 'Cuando entregamos tu sitio, es tuyo — código, dominio, cuentas, todo. Sin ataduras mensuales, sin tarifas ocultas. Nunca dependes de nosotros para mantener vivo tu sitio.',
 
     'slc.ap.badge': 'Nuevo · FlowForge AutoPilot',
-    'slc.ap.h2': 'Tu marketing en piloto automático.<br>Menos de $6 al día.',
+    'slc.ap.h2': 'Tu marketing en piloto automático.<br>Menos de $9 al día.',
     'slc.ap.p': 'Una vez que tu sitio esté en vivo, agrega AutoPilot y tu marketing funciona solo — publicaciones sociales, seguimientos, actualizaciones de Google, solicitudes de reseñas y un reporte cada lunes. En inglés y español.',
     'slc.ap.li1': '5 publicaciones sociales/semana — Instagram + Facebook, bilingüe',
     'slc.ap.li2': 'Nuevo lead → SMS a ti en 60 segundos + auto-respuesta al prospecto',
