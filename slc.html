@@ -28,10 +28,10 @@
   --bg:#07070e;--surface:#0d0d1a;--surface-2:#111127;
   --blue:#38bdf8;--purple:#a855f7;
   --blue-dim:rgba(56,189,248,0.15);--purple-dim:rgba(168,85,247,0.15);
-  /* SLC accent: emerald → gold */
-  --gradient:linear-gradient(135deg,#059669,#eab308);
-  --accent:   #059669;
-  --accent-dim:rgba(5,150,105,0.15);
+  /* SLC accent: electric purple → hot pink */
+  --gradient:linear-gradient(135deg,#7c3aed,#ec4899);
+  --accent:   #7c3aed;
+  --accent-dim:rgba(124,58,237,0.15);
   --text:#f1f5f9;--muted:#94a3b8;
   --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.14);
   --radius:14px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,0.4);
@@ -42,9 +42,9 @@
   --text:#0f172a;--muted:#64748b;
   --border:rgba(0,0,0,0.08);--border-h:rgba(0,0,0,0.15);
   --blue-dim:rgba(56,189,248,0.1);--purple-dim:rgba(168,85,247,0.1);
-  --accent-dim:rgba(5,150,105,0.1);
+  --accent-dim:rgba(124,58,237,0.1);
   --shadow:0 4px 24px rgba(0,0,0,0.12);
-  --gradient:linear-gradient(135deg,#059669,#eab308) !important;
+  --gradient:linear-gradient(135deg,#7c3aed,#ec4899) !important;
 }
 @media (prefers-color-scheme:light) {
   [data-theme="auto"] {
@@ -52,16 +52,16 @@
     --text:#0f172a;--muted:#64748b;
     --border:rgba(0,0,0,0.08);--border-h:rgba(0,0,0,0.15);
     --blue-dim:rgba(56,189,248,0.1);--purple-dim:rgba(168,85,247,0.1);
-    --accent-dim:rgba(5,150,105,0.1);
+    --accent-dim:rgba(124,58,237,0.1);
     --shadow:0 4px 24px rgba(0,0,0,0.12);
-    --gradient:linear-gradient(135deg,#059669,#eab308) !important;
+    --gradient:linear-gradient(135deg,#7c3aed,#ec4899) !important;
   }
 }
 
-/* ── SLC ACCENT OVERRIDES: emerald + gold ── */
+/* ── SLC ACCENT OVERRIDES: purple + pink ── */
 .urgency-badge {
-  background: rgba(5,150,105,0.08);
-  border-color: rgba(5,150,105,0.25);
+  background: rgba(124,58,237,0.08);
+  border-color: rgba(124,58,237,0.25);
 }
 .urgency-badge strong { color: var(--accent); }
 .urgency-dot {
@@ -69,16 +69,16 @@
   box-shadow: 0 0 8px var(--accent);
 }
 .niche-card:hover {
-  box-shadow: 0 16px 48px rgba(5,150,105,0.10);
+  box-shadow: 0 16px 48px rgba(124,58,237,0.10);
 }
 .step-num { color: var(--accent); }
 
-/* ── SLC HERO ORBS: emerald + gold ── */
+/* ── SLC HERO ORBS: purple + pink ── */
 .hero-orb-1 {
-  background: rgba(5,150,105,0.10) !important;
+  background: rgba(124,58,237,0.10) !important;
 }
 .hero-orb-2 {
-  background: rgba(234,179,8,0.06) !important;
+  background: rgba(236,72,153,0.07) !important;
 }
 
 /* ── NAV UTILS (right corner group) ── */
