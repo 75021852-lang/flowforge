@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK4HRK4L4M"></script>
@@ -10,7 +10,7 @@
     gtag('config', 'G-CK4HRK4L4M');
   </script>
   <meta charset="UTF-8">
-  <script>var t=localStorage.getItem('ff-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);</script>
+  <script>(function(){var t=localStorage.getItem('ff_theme')||'auto';document.documentElement.setAttribute('data-theme',t);})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FlowForge — AI Tools, Automations & Web Design</title>
   <meta name="description" content="FlowForge builds AI integrations, automation workflows, Chrome extensions, and web design for businesses worldwide. Utah-based, globally delivered.">
@@ -38,23 +38,35 @@
         <li><a href="#portfolio" data-i18n="nav.work">Work</a></li>
         <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
         <li><a href="#contact" class="btn-nav" data-i18n="nav.cta">Get a Quote</a></li>
-        <li>
-          <div class="lang-toggle">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="es">ES</button>
-          </div>
-        </li>
-        <li>
-          <div class="theme-toggle" id="theme-toggle">
-            <button class="theme-btn active" data-theme-val="auto" title="Auto">Auto</button>
-            <button class="theme-btn" data-theme-val="light" title="Light">☀︎</button>
-            <button class="theme-btn" data-theme-val="dark" title="Dark">☾</button>
-          </div>
-        </li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-utils">
+        <!-- Desktop lang toggle -->
+        <div class="nav-lang-toggle" id="nav-lang-desktop">
+          <button class="nav-lang-btn active" id="nav-btn-en" onclick="setLang('en')">EN</button>
+          <button class="nav-lang-btn" id="nav-btn-es" onclick="setLang('es')">ES</button>
+        </div>
+        <!-- Desktop theme seg -->
+        <div class="theme-seg" id="theme-seg">
+          <button class="theme-seg-btn" data-theme-key="light" onclick="setTheme('light')" title="Light">☀️</button>
+          <button class="theme-seg-btn active" data-theme-key="auto" onclick="setTheme('auto')" title="Auto">💻</button>
+          <button class="theme-seg-btn" data-theme-key="dark" onclick="setTheme('dark')" title="Dark">🌙</button>
+        </div>
+        <!-- Mobile lang toggle -->
+        <div class="nav-lang-toggle nav-lang-mobile">
+          <button class="nav-lang-btn active" id="nav-btn-en-m" onclick="setLang('en')">EN</button>
+          <button class="nav-lang-btn" id="nav-btn-es-m" onclick="setLang('es')">ES</button>
+        </div>
+        <!-- Mobile theme seg -->
+        <div class="theme-seg theme-seg-mobile" id="theme-seg-mobile">
+          <button class="theme-seg-btn" data-theme-key="light" onclick="setTheme('light')" title="Light">☀️</button>
+          <button class="theme-seg-btn active" data-theme-key="auto" onclick="setTheme('auto')" title="Auto">💻</button>
+          <button class="theme-seg-btn" data-theme-key="dark" onclick="setTheme('dark')" title="Dark">🌙</button>
+        </div>
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -586,29 +598,186 @@
   </a>
 
   <script src="script.js"></script>
-  <script src="lang.js"></script>
   <script>
-    (function() {
-      const saved = localStorage.getItem('ff-theme') || 'auto';
-      if (saved !== 'auto') document.documentElement.setAttribute('data-theme', saved);
-    })();
-    document.addEventListener('DOMContentLoaded', function() {
-      const btns = document.querySelectorAll('.theme-btn');
-      const saved = localStorage.getItem('ff-theme') || 'auto';
-      btns.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.themeVal === saved);
-        btn.addEventListener('click', function() {
-          const val = this.dataset.themeVal;
-          localStorage.setItem('ff-theme', val);
-          if (val === 'auto') {
-            document.documentElement.removeAttribute('data-theme');
-          } else {
-            document.documentElement.setAttribute('data-theme', val);
-          }
-          btns.forEach(b => b.classList.toggle('active', b.dataset.themeVal === val));
+  // ── TRANSLATIONS ──
+  const T = {
+    en: {
+      'nav.services': 'Services', 'nav.work': 'Work', 'nav.pricing': 'Pricing', 'nav.cta': 'Get a Quote',
+      'hero.badge': 'Utah-based · Globally delivered',
+      'hero.urgency': 'Currently accepting <strong>3 new projects</strong> — slots filling fast',
+      'hero.h1': 'We <span class="gradient-text">forge</span> AI tools,<br>automations &amp;<br>digital experiences.',
+      'hero.sub': 'FlowForge builds the software infrastructure modern businesses need — custom AI integrations, browser extensions, automation workflows, and web design that actually converts.',
+      'hero.cta1': 'Start a Project', 'hero.cta2': 'See Our Work →',
+      'stats.shipped': 'Projects Shipped', 'stats.services': 'Core Services', 'stats.response': 'Response Time', 'stats.ownership': 'Ownership Handover',
+      'services.label': 'What we build', 'services.h2': 'Services', 'services.sub': 'End-to-end digital solutions — from idea to deployment.',
+      'svc.ai.title': 'AI Integration', 'svc.ai.desc': 'Connect Claude, GPT, and other AI models to your existing tools. Chatbots, smart search, document analysis, and custom AI workflows.', 'svc.ai.price': 'From $800', 'svc.ai.cta': 'Get started →',
+      'svc.auto.title': 'Automation Workflows', 'svc.auto.desc': "Eliminate repetitive tasks with custom automation pipelines. We connect your apps and let the machines do the work so your team doesn't have to.", 'svc.auto.price': 'From $400', 'svc.auto.cta': 'Get started →',
+      'svc.chrome.title': 'Chrome Extensions', 'svc.chrome.desc': "Custom browser extensions for internal teams or public markets. Productivity tools, AI overlays, data tools — built to Chrome's latest standards.", 'svc.chrome.price': 'From $600', 'svc.chrome.cta': 'Get started →',
+      'svc.web.title': 'Web Design & Dev', 'svc.web.desc': 'Fast, modern websites that look great and convert. Landing pages to full business sites — built clean, mobile-first, and shipped fast.', 'svc.web.price': 'From $500', 'svc.web.cta': 'Get started →',
+      'svc.social.title': 'Social Media Automation', 'svc.social.desc': 'Auto-posting, scheduling, cross-platform pipelines and DM automation. We wire up your social presence so it runs itself while you focus on the business.', 'svc.social.price': 'From $350', 'svc.social.cta': 'Get started →',
+      'svc.chatbot.title': 'AI Chatbots & Assistants', 'svc.chatbot.desc': 'Custom AI assistants for WhatsApp, Instagram, websites, and internal tools. Answer questions, qualify leads, and support customers 24/7 automatically.', 'svc.chatbot.price': 'From $600', 'svc.chatbot.cta': 'Get started →',
+      'badge.mostRequested': 'Most Requested', 'badge.mostPopular': 'Most Popular',
+      'process.label': 'How we work', 'process.h2': 'Simple process, real results',
+      'step1.title': 'Discovery', 'step1.desc': "We learn your business, your problem, and your goals. One free call — no jargon, just a clear picture of what you need and what it'll cost.",
+      'step2.title': 'Build', 'step2.desc': 'We design, develop, and test. You get progress updates and can give feedback at every step. No surprises, no scope creep.',
+      'step3.title': 'Launch', 'step3.desc': 'We ship, hand over full ownership, and support you post-launch. Your success is the only metric we care about.',
+      'portfolio.label': 'Our work', 'portfolio.h2': 'Recent Projects', 'portfolio.sub': 'Real products, shipped and working.',
+      'proj.studysnap.title': 'StudySnap', 'proj.studysnap.desc': 'AI-powered Chrome extension that captures any on-screen question and delivers instant answers with explanations and a confidence score — powered by Claude Vision API.',
+      'proj.clarity.title': 'Clarity Extension', 'proj.clarity.desc': 'Browser extension that detects and highlights dark patterns on websites in real time — protecting users from manipulative UX tricks while browsing.',
+      'proj.foto.title': 'FotoExpress Peru', 'proj.foto.desc': 'Full business website for a photography services company in Peru — modern design, service showcase, and contact flow built for local and international clients.',
+      'proj.yours.title': 'Could be yours', 'proj.yours.desc': "We're actively taking new projects. Your solution could be featured here next. Let's build something that makes a difference.", 'proj.yours.cta': 'Start a conversation →',
+      'pricing.label': 'Investment', 'pricing.h2': 'Transparent Pricing', 'pricing.sub': 'Every project is scoped and quoted individually. These are starting points — complex work is quoted after a free discovery call.',
+      'price.web.title': 'Web Design', 'price.web.li1': 'Landing page', 'price.web.li2': 'Mobile responsive', 'price.web.li3': 'SEO ready', 'price.web.li4': 'Full business site from $1,200', 'price.web.btn': 'Get a quote',
+      'price.auto.title': 'Automation', 'price.auto.li1': 'App-to-app automation', 'price.auto.li2': 'Trigger + action flows', 'price.auto.li3': 'Testing & documentation', 'price.auto.li4': 'Complex n8n from $1,200', 'price.auto.btn': 'Get a quote',
+      'price.ai.title': 'AI Integration', 'price.ai.li1': 'AI API connection', 'price.ai.li2': 'Custom prompting & logic', 'price.ai.li3': 'Testing & deployment', 'price.ai.li4': 'Full AI systems from $2,500', 'price.ai.btn': 'Get a quote',
+      'price.chrome.title': 'Chrome Extension', 'price.chrome.li1': 'Manifest V3 compliant', 'price.chrome.li2': 'Popup + content scripts', 'price.chrome.li3': 'API integration ready', 'price.chrome.li4': 'AI-powered from $1,500', 'price.chrome.btn': 'Get a quote',
+      'price.social.title': 'Social Automation', 'price.social.li1': 'Auto-posting pipelines', 'price.social.li2': 'DM automation', 'price.social.li3': 'Cross-platform scheduling', 'price.social.li4': 'Analytics dashboards from $800', 'price.social.btn': 'Get a quote',
+      'price.chatbot.title': 'AI Chatbot', 'price.chatbot.li1': 'WhatsApp / Instagram / Web', 'price.chatbot.li2': 'Custom knowledge base', 'price.chatbot.li3': 'Lead qualification logic', 'price.chatbot.li4': 'Multi-platform from $1,500', 'price.chatbot.btn': 'Get a quote',
+      'faq.label': 'Common questions', 'faq.h2': 'Before you reach out', 'faq.sub': 'The questions every client asks — answered upfront.',
+      'faq.q1': 'How long does a project take?', 'faq.a1': 'Depends on scope. A landing page takes 3–5 days. A Chrome extension 1–2 weeks. An AI integration 1–3 weeks. We give you a clear timeline before we start — no surprises.',
+      'faq.q2': 'Do you require a deposit?', 'faq.a2': 'Yes — 50% upfront to start, 50% on delivery. This protects both sides and keeps the project moving. We accept bank transfer, PayPal, and Stripe.',
+      'faq.q3': "What if I'm not happy with the result?", 'faq.a3': "We include revision rounds in every project and work with you until it's right. We don't close a project until you're satisfied — that's our standard, not a policy.",
+      'faq.q4': 'Can you work with a small budget?', 'faq.a4': "Yes. Our starting prices reflect real, lean work — no bloated agency overhead. If your budget is tight, tell us and we'll scope something that fits. We'd rather start small than not work together at all.",
+      'faq.q5': 'Do I own everything after delivery?', 'faq.a5': '100%. All code, assets, and accounts are handed over to you at the end of every project. No lock-in, no monthly fees unless you want ongoing support.',
+      'faq.q6': 'Do you work with clients outside the US?', 'faq.a6': "Absolutely — most of our clients are international. We work across time zones, communicate in English and Spanish, and handle remote projects end to end.",
+      'contact.label': "Let's talk", 'contact.h2': 'Start a project<br>with us', 'contact.p': "Tell us what you're building or what problem you need solved. We'll respond within 24 hours with a clear path forward — no commitment required.",
+      'contact.loc': 'Utah, USA', 'contact.world': 'Available worldwide', 'contact.time': 'Response within 24 hours', 'contact.call': 'Free discovery call included',
+      'contact.name.label': 'Name', 'contact.name.ph': 'Your name', 'contact.email.label': 'Email', 'contact.svc.label': 'Service', 'contact.svc.ph': 'Select a service',
+      'contact.budget.label': 'Estimated budget', 'contact.budget.ph': 'Select a range', 'contact.msg.label': 'Tell us about your project', 'contact.msg.ph': 'What are you trying to build or automate?',
+      'contact.btn': 'Send Message →', 'contact.success': "✓ Message sent! We'll be in touch within 24 hours.",
+      'footer.copy': '© 2025 FlowForge · Utah, USA · Globally delivered.',
+    },
+    es: {
+      'nav.services': 'Servicios', 'nav.work': 'Trabajo', 'nav.pricing': 'Precios', 'nav.cta': 'Solicitar Cotización',
+      'hero.badge': 'Con base en Utah · Entrega global',
+      'hero.urgency': 'Aceptando <strong>3 nuevos proyectos</strong> — cupos llenándose rápido',
+      'hero.h1': 'Creamos <span class="gradient-text">herramientas</span> de IA,<br>automatizaciones y<br>experiencias digitales.',
+      'hero.sub': 'FlowForge construye la infraestructura de software que los negocios modernos necesitan — integraciones de IA, extensiones de navegador, flujos de automatización y diseño web que realmente convierte.',
+      'hero.cta1': 'Iniciar un Proyecto', 'hero.cta2': 'Ver Nuestro Trabajo →',
+      'stats.shipped': 'Proyectos Entregados', 'stats.services': 'Servicios Principales', 'stats.response': 'Tiempo de Respuesta', 'stats.ownership': 'Traspaso Total',
+      'services.label': 'Qué construimos', 'services.h2': 'Servicios', 'services.sub': 'Soluciones digitales completas — desde la idea hasta el lanzamiento.',
+      'svc.ai.title': 'Integración de IA', 'svc.ai.desc': 'Conecta Claude, GPT y otros modelos de IA a tus herramientas existentes. Chatbots, búsqueda inteligente, análisis de documentos y flujos de trabajo de IA personalizados.', 'svc.ai.price': 'Desde $800', 'svc.ai.cta': 'Empezar →',
+      'svc.auto.title': 'Flujos de Automatización', 'svc.auto.desc': 'Elimina las tareas repetitivas con pipelines de automatización personalizados. Conectamos tus apps y dejamos que las máquinas hagan el trabajo.', 'svc.auto.price': 'Desde $400', 'svc.auto.cta': 'Empezar →',
+      'svc.chrome.title': 'Extensiones de Chrome', 'svc.chrome.desc': 'Extensiones de navegador personalizadas para equipos internos o mercados públicos. Herramientas de productividad, overlays de IA — con los últimos estándares de Chrome.', 'svc.chrome.price': 'Desde $600', 'svc.chrome.cta': 'Empezar →',
+      'svc.web.title': 'Diseño y Desarrollo Web', 'svc.web.desc': 'Sitios web rápidos y modernos que se ven bien y convierten. Desde landing pages hasta sitios completos — mobile-first y entregados rápido.', 'svc.web.price': 'Desde $500', 'svc.web.cta': 'Empezar →',
+      'svc.social.title': 'Automatización de Redes Sociales', 'svc.social.desc': 'Auto-publicación, programación, pipelines entre plataformas y automatización de DMs. Tu presencia social funciona sola mientras te enfocas en el negocio.', 'svc.social.price': 'Desde $350', 'svc.social.cta': 'Empezar →',
+      'svc.chatbot.title': 'Chatbots y Asistentes de IA', 'svc.chatbot.desc': 'Asistentes de IA personalizados para WhatsApp, Instagram, sitios web y herramientas internas. Responde, califica leads y atiende clientes 24/7 automáticamente.', 'svc.chatbot.price': 'Desde $600', 'svc.chatbot.cta': 'Empezar →',
+      'badge.mostRequested': 'Más Solicitado', 'badge.mostPopular': 'Más Popular',
+      'process.label': 'Cómo trabajamos', 'process.h2': 'Proceso simple, resultados reales',
+      'step1.title': 'Descubrimiento', 'step1.desc': 'Conocemos tu negocio, tu problema y tus objetivos. Una llamada gratuita — sin tecnicismos, solo un panorama claro de lo que necesitas y lo que costará.',
+      'step2.title': 'Construcción', 'step2.desc': 'Diseñamos, desarrollamos y probamos. Recibes actualizaciones y puedes dar retroalimentación en cada paso. Sin sorpresas, sin cambios de alcance.',
+      'step3.title': 'Lanzamiento', 'step3.desc': 'Lanzamos, entregamos la propiedad completa y te apoyamos después del lanzamiento. Tu éxito es la única métrica que nos importa.',
+      'portfolio.label': 'Nuestro trabajo', 'portfolio.h2': 'Proyectos Recientes', 'portfolio.sub': 'Productos reales, entregados y funcionando.',
+      'proj.studysnap.title': 'StudySnap', 'proj.studysnap.desc': 'Extensión de Chrome con IA que captura preguntas en pantalla y entrega respuestas instantáneas con explicaciones — impulsada por Claude Vision API.',
+      'proj.clarity.title': 'Clarity Extension', 'proj.clarity.desc': 'Extensión de navegador que detecta y resalta patrones oscuros en sitios web en tiempo real — protegiendo a los usuarios mientras navegan.',
+      'proj.foto.title': 'FotoExpress Peru', 'proj.foto.desc': 'Sitio web completo para empresa de fotografía en Perú — diseño moderno, showcase de servicios y flujo de contacto para clientes locales e internacionales.',
+      'proj.yours.title': 'Podría ser el tuyo', 'proj.yours.desc': 'Estamos tomando nuevos proyectos. Tu solución podría aparecer aquí. Construyamos algo que marque la diferencia.', 'proj.yours.cta': 'Iniciar una conversación →',
+      'pricing.label': 'Inversión', 'pricing.h2': 'Precios Transparentes', 'pricing.sub': 'Cada proyecto se cotiza individualmente. Estos son puntos de partida — el trabajo complejo se cotiza después de una llamada gratuita.',
+      'price.web.title': 'Diseño Web', 'price.web.li1': 'Landing page', 'price.web.li2': 'Responsive para móvil', 'price.web.li3': 'Listo para SEO', 'price.web.li4': 'Sitio completo desde $1,200', 'price.web.btn': 'Solicitar cotización',
+      'price.auto.title': 'Automatización', 'price.auto.li1': 'Automatización app-a-app', 'price.auto.li2': 'Flujos de disparador + acción', 'price.auto.li3': 'Pruebas y documentación', 'price.auto.li4': 'n8n complejo desde $1,200', 'price.auto.btn': 'Solicitar cotización',
+      'price.ai.title': 'Integración de IA', 'price.ai.li1': 'Conexión a API de IA', 'price.ai.li2': 'Prompting y lógica personalizada', 'price.ai.li3': 'Pruebas y despliegue', 'price.ai.li4': 'Sistemas completos desde $2,500', 'price.ai.btn': 'Solicitar cotización',
+      'price.chrome.title': 'Extensión de Chrome', 'price.chrome.li1': 'Compatible con Manifest V3', 'price.chrome.li2': 'Popup + scripts de contenido', 'price.chrome.li3': 'Listo para integración de API', 'price.chrome.li4': 'Con IA desde $1,500', 'price.chrome.btn': 'Solicitar cotización',
+      'price.social.title': 'Automatización Social', 'price.social.li1': 'Pipelines de auto-publicación', 'price.social.li2': 'Automatización de DMs', 'price.social.li3': 'Programación entre plataformas', 'price.social.li4': 'Dashboards analíticos desde $800', 'price.social.btn': 'Solicitar cotización',
+      'price.chatbot.title': 'Chatbot de IA', 'price.chatbot.li1': 'WhatsApp / Instagram / Web', 'price.chatbot.li2': 'Base de conocimiento personalizada', 'price.chatbot.li3': 'Lógica de calificación de leads', 'price.chatbot.li4': 'Multi-plataforma desde $1,500', 'price.chatbot.btn': 'Solicitar cotización',
+      'faq.label': 'Preguntas frecuentes', 'faq.h2': 'Antes de contactarnos', 'faq.sub': 'Las preguntas que todo cliente hace — respondidas por adelantado.',
+      'faq.q1': '¿Cuánto tiempo toma un proyecto?', 'faq.a1': 'Depende del alcance. Una landing page toma 3–5 días. Una extensión de Chrome 1–2 semanas. Una integración de IA 1–3 semanas. Te damos un cronograma claro antes de empezar.',
+      'faq.q2': '¿Requieren un depósito?', 'faq.a2': 'Sí — 50% al inicio, 50% al entregar. Esto protege a ambos lados y mantiene el proyecto avanzando. Aceptamos transferencia bancaria, PayPal y Stripe.',
+      'faq.q3': '¿Qué pasa si no estoy satisfecho?', 'faq.a3': 'Incluimos rondas de revisión en cada proyecto y trabajamos contigo hasta que esté bien. No cerramos un proyecto hasta que estés satisfecho.',
+      'faq.q4': '¿Pueden trabajar con un presupuesto pequeño?', 'faq.a4': 'Sí. Nuestros precios reflejan trabajo real y eficiente — sin overhead de agencia inflado. Si tu presupuesto es ajustado, dinos y adaptamos algo que funcione.',
+      'faq.q5': '¿Soy dueño de todo después de la entrega?', 'faq.a5': '100%. Todo el código, activos y cuentas se te entregan al final de cada proyecto. Sin ataduras, sin tarifas mensuales.',
+      'faq.q6': '¿Trabajan con clientes fuera de EE.UU.?', 'faq.a6': 'Absolutamente — la mayoría de nuestros clientes son internacionales. Trabajamos en diferentes zonas horarias, en inglés y español.',
+      'contact.label': 'Hablemos', 'contact.h2': 'Inicia un proyecto<br>con nosotros', 'contact.p': 'Cuéntanos qué estás construyendo o qué problema necesitas resolver. Respondemos en 24 horas con un camino claro — sin compromiso requerido.',
+      'contact.loc': 'Utah, EE.UU.', 'contact.world': 'Disponible en todo el mundo', 'contact.time': 'Respuesta en 24 horas', 'contact.call': 'Llamada de descubrimiento gratuita',
+      'contact.name.label': 'Nombre', 'contact.name.ph': 'Tu nombre', 'contact.email.label': 'Correo electrónico', 'contact.svc.label': 'Servicio', 'contact.svc.ph': 'Selecciona un servicio',
+      'contact.budget.label': 'Presupuesto estimado', 'contact.budget.ph': 'Selecciona un rango', 'contact.msg.label': 'Cuéntanos sobre tu proyecto', 'contact.msg.ph': '¿Qué estás tratando de construir o automatizar?',
+      'contact.btn': 'Enviar Mensaje →', 'contact.success': '✓ ¡Mensaje enviado! Te contactaremos en 24 horas.',
+      'footer.copy': '© 2025 FlowForge · Utah, EE.UU. · Entrega global.',
+    }
+  };
+
+  // ── THEME ──
+  function setTheme(key) {
+    localStorage.setItem('ff_theme', key);
+    document.documentElement.setAttribute('data-theme', key);
+    document.querySelectorAll('.theme-seg-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.themeKey === key);
+    });
+  }
+
+  // ── LANGUAGE ──
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = T[lang]?.[el.dataset.i18n];
+      if (val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const val = T[lang]?.[el.dataset.i18nHtml];
+      if (val !== undefined) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const val = T[lang]?.[el.dataset.i18nPh];
+      if (val !== undefined) el.placeholder = val;
+    });
+    ['nav-btn-en','nav-btn-en-m'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active', lang === 'en');
+    });
+    ['nav-btn-es','nav-btn-es-m'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('active', lang === 'es');
+    });
+  }
+
+  function setLang(lang) {
+    localStorage.setItem('ff_lang', lang);
+    applyLang(lang);
+  }
+
+  // ── INIT ──
+  document.addEventListener('DOMContentLoaded', function() {
+    const lang = localStorage.getItem('ff_lang') || 'en';
+    applyLang(lang);
+
+    const theme = localStorage.getItem('ff_theme') || 'auto';
+    document.querySelectorAll('.theme-seg-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.themeKey === theme);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          hamburger.classList.remove('open');
+          document.body.style.overflow = '';
         });
       });
-    });
+    }
+
+    // Contact form
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        const success = document.getElementById('form-success');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (res.ok) { form.reset(); success.style.display = 'block'; btn.textContent = '✓ Sent!'; }
+          else { btn.textContent = 'Send Message →'; btn.disabled = false; }
+        } catch { btn.textContent = 'Send Message →'; btn.disabled = false; }
+      });
+    }
+  });
   </script>
 </body>
 </html>
